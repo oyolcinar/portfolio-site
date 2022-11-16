@@ -9,6 +9,7 @@ const Connection = ({
   toggleMinimize,
   setModemState,
   doubleClick,
+  setDoubleClick,
   elapsedTime,
 }) => {
   function formatDuration(seconds) {
@@ -17,7 +18,12 @@ const Connection = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
+      <div
+        className={styles.card}
+        onClick={() => {
+          setDoubleClick((prevState) => !prevState);
+        }}
+      >
         <div
           className={
             !doubleClick ? styles.header : `${styles.header} ${styles.double}`

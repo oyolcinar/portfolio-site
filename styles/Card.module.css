@@ -97,6 +97,11 @@
   padding: .2rem 0.9rem;
 }
 
+.button:focus {
+  outline: 1px dashed #08080E;
+  outline-offset: -5px;
+}
+
 .underline {
   text-decoration: underline;
 }

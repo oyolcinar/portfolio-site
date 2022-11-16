@@ -113,6 +113,7 @@ const Navbar = () => {
           modemState={modem}
           setModemState={setModem}
           doubleClick={doubleClick}
+          setDoubleClick={setDoubleClick}
           elapsedTime={elapsedTime}
         />
       )}
