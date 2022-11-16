@@ -1,0 +1,107 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40vh;
+}
+
+.card {
+  position: absolute;
+  z-index: 1;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid #393939;
+  border-bottom: 2px solid #393939;
+  border-radius: 0;
+  background: #C0C0C0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #000181;
+  color: white;
+  position: relative;
+  font-size: .55rem;
+  padding: 4px;
+  color: #C9C9C9;
+  border-radius: 0;
+  border: 2px solid #BDBDBD;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.headerRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 0;
+}
+
+.close {
+  margin-left: 2px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 5px;
+}
+
+.body{
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px;
+  border-top: 2px solid #BDBDBD;
+  border-left: 3px solid #BDBDBD;
+  border-right: 3px solid #BDBDBD;
+  border-bottom: 2px solid #bdbdbd;
+}
+
+.bodyLeft {
+  font-size: .55rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.headerModem {
+  margin-right: 5px;
+}
+
+.modemBody {
+  margin-right: 10px;
+}
+
+.buttonsBody {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button {
+  font-family: 'Windows 95';
+  font-size: 0.55rem;
+  color: #000;
+  background-color: #c0c0c0;
+  border-color: #a0a0a0;
+  letter-spacing: 0.025em;
+  padding: .2rem 0.9rem;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.double {
+  background: #808080;
+  color: #C9C9C9;
+}

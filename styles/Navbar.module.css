@@ -1,0 +1,86 @@
+.navbar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: #c0c0c0;
+  height: 45px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-top: 2px solid #FCFCFC;
+  border-bottom: 2px solid #c0c0c0;
+  padding-top: 1px;
+  padding-bottom: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list {
+  position: relative;
+  padding-left: 0;
+  display: flex;
+  list-style: none;
+  gap: 5px;
+}
+
+.item {
+  font-family: "Windows 95 Bold";
+  position: relative;
+  font-size: 0.85rem;
+  color: black;
+  text-transform: normal;
+  background: #C0C0C0;
+  letter-spacing: 0;
+  font-weight: 400;
+  padding: 0 5px;
+  background-color: #c0c0c0;
+  border-color: #a0a0a0;
+  border-top-color: white;
+  border-left-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+}
+
+.text {
+  margin-bottom: 5px;
+}
+
+.start {
+  height: 32px;
+  margin-bottom: 2px;
+}
+
+.item:active {
+  border: 2px solid #0A0A0A !important;
+/*   border-top-color: #a0a0a0;
+  border-left-color: #a0a0a0; */
+}
+
+.taskbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: .65rem;
+  border-top: 1px solid #08080E;
+  border-left: 1px solid #08080E;
+  border-right: 1px solid #FCFCFC;
+  border-bottom: 1px solid #FCFCFC;
+  padding: 3px 12px;
+  margin-right: 1px;
+}
+
+.speaker {
+  padding: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
+  line-height: normal;
+}
+
+.modem {
+  margin-right: 7px;
+}

@@ -1,9 +1,31 @@
+@font-face {
+  font-family: 'Pixelated';
+  src: url('../public/fonts/pixelated-times-new-roman.ttf');
+  font-style: normal;
+  }
+
+@font-face {
+    font-family: 'Windows 95';
+    src: url('../public/fonts/w-95-sans-serif.woff2') format('woff2'),
+        url('../public/fonts/w-95-sans-serif.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Windows 95 Bold';
+  src: url('../public/fonts/MS\ Sans\ Serif\ 8pt\ bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Windows 95';
+  background-color: #008081;
+  cursor: url('../public/icons/cursor.png'), url('../public/icons/cursor2.png'), auto;
 }
 
 a {
@@ -13,14 +35,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
 }
