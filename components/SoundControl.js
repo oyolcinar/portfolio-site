@@ -11,7 +11,7 @@ const SoundControl = () => {
           className={styles.input}
           min='0'
           max='100'
-          value='50'
+          defaultValue='50'
         />
       </div>
       <div>

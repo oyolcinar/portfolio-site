@@ -44,13 +44,17 @@
   appearance: none;
   height: 100px;
   margin-left: 20px;
-/*   padding: 0 20px; */
   width: 2px;
   outline: none;
-  writing-mode: bt-lr;
+  writing-mode: vertical-rl;
   background: #08080E;
   border: 1px solid #08080E;
   border-right-color:#a0a0a0;
+}
+
+.input:focus {
+  outline: 1px dashed #08080E;
+  outline-offset: 14px;
 }
 
 .input::-webkit-slider-thumb {
