@@ -69,7 +69,7 @@
 }
 
 .input::-moz-range-thumb {
-  width: 35px;
+  width: 30px;
   height: 15px;
   background: #c0c0c0;
   border: 2px solid #08080E;

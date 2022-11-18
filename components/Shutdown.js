@@ -45,13 +45,14 @@ const Shutdown = ({
             <Image src={shutdownImage} alt='' height={45} />
           </div>
           <div className={styles.bodyRight}>
-            <div>What do you want computer to do?</div>
+            <div>What do you want the computer to do?</div>
             <form className={styles.form}>
               <input
                 type='radio'
                 id='choice1'
                 name='shutdown'
                 value='shutdown'
+                className={styles.radio}
               />
               <label for='choice1'>
                 <span className={styles.underline}>S</span>hut down
@@ -62,12 +63,19 @@ const Shutdown = ({
                 id='choice2'
                 name='shutdown'
                 value='Restart'
+                className={styles.radio}
               />
               <label for='choice2'>
                 <span className={styles.underline}>R</span>estart
               </label>
               <br />
-              <input type='radio' id='choice3' name='shutdown' value='MSDOS' />
+              <input
+                type='radio'
+                id='choice3'
+                name='shutdown'
+                value='MSDOS'
+                className={styles.radio}
+              />
               <label for='choice3'>
                 Restart in <span className={styles.underline}>M</span>S-DOS mode
               </label>
