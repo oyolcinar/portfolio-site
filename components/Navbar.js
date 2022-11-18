@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import SoundControl from './SoundControl';
 import Connection from './Connection';
 import { useElapsedTime } from 'use-elapsed-time';
+import Start from './Start';
 
 const Navbar = () => {
   const [currentImage, setCurrentImage] = useState(offOff);
@@ -19,6 +20,7 @@ const Navbar = () => {
   const [modem, setModem] = useState(false);
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [doubleClick, setDoubleClick] = useState(false);
+  const [isStartOpen, setIsStartOpen] = useState(false);
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
 
   useEffect(() => {
@@ -31,6 +33,10 @@ const Navbar = () => {
 
   function toggleMinimize() {
     setMinimizeModem(true);
+  }
+
+  function toggleStart() {
+    setIsStartOpen((prevState) => !prevState);
   }
 
   var today = new Date();
@@ -55,7 +61,12 @@ const Navbar = () => {
       <nav className={styles.navbar}>
         <ul className={styles.list}>
           <li className={styles.start}>
-            <button className={styles.item}>
+            <button
+              className={styles.item}
+              onClick={() => {
+                toggleStart();
+              }}
+            >
               <Image src={windows} height={28} alt='' />
               <div className={styles.text}>Start</div>
             </button>
@@ -118,6 +129,7 @@ const Navbar = () => {
         />
       )}
       {sound && <SoundControl />}
+      {isStartOpen && <Start />}
     </>
   );
 };
