@@ -13,8 +13,10 @@ import SoundControl from './SoundControl';
 import Connection from './Connection';
 import { useElapsedTime } from 'use-elapsed-time';
 import Start from './Start';
+import Shutdown from './Shutdown';
 
 const Navbar = () => {
+  const [isShutdown, setIsShutdown] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
   const [sound, setSound] = useState(false);
   const [modem, setModem] = useState(false);
@@ -54,6 +56,12 @@ const Navbar = () => {
   function random() {
     const random = Math.floor(Math.random() * modemImages.length);
     return modemImages[random];
+  }
+
+  function shutDownHandler() {
+    !isShutdown
+      ? setIsShutdown(true)
+      : setDoubleClick((prevState) => !prevState);
   }
 
   return (
@@ -129,7 +137,23 @@ const Navbar = () => {
         />
       )}
       {sound && <SoundControl />}
-      {isStartOpen && <Start />}
+      {isStartOpen && (
+        <Start
+          setIsStartOpen={setIsStartOpen}
+          setIsShutdown={setIsShutdown}
+          toggleMinimize={toggleMinimize}
+          modem={modem}
+        />
+      )}
+      {isShutdown && (
+        <Shutdown
+          setDoubleClick={setDoubleClick}
+          doubleClick={doubleClick}
+          isShutdown={isShutdown}
+          setIsShutdown={setIsShutdown}
+          setIsStartOpen={setIsStartOpen}
+        />
+      )}
     </>
   );
 };

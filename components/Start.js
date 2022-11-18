@@ -6,41 +6,57 @@ import documents from '../public/icons/documents.png';
 import Image from 'next/image';
 import styles from '../styles/Start.module.css';
 import { RiArrowRightSFill } from 'react-icons/ri';
+import { useState } from 'react';
 
-const Start = () => {
+const Start = ({ setIsStartOpen, setIsShutdown, toggleMinimize, modem }) => {
+  const [doubleClick, setDoubleClick] = useState(false);
+
+  function toggleShutdown() {
+    setIsShutdown((prevState) => !prevState);
+  }
+
   return (
-    <div className={styles.container}>
-      <div className={styles.banner}></div>
-      <ul className={styles.list}>
-        <li className={`${styles.item} ${styles.firstTwo}`}>
-          <div className={styles.cluster}>
-            <Image src={programs} alt='' height={30} />
-            <div>Programs</div>
-          </div>
-          <RiArrowRightSFill className={styles.arrow} />
-        </li>
-        <li className={`${styles.item} ${styles.firstTwo}`}>
-          <div className={styles.cluster}>
-            <Image src={documents} alt='' height={30} />
-            <div>Documents</div>
-          </div>
-          <RiArrowRightSFill className={styles.arrow} />
-        </li>
-        <li className={styles.item}>
-          <Image src={help} alt='' height={30} className={styles.helpImage} />
-          <div className={styles.help}>Help</div>
-        </li>
-        <li className={styles.seperator}></li>
-        <li className={styles.item}>
-          <Image src={key} alt='' height={45} />
-          Login
-        </li>
-        <li className={`${styles.item} ${styles.shutdown}`}>
-          <Image src={shutdown} alt='' height={45} />
-          Turn Off Computer
-        </li>
-      </ul>
-    </div>
+    <>
+      <div className={styles.container}>
+        <div className={styles.banner}></div>
+        <ul className={styles.list}>
+          <li className={`${styles.item} ${styles.firstTwo}`}>
+            <div className={styles.cluster}>
+              <Image src={programs} alt='' height={30} />
+              <div>Programs</div>
+            </div>
+            <RiArrowRightSFill className={styles.arrow} />
+          </li>
+          <li className={`${styles.item} ${styles.firstTwo}`}>
+            <div className={styles.cluster}>
+              <Image src={documents} alt='' height={30} />
+              <div>Documents</div>
+            </div>
+            <RiArrowRightSFill className={styles.arrow} />
+          </li>
+          <li className={styles.item}>
+            <Image src={help} alt='' height={30} className={styles.helpImage} />
+            <div className={styles.help}>Help</div>
+          </li>
+          <li className={styles.seperator}></li>
+          <li className={styles.item}>
+            <Image src={key} alt='' height={45} />
+            Login...
+          </li>
+          <li
+            className={`${styles.item} ${styles.shutdown}`}
+            onClick={() => {
+              setIsStartOpen(false);
+              setIsShutdown(true);
+              if (modem) toggleMinimize(false);
+            }}
+          >
+            <Image src={shutdown} alt='' height={45} />
+            Turn Off Computer...
+          </li>
+        </ul>
+      </div>
+    </>
   );
 };
 

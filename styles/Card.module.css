@@ -6,6 +6,10 @@
   margin-top: 40vh;
 }
 
+.shutdown {
+  z-index: 2 !important;
+}
+
 .card {
   position: absolute;
   z-index: 1;
@@ -113,4 +117,54 @@
 
 .connection {
   width: 170px;
+}
+
+.bodyRight {
+  font-size: .55rem;
+}
+
+.form {
+  margin-top: 10px;
+}
+
+.form > input {
+  margin-bottom: 10px;
+}
+
+.headerShutdown {
+  font-family: "Windows 95 Bold";
+  font-size: 0.75rem;
+  color: white;
+}
+
+.sdBodyLeft {
+  align-items: flex-start;
+  margin-right: 10px;
+}
+
+.sdButton {
+  width: 100px;
+  border-top-color: white;
+  border-left-color: white;
+}
+
+.formButtons {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sdClose {
+  margin-bottom: 0;
+}
+
+.form > label {
+  margin-left: 5px;
+}
+
+.form > label:focus {
+  outline: 1px dashed #08080E;
+  outline-offset: 2px;
 }

@@ -74,7 +74,7 @@ const Connection = ({
               <Image
                 alt=''
                 src={close}
-                height={20}
+                height={21}
                 onClick={() => {
                   setModemState(false);
                 }}
