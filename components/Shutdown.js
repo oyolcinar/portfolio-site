@@ -13,7 +13,7 @@ const Shutdown = ({
   setIsShutdown,
   setIsStartOpen,
 }) => {
-  const [redirect, setRedirect] = useState('');
+  const [redirect, setRedirect] = useState('http://www.google.com');
   const router = useRouter();
 
   function submitHandler(e) {
