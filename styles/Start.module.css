@@ -73,3 +73,13 @@
 .help {
   margin-left: 10px;
 }
+
+.documentsContainer {
+  bottom: 130px;
+  left: 292px;
+}
+
+.programsContainer {
+  bottom: 220px;
+  left: 292px;
+}

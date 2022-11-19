@@ -7,9 +7,29 @@ import Image from 'next/image';
 import styles from '../styles/Start.module.css';
 import { RiArrowRightSFill } from 'react-icons/ri';
 import { useState } from 'react';
+import StartDocuments from './StartDocuments';
+import Programs from './Programs';
 
-const Start = ({ setIsStartOpen, setIsShutdown, toggleMinimize, modem }) => {
+const Start = ({
+  setIsStartOpen,
+  setIsShutdown,
+  toggleMinimize,
+  modem,
+  isDocumentsOpen,
+  setIsDocumentsOpen,
+  isProgramsOpen,
+  setIsProgramsOpen,
+}) => {
   const [doubleClick, setDoubleClick] = useState(false);
+
+  function toggleDocuments() {
+    setIsProgramsOpen(false);
+    setIsDocumentsOpen(true);
+  }
+
+  function togglePrograms() {
+    setIsProgramsOpen(true);
+  }
 
   function toggleShutdown() {
     setIsShutdown((prevState) => !prevState);
@@ -20,14 +40,30 @@ const Start = ({ setIsStartOpen, setIsShutdown, toggleMinimize, modem }) => {
       <div className={styles.container}>
         <div className={styles.banner}></div>
         <ul className={styles.list}>
-          <li className={`${styles.item} ${styles.firstTwo}`}>
+          <li
+            className={`${styles.item} ${styles.firstTwo}`}
+            onMouseEnter={() => {
+              togglePrograms();
+            }}
+            onMouseLeave={() => {
+              setIsProgramsOpen(false);
+            }}
+          >
             <div className={styles.cluster}>
               <Image src={programs} alt='' height={30} />
               <div>Programs</div>
             </div>
             <RiArrowRightSFill className={styles.arrow} />
           </li>
-          <li className={`${styles.item} ${styles.firstTwo}`}>
+          <li
+            className={`${styles.item} ${styles.firstTwo}`}
+            onMouseEnter={() => {
+              toggleDocuments();
+            }}
+            onMouseLeave={() => {
+              setIsDocumentsOpen(false);
+            }}
+          >
             <div className={styles.cluster}>
               <Image src={documents} alt='' height={30} />
               <div>Documents</div>
@@ -56,6 +92,18 @@ const Start = ({ setIsStartOpen, setIsShutdown, toggleMinimize, modem }) => {
           </li>
         </ul>
       </div>
+      {isDocumentsOpen && !isProgramsOpen && (
+        <StartDocuments
+          setIsStartOpen={setIsStartOpen}
+          setIsDocumentsOpen={setIsDocumentsOpen}
+        />
+      )}
+      {isProgramsOpen && (
+        <Programs
+          setIsStartOpen={setIsProgramsOpen}
+          setIsProgramsOpen={setIsProgramsOpen}
+        />
+      )}
     </>
   );
 };

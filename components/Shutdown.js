@@ -3,6 +3,8 @@ import shutdownStyles from '../styles/Shutdown.module.css';
 import Image from 'next/image';
 import shutdownImage from '../public/icons/shutdown.png';
 import close from '../public/icons/close.png';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const Shutdown = ({
   setDoubleClick,
@@ -11,6 +13,15 @@ const Shutdown = ({
   setIsShutdown,
   setIsStartOpen,
 }) => {
+  const [redirect, setRedirect] = useState('');
+  const router = useRouter();
+
+  function submitHandler(e) {
+    e.preventDefault();
+    setIsShutdown(false);
+    router.push(redirect);
+  }
+
   return (
     <div className={`${styles.container} ${styles.shutdown}`}>
       <div
@@ -53,6 +64,10 @@ const Shutdown = ({
                 name='shutdown'
                 value='shutdown'
                 className={styles.radio}
+                onClick={() => {
+                  setRedirect('http://www.google.com');
+                }}
+                defaultChecked='checked'
               />
               <label for='choice1'>
                 <span className={styles.underline}>S</span>hut down
@@ -64,6 +79,9 @@ const Shutdown = ({
                 name='shutdown'
                 value='Restart'
                 className={styles.radio}
+                onClick={() => {
+                  setRedirect('/');
+                }}
               />
               <label for='choice2'>
                 <span className={styles.underline}>R</span>estart
@@ -75,6 +93,9 @@ const Shutdown = ({
                 name='shutdown'
                 value='MSDOS'
                 className={styles.radio}
+                onClick={() => {
+                  setRedirect('https://github.com/oyolcinar/portfolio-site');
+                }}
               />
               <label for='choice3'>
                 Restart in <span className={styles.underline}>M</span>S-DOS mode
@@ -85,8 +106,16 @@ const Shutdown = ({
                   type='submit'
                   value='OK'
                   className={`${styles.button} ${styles.sdButton} `}
+                  onClick={(e) => {
+                    submitHandler(e);
+                  }}
                 />
-                <button className={`${styles.button} ${styles.sdButton} `}>
+                <button
+                  className={`${styles.button} ${styles.sdButton} `}
+                  onClick={() => {
+                    setIsShutdown(false);
+                  }}
+                >
                   Cancel
                 </button>
                 <button className={`${styles.button} ${styles.sdButton} `}>

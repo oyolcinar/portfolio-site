@@ -23,6 +23,9 @@ const Navbar = () => {
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [doubleClick, setDoubleClick] = useState(false);
   const [isStartOpen, setIsStartOpen] = useState(false);
+  const [isDocumentsOpen, setIsDocumentsOpen] = useState(false);
+  const [isProgramsOpen, setIsProgramsOpen] = useState(false);
+
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
 
   useEffect(() => {
@@ -39,6 +42,8 @@ const Navbar = () => {
 
   function toggleStart() {
     setIsStartOpen((prevState) => !prevState);
+    setIsDocumentsOpen(false);
+    setIsProgramsOpen(false);
   }
 
   var today = new Date();
@@ -143,6 +148,10 @@ const Navbar = () => {
           setIsShutdown={setIsShutdown}
           toggleMinimize={toggleMinimize}
           modem={modem}
+          isDocumentsOpen={isDocumentsOpen}
+          setIsDocumentsOpen={setIsDocumentsOpen}
+          isProgramsOpen={isProgramsOpen}
+          setIsProgramsOpen={setIsProgramsOpen}
         />
       )}
       {isShutdown && (
