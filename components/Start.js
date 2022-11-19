@@ -19,6 +19,7 @@ const Start = ({
   setIsDocumentsOpen,
   isProgramsOpen,
   setIsProgramsOpen,
+  setIsNotepad,
 }) => {
   const [doubleClick, setDoubleClick] = useState(false);
 
@@ -100,8 +101,9 @@ const Start = ({
       )}
       {isProgramsOpen && (
         <Programs
-          setIsStartOpen={setIsProgramsOpen}
+          setIsStartOpen={setIsStartOpen}
           setIsProgramsOpen={setIsProgramsOpen}
+          setIsNotepad={setIsNotepad}
         />
       )}
     </>

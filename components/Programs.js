@@ -7,7 +7,7 @@ import paint from '../public/icons/paint.png';
 import styles from '../styles/Start.module.css';
 import Image from 'next/image';
 
-const Programs = ({ setIsStartOpen, setIsProgramsOpen }) => {
+const Programs = ({ setIsStartOpen, setIsProgramsOpen, setIsNotepad }) => {
   return (
     <div
       className={`${styles.container} ${styles.programsContainer}`}
@@ -34,7 +34,14 @@ const Programs = ({ setIsStartOpen, setIsProgramsOpen }) => {
             <div>Minesweeper</div>
           </div>
         </li>
-        <li className={styles.item}>
+        <li
+          className={styles.item}
+          onClick={() => {
+            setIsProgramsOpen(false);
+            setIsStartOpen(false);
+            setIsNotepad(true);
+          }}
+        >
           <div className={styles.cluster}>
             <Image src={notepad} alt='' height={30} />
             <div>Notepad</div>

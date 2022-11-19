@@ -14,9 +14,12 @@ import Connection from './Connection';
 import { useElapsedTime } from 'use-elapsed-time';
 import Start from './Start';
 import Shutdown from './Shutdown';
+import Notepad from './Notepad';
+import notepadIcon from '../public/icons/notepadIcon.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
+  const [isNotepad, setIsNotepad] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
   const [sound, setSound] = useState(false);
   const [modem, setModem] = useState(false);
@@ -25,6 +28,7 @@ const Navbar = () => {
   const [isStartOpen, setIsStartOpen] = useState(false);
   const [isDocumentsOpen, setIsDocumentsOpen] = useState(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
+  const [minimizeNotepad, setMinimizeNotepad] = useState(false);
 
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
 
@@ -35,6 +39,10 @@ const Navbar = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+
+  function toggleMinimizeNotepad() {
+    setMinimizeNotepad(true);
+  }
 
   function toggleMinimize() {
     setMinimizeModem(true);
@@ -104,6 +112,26 @@ const Navbar = () => {
               </div>
             </div>
           )}
+          {minimizeNotepad && (
+            <div
+              className={cardStyles.card}
+              onClick={() => {
+                setMinimizeNotepad(false);
+              }}
+            >
+              <div className={cardStyles.header}>
+                <div className={cardStyles.headerLeft}>
+                  <Image
+                    src={notepadIcon}
+                    alt=''
+                    height={20}
+                    className={cardStyles.headerModem}
+                  />
+                  Notepad
+                </div>
+              </div>
+            </div>
+          )}
         </ul>
         <div className={styles.taskbar}>
           <Image
@@ -152,6 +180,7 @@ const Navbar = () => {
           setIsDocumentsOpen={setIsDocumentsOpen}
           isProgramsOpen={isProgramsOpen}
           setIsProgramsOpen={setIsProgramsOpen}
+          setIsNotepad={setIsNotepad}
         />
       )}
       {isShutdown && (
@@ -161,6 +190,15 @@ const Navbar = () => {
           isShutdown={isShutdown}
           setIsShutdown={setIsShutdown}
           setIsStartOpen={setIsStartOpen}
+        />
+      )}
+      {isNotepad && !minimizeNotepad && (
+        <Notepad
+          doubleClick={doubleClick}
+          setDoubleClick={setDoubleClick}
+          isNotepad={isNotepad}
+          setIsNotepad={setIsNotepad}
+          toggleMinimizeNotepad={toggleMinimizeNotepad}
         />
       )}
     </>
