@@ -1,9 +1,8 @@
 .container {
-  position: relative;
+/*   height: calc(100vh - 45px);
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 40vh;
+  align-items: center; */
 }
 
 .shutdown {
