@@ -7,7 +7,12 @@ import paint from '../public/icons/paint.png';
 import styles from '../styles/Start.module.css';
 import Image from 'next/image';
 
-const Programs = ({ setIsStartOpen, setIsProgramsOpen, setIsNotepad }) => {
+const Programs = ({
+  setIsStartOpen,
+  setIsProgramsOpen,
+  setIsNotepad,
+  setMinimizeNotepad,
+}) => {
   return (
     <div
       className={`${styles.container} ${styles.programsContainer}`}
@@ -40,6 +45,7 @@ const Programs = ({ setIsStartOpen, setIsProgramsOpen, setIsNotepad }) => {
             setIsProgramsOpen(false);
             setIsStartOpen(false);
             setIsNotepad(true);
+            setMinimizeNotepad(false);
           }}
         >
           <div className={styles.cluster}>

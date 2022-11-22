@@ -23,6 +23,7 @@
   display: flex;
   list-style: none;
   gap: 5px;
+  flex-wrap: nowrap;
 }
 
 .item {

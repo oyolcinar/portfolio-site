@@ -20,6 +20,7 @@ const Start = ({
   isProgramsOpen,
   setIsProgramsOpen,
   setIsNotepad,
+  setMinimizeNotepad,
 }) => {
   const [doubleClick, setDoubleClick] = useState(false);
 
@@ -104,6 +105,7 @@ const Start = ({
           setIsStartOpen={setIsStartOpen}
           setIsProgramsOpen={setIsProgramsOpen}
           setIsNotepad={setIsNotepad}
+          setMinimizeNotepad={setMinimizeNotepad}
         />
       )}
     </>

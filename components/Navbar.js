@@ -20,14 +20,16 @@ import notepadIcon from '../public/icons/notepadIcon.png';
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
   const [isNotepad, setIsNotepad] = useState(false);
-  const [currentImage, setCurrentImage] = useState(offOff);
   const [sound, setSound] = useState(false);
   const [modem, setModem] = useState(false);
-  const [minimizeModem, setMinimizeModem] = useState(false);
-  const [doubleClick, setDoubleClick] = useState(false);
   const [isStartOpen, setIsStartOpen] = useState(false);
   const [isDocumentsOpen, setIsDocumentsOpen] = useState(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
+
+  const [doubleClick, setDoubleClick] = useState(false);
+  const [currentImage, setCurrentImage] = useState(offOff);
+
+  const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
 
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
@@ -39,6 +41,21 @@ const Navbar = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+
+  var today = new Date();
+  var time =
+    today.getHours() +
+    ':' +
+    ((today.getMinutes() < 10 ? '0' : '') + today.getMinutes());
+  var date =
+    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+
+  const modemImages = [offOff, onOff, offOn, onOn];
+
+  function random() {
+    const random = Math.floor(Math.random() * modemImages.length);
+    return modemImages[random];
+  }
 
   function toggleMinimizeNotepad() {
     setMinimizeNotepad(true);
@@ -52,23 +69,6 @@ const Navbar = () => {
     setIsStartOpen((prevState) => !prevState);
     setIsDocumentsOpen(false);
     setIsProgramsOpen(false);
-  }
-
-  var today = new Date();
-  var time =
-    today.getHours() +
-    ':' +
-    ((today.getMinutes() < 10 ? '0' : '') + today.getMinutes());
-  var date =
-    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-
-  var display = date + ' ' + time;
-
-  const modemImages = [offOff, onOff, offOn, onOn];
-
-  function random() {
-    const random = Math.floor(Math.random() * modemImages.length);
-    return modemImages[random];
   }
 
   function shutDownHandler() {
@@ -92,7 +92,7 @@ const Navbar = () => {
               <div className={styles.text}>Start</div>
             </button>
           </li>
-          {minimizeModem && (
+          {minimizeModem || modem ? (
             <div
               className={cardStyles.card}
               onClick={() => {
@@ -111,8 +111,10 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
+          ) : (
+            ''
           )}
-          {minimizeNotepad && (
+          {minimizeNotepad || isNotepad ? (
             <div
               className={cardStyles.card}
               onClick={() => {
@@ -131,6 +133,8 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
+          ) : (
+            ''
           )}
         </ul>
         <div className={styles.taskbar}>
@@ -181,6 +185,7 @@ const Navbar = () => {
           isProgramsOpen={isProgramsOpen}
           setIsProgramsOpen={setIsProgramsOpen}
           setIsNotepad={setIsNotepad}
+          setMinimizeNotepad={setMinimizeNotepad}
         />
       )}
       {isShutdown && (
