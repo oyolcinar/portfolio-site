@@ -78,7 +78,7 @@ const Navbar = () => {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <nav className={styles.navbar}>
         <ul className={styles.list}>
           <li className={styles.start}>
@@ -206,7 +206,7 @@ const Navbar = () => {
           toggleMinimizeNotepad={toggleMinimizeNotepad}
         />
       )}
-    </>
+    </div>
   );
 };
 

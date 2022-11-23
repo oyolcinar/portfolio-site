@@ -5,6 +5,7 @@ import minimize from '../public/icons/minimize.png';
 import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
 import { useState, useEffect } from 'react';
+import Draggable from 'react-draggable';
 
 const Connection = ({
   toggleMinimize,
@@ -32,7 +33,7 @@ const Connection = ({
   }
 
   return (
-    <div className={styles.container}>
+    <Draggable bounds='parent' positionOffset={{ x: '-50%', y: '-50%' }}>
       <div
         className={styles.card}
         onClick={() => {
@@ -107,7 +108,7 @@ const Connection = ({
           </div>
         </div>
       </div>
-    </div>
+    </Draggable>
   );
 };
 

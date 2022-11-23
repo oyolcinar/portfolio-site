@@ -1,3 +1,7 @@
+.container {
+  height: calc(100vh - 45px);
+}
+
 .navbar {
   position: absolute;
   bottom: 0;

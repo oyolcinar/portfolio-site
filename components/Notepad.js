@@ -5,6 +5,7 @@ import minimize from '../public/icons/minimize.png';
 import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
 import { useState } from 'react';
+import Draggable from 'react-draggable';
 
 const Notepad = ({
   doubleClick,
@@ -13,10 +14,10 @@ const Notepad = ({
   setIsNotepad,
   toggleMinimizeNotepad,
 }) => {
-  const [size, resize] = useState({ x: 800, y: 400 });
+  const [size, resize] = useState({ x: 400, y: 500 });
 
   return (
-    <div className={styles.container}>
+    <Draggable bounds='parent'>
       <div
         className='card'
         onClick={() => {
@@ -25,6 +26,9 @@ const Notepad = ({
       >
         <style jsx>{`
           .card {
+            position: absolute;
+            left: calc(50% - 200px);
+            top: calc(50% - 250px);
             width: ${size.x}px;
             height: ${size.y}px;
             z-index: 2;
@@ -94,7 +98,7 @@ const Notepad = ({
           </li>
         </ul>
       </div>
-    </div>
+    </Draggable>
   );
 };
 
