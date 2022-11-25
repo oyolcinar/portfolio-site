@@ -178,7 +178,7 @@ const Navbar = () => {
           setIsStartOpen={setIsStartOpen}
         />
       )}
-      {sound && <SoundControl />}
+      {sound && <SoundControl setSound={setSound} />}
       {isStartOpen && (
         <Start
           setIsStartOpen={setIsStartOpen}

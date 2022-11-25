@@ -14,6 +14,7 @@ const Connection = ({
   doubleClick,
   setDoubleClick,
   elapsedTime,
+  setIsStartOpen,
 }) => {
   const [currentSpeed, setCurrentSpeed] = useState(20000);
   const connectionRef = useRef(null);
@@ -36,6 +37,7 @@ const Connection = ({
 
   function doubleClickHandler() {
     setDoubleClick((prevState) => !prevState);
+    setIsStartOpen(false);
   }
 
   clickOutsideHandler(connectionRef, doubleClickHandler);

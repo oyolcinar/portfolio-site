@@ -1,8 +1,18 @@
 import styles from '../styles/SoundControl.module.css';
+import { clickOutsideHandler } from '../utils/utils';
+import { useRef } from 'react';
 
-const SoundControl = () => {
+const SoundControl = ({ setSound }) => {
+  const soundRef = useRef(null);
+
+  function setSoundHandler() {
+    setSound(false);
+  }
+
+  clickOutsideHandler(soundRef, setSoundHandler);
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={soundRef}>
       <div className={styles.header}>Volume</div>
       <div className={styles.body}>
         <div className={styles.triangle}></div>
