@@ -6,6 +6,8 @@ import outlook from '../public/icons/outlook.png';
 import paint from '../public/icons/paint.png';
 import styles from '../styles/Start.module.css';
 import Image from 'next/image';
+import { clickOutsideHandler } from '../utils/utils';
+import { useRef } from 'react';
 
 const Programs = ({
   setIsStartOpen,
@@ -13,12 +15,21 @@ const Programs = ({
   setIsNotepad,
   setMinimizeNotepad,
 }) => {
+  const programsRef = useRef(null);
+
+  clickOutsideHandler(programsRef, programsOutsideClickHandler);
+
+  function programsOutsideClickHandler() {
+    setIsStartOpen(false);
+  }
+
   return (
     <div
       className={`${styles.container} ${styles.programsContainer}`}
       onMouseEnter={() => {
         setIsProgramsOpen(true);
       }}
+      ref={programsRef}
     >
       <ul className={styles.list}>
         <li className={styles.item}>

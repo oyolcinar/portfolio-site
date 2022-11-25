@@ -4,8 +4,9 @@ import modem from '../public/icons/conn_dialup.png';
 import minimize from '../public/icons/minimize.png';
 import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
+import { clickOutsideHandler } from '../utils/utils';
 
 const Connection = ({
   toggleMinimize,
@@ -15,6 +16,7 @@ const Connection = ({
   elapsedTime,
 }) => {
   const [currentSpeed, setCurrentSpeed] = useState(20000);
+  const connectionRef = useRef(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -32,6 +34,12 @@ const Connection = ({
     return new Date(seconds * 1000).toISOString().substring(11, 11 + 8);
   }
 
+  function doubleClickHandler() {
+    setDoubleClick((prevState) => !prevState);
+  }
+
+  clickOutsideHandler(connectionRef, doubleClickHandler);
+
   return (
     <Draggable bounds='parent' positionOffset={{ x: '-50%', y: '-50%' }}>
       <div
@@ -39,6 +47,7 @@ const Connection = ({
         onClick={() => {
           setDoubleClick((prevState) => !prevState);
         }}
+        ref={connectionRef}
       >
         <div
           className={

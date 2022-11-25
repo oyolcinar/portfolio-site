@@ -6,7 +6,7 @@ import documents from '../public/icons/documents.png';
 import Image from 'next/image';
 import styles from '../styles/Start.module.css';
 import { RiArrowRightSFill } from 'react-icons/ri';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import StartDocuments from './StartDocuments';
 import Programs from './Programs';
 
@@ -23,6 +23,25 @@ const Start = ({
   setMinimizeNotepad,
 }) => {
   const [doubleClick, setDoubleClick] = useState(false);
+  const startRef = useRef(null);
+
+  function clickOutsideHandler(ref, func) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (!isProgramsOpen && !isDocumentsOpen) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            if (func) {
+              func();
+            }
+          }
+        }
+      }
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [ref, func]);
+  }
 
   function toggleDocuments() {
     setIsProgramsOpen(false);
@@ -37,9 +56,15 @@ const Start = ({
     setIsShutdown((prevState) => !prevState);
   }
 
+  function outsideStartClickHandler() {
+    setIsStartOpen(false);
+  }
+
+  clickOutsideHandler(startRef, outsideStartClickHandler);
+
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.container} ref={startRef}>
         <div className={styles.banner}></div>
         <ul className={styles.list}>
           <li

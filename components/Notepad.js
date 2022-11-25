@@ -4,8 +4,9 @@ import styles from '../styles/Card.module.css';
 import minimize from '../public/icons/minimize.png';
 import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Draggable from 'react-draggable';
+import { clickOutsideHandler } from '../utils/utils';
 
 const Notepad = ({
   doubleClick,
@@ -13,8 +14,30 @@ const Notepad = ({
   isNotepad,
   setIsNotepad,
   toggleMinimizeNotepad,
+  minimizeNotepad,
+  navRef,
 }) => {
   const [size, resize] = useState({ x: 400, y: 500 });
+  const [isFile, setIsFile] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+  const [isHelp, setIsHelp] = useState(false);
+
+  const notepadRef = useRef(null);
+  const fileRef = useRef(null);
+  const editRef = useRef(null);
+  const searchRef = useRef(null);
+  const helpRef = useRef(null);
+
+  clickOutsideHandler(notepadRef, minimizeHandler);
+  clickOutsideHandler(fileRef);
+  clickOutsideHandler(editRef);
+  clickOutsideHandler(searchRef);
+  clickOutsideHandler(helpRef);
+
+  function minimizeHandler() {
+    setDoubleClick((prevState) => !prevState);
+  }
 
   return (
     <Draggable bounds='parent'>
@@ -23,6 +46,7 @@ const Notepad = ({
         onClick={() => {
           setDoubleClick((prevState) => !prevState);
         }}
+        ref={notepadRef}
       >
         <style jsx>{`
           .card {
@@ -83,18 +107,18 @@ const Notepad = ({
             </div>
           </div>
         </div>
-        <ul>
-          <li>
-            <span>F</span>ile
+        <ul className={styles.menu}>
+          <li ref={fileRef}>
+            <span className={styles.underline}>F</span>ile
           </li>
-          <li>
-            <span>E</span>dit
+          <li ref={editRef}>
+            <span className={styles.underline}>E</span>dit
           </li>
-          <li>
-            <span>S</span>earch
+          <li ref={searchRef}>
+            <span className={styles.underline}>S</span>earch
           </li>
-          <li>
-            <span>H</span>elp
+          <li ref={helpRef}>
+            <span className={styles.underline}>H</span>elp
           </li>
         </ul>
       </div>

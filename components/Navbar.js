@@ -8,7 +8,7 @@ import onOn from '../public/icons/conn_pcs_on_on.png';
 import windows from '../public/icons/windows.png';
 import dialUp from '../public/icons/conn_dialup.png';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import SoundControl from './SoundControl';
 import Connection from './Connection';
 import { useElapsedTime } from 'use-elapsed-time';
@@ -33,6 +33,8 @@ const Navbar = () => {
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
 
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
+
+  const navRef = useRef(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -79,7 +81,7 @@ const Navbar = () => {
 
   return (
     <div className={styles.container}>
-      <nav className={styles.navbar}>
+      <nav className={styles.navbar} ref={navRef}>
         <ul className={styles.list}>
           <li className={styles.start}>
             <button
@@ -97,6 +99,7 @@ const Navbar = () => {
               className={cardStyles.card}
               onClick={() => {
                 setMinimizeModem(false);
+                setDoubleClick((prevState) => !prevState);
               }}
             >
               <div className={cardStyles.header}>
@@ -119,6 +122,7 @@ const Navbar = () => {
               className={cardStyles.card}
               onClick={() => {
                 setMinimizeNotepad(false);
+                setDoubleClick((prevState) => !prevState);
               }}
             >
               <div className={cardStyles.header}>
@@ -171,6 +175,7 @@ const Navbar = () => {
           doubleClick={doubleClick}
           setDoubleClick={setDoubleClick}
           elapsedTime={elapsedTime}
+          setIsStartOpen={setIsStartOpen}
         />
       )}
       {sound && <SoundControl />}
@@ -204,6 +209,8 @@ const Navbar = () => {
           isNotepad={isNotepad}
           setIsNotepad={setIsNotepad}
           toggleMinimizeNotepad={toggleMinimizeNotepad}
+          minimizeNotepad={minimizeNotepad}
+          navRef={navRef}
         />
       )}
     </div>

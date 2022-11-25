@@ -1,14 +1,25 @@
 import notepadImage from '../public/icons/notepadFile.png';
 import styles from '../styles/Start.module.css';
 import Image from 'next/image';
+import { useRef } from 'react';
+import { clickOutsideHandler } from '../utils/utils';
 
 const StartDocuments = ({ setIsStartOpen, setIsDocumentsOpen }) => {
+  const documentsRef = useRef(null);
+
+  function documentsOutsideClickHandler() {
+    setIsStartOpen(false);
+  }
+
+  clickOutsideHandler(documentsRef, documentsOutsideClickHandler);
+
   return (
     <div
       className={`${styles.container} ${styles.documentsContainer}`}
       onMouseEnter={() => {
         setIsDocumentsOpen(true);
       }}
+      ref={documentsRef}
     >
       <ul className={styles.list}>
         <li className={styles.item}>
