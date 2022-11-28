@@ -19,6 +19,7 @@ const Notepad = ({
   navRef,
 }) => {
   const [size, resize] = useState({ x: 400, y: 500 });
+  const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
@@ -41,6 +42,10 @@ const Notepad = ({
     setDoubleClickNotepad(true);
   }
 
+  function maximizeHandler() {
+    setFullScreen((prevState) => !prevState);
+  }
+
   function textHandler(e) {
     setInputText(e.target.value);
   }
@@ -48,7 +53,7 @@ const Notepad = ({
   return (
     <Draggable bounds='parent'>
       <div
-        className='card'
+        className={!fullScreen ? 'card' : styles.fullScreen}
         onClick={() => {
           setDoubleClickNotepad(false);
         }}
@@ -67,7 +72,7 @@ const Notepad = ({
             border-right: 2px solid #393939;
             border-bottom: 2px solid #393939;
             border-radius: 0;
-            background: #c0c0c0;
+            background-color: #c0c0c0;
           }
         `}</style>
         <div
@@ -101,6 +106,9 @@ const Notepad = ({
                 src={maximize}
                 height={20}
                 className={styles.maximize}
+                onClick={() => {
+                  maximizeHandler();
+                }}
               />
             </div>
             <div className={styles.close}>

@@ -62,6 +62,13 @@
   margin-left: 5px;
 }
 
+.programsCluster {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: 5px;
+}
+
 .firstTwo {
   justify-content: space-between;
 }
@@ -82,4 +89,8 @@
 .programsContainer {
   bottom: 220px;
   left: 292px;
+}
+
+.programsIcon {
+  margin-left: -4px;
 }

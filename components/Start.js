@@ -76,8 +76,13 @@ const Start = ({
               setIsProgramsOpen(false);
             }}
           >
-            <div className={styles.cluster}>
-              <Image src={programs} alt='' height={30} />
+            <div className={styles.programsCluster}>
+              <Image
+                src={programs}
+                alt=''
+                height={38}
+                className={styles.programsIcon}
+              />
               <div>Programs</div>
             </div>
             <RiArrowRightSFill className={styles.arrow} />
