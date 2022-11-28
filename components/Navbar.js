@@ -26,7 +26,9 @@ const Navbar = () => {
   const [isDocumentsOpen, setIsDocumentsOpen] = useState(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
 
-  const [doubleClick, setDoubleClick] = useState(false);
+  const [doubleClickModem, setDoubleClickModem] = useState(false);
+  const [doubleClickNotepad, setDoubleClickNotepad] = useState(false);
+  const [doubleClickShutdown, setDoubleClickShutdown] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
 
   const [minimizeModem, setMinimizeModem] = useState(false);
@@ -76,7 +78,7 @@ const Navbar = () => {
   function shutDownHandler() {
     !isShutdown
       ? setIsShutdown(true)
-      : setDoubleClick((prevState) => !prevState);
+      : setDoubleClickShutdown((prevState) => !prevState);
   }
 
   return (
@@ -99,7 +101,7 @@ const Navbar = () => {
               className={cardStyles.card}
               onClick={() => {
                 setMinimizeModem(false);
-                setDoubleClick((prevState) => !prevState);
+                setDoubleClickModem((prevState) => !prevState);
               }}
             >
               <div className={cardStyles.header}>
@@ -122,7 +124,7 @@ const Navbar = () => {
               className={cardStyles.card}
               onClick={() => {
                 setMinimizeNotepad(false);
-                setDoubleClick((prevState) => !prevState);
+                setDoubleClickNotepad((prevState) => !prevState);
               }}
             >
               <div className={cardStyles.header}>
@@ -151,7 +153,7 @@ const Navbar = () => {
               minimizeModem
                 ? setMinimizeModem(false)
                 : modem
-                ? setDoubleClick((prevState) => !prevState)
+                ? setDoubleClickModem((prevState) => !prevState)
                 : setModem((prevState) => !prevState);
             }}
           />
@@ -172,8 +174,8 @@ const Navbar = () => {
           toggleMinimize={toggleMinimize}
           modemState={modem}
           setModemState={setModem}
-          doubleClick={doubleClick}
-          setDoubleClick={setDoubleClick}
+          doubleClickModem={doubleClickModem}
+          setDoubleClickModem={setDoubleClickModem}
           elapsedTime={elapsedTime}
           setIsStartOpen={setIsStartOpen}
         />
@@ -195,8 +197,8 @@ const Navbar = () => {
       )}
       {isShutdown && (
         <Shutdown
-          setDoubleClick={setDoubleClick}
-          doubleClick={doubleClick}
+          setDoubleClickShutdown={setDoubleClickShutdown}
+          doubleClickShutdown={doubleClickShutdown}
           isShutdown={isShutdown}
           setIsShutdown={setIsShutdown}
           setIsStartOpen={setIsStartOpen}
@@ -204,8 +206,8 @@ const Navbar = () => {
       )}
       {isNotepad && !minimizeNotepad && (
         <Notepad
-          doubleClick={doubleClick}
-          setDoubleClick={setDoubleClick}
+          doubleClickNotepad={doubleClickNotepad}
+          setDoubleClickNotepad={setDoubleClickNotepad}
           isNotepad={isNotepad}
           setIsNotepad={setIsNotepad}
           toggleMinimizeNotepad={toggleMinimizeNotepad}

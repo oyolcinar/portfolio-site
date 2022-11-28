@@ -11,10 +11,11 @@ import { clickOutsideHandler } from '../utils/utils';
 const Connection = ({
   toggleMinimize,
   setModemState,
-  doubleClick,
-  setDoubleClick,
+  doubleClickModem,
+  setDoubleClickModem,
   elapsedTime,
   setIsStartOpen,
+  setDoubleClickNotepad,
 }) => {
   const [currentSpeed, setCurrentSpeed] = useState(20000);
   const connectionRef = useRef(null);
@@ -36,8 +37,7 @@ const Connection = ({
   }
 
   function doubleClickHandler() {
-    setDoubleClick((prevState) => !prevState);
-    setIsStartOpen(false);
+    setDoubleClickModem(true);
   }
 
   clickOutsideHandler(connectionRef, doubleClickHandler);
@@ -47,13 +47,15 @@ const Connection = ({
       <div
         className={styles.card}
         onClick={() => {
-          setDoubleClick((prevState) => !prevState);
+          setDoubleClickModem(false);
         }}
         ref={connectionRef}
       >
         <div
           className={
-            !doubleClick ? styles.header : `${styles.header} ${styles.double}`
+            !doubleClickModem
+              ? styles.header
+              : `${styles.header} ${styles.double}`
           }
         >
           <div className={styles.headerLeft}>

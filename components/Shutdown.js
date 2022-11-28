@@ -3,18 +3,20 @@ import shutdownStyles from '../styles/Shutdown.module.css';
 import Image from 'next/image';
 import shutdownImage from '../public/icons/shutdown.png';
 import close from '../public/icons/close.png';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
+import { clickOutsideHandler } from '../utils/utils';
 
 const Shutdown = ({
-  setDoubleClick,
-  doubleClick,
+  setDoubleClickShutdown,
+  doubleClickShutdown,
   isShutdown,
   setIsShutdown,
   setIsStartOpen,
 }) => {
   const [redirect, setRedirect] = useState('http://www.google.com');
   const router = useRouter();
+  const shutdownRef = useRef();
 
   function submitHandler(e) {
     e.preventDefault();
@@ -22,17 +24,25 @@ const Shutdown = ({
     router.push(redirect);
   }
 
+  function shutdownDoubleClickHandler() {
+    setDoubleClickShutdown(true);
+  }
+
+  clickOutsideHandler(shutdownRef, shutdownDoubleClickHandler);
+
   return (
-    <div className={`${styles.container} ${styles.shutdown}`}>
+    <div className={`${styles.container} ${styles.shutdown}`} ref={shutdownRef}>
       <div
         className={`${styles.card} ${styles.shutdown}`}
         onClick={() => {
-          setDoubleClick((prevState) => !prevState);
+          setDoubleClickShutdown(false);
         }}
       >
         <div
           className={
-            !doubleClick ? styles.header : `${styles.header} ${styles.double}`
+            !doubleClickShutdown
+              ? styles.header
+              : `${styles.header} ${styles.double}`
           }
         >
           <div className={`${styles.headerLeft} ${styles.headerShutdown}`}>

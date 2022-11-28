@@ -1,5 +1,9 @@
 .shutdown {
   z-index: 2 !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .card {
@@ -13,6 +17,7 @@
   border-bottom: 2px solid #393939;
   border-radius: 0;
   background: #C0C0C0;
+  box-shadow: 3px 0 4px -2px #393939;
 }
 
 .header {
@@ -203,6 +208,7 @@
   padding-left: 7px;
   gap: 10px;
   margin-top: 3px;
+  margin-bottom: 0;
 }
 
 .menu > li {

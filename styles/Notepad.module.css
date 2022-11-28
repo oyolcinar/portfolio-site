@@ -1,0 +1,209 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1px;
+  border-top: 2px solid #BDBDBD;
+  border-left: 2px solid #BDBDBD;
+  border-right: 2px solid #BDBDBD;
+  border-bottom: 2px solid white;
+  height: 86%;
+  width: 100%;
+}
+
+.textarea {
+  flex-grow: 1;
+  background-color: white;
+  border: inset 2px #a0a0a0;
+  border-right-color: white;
+}
+
+.input::-webkit-scrollbar {
+  width: 24px !important;
+  margin-bottom: 24px;
+  background-color: #BDBDBD;
+  height: 24px;
+}
+
+.input::-webkit-scrollbar-thumb {
+  width: 24px;
+  border: 2px solid #393939;
+  border-left-color: white;
+  border-top-color: white;
+}
+
+.input::-webkit-scrollbar-button {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #393939;
+  border-left-color: white;
+  border-top-color: white;
+  background-size: 12px;
+  background-repeat: no-repeat;
+}
+
+.input::-webkit-scrollbar-button:single-button:vertical:increment {
+
+  background-position: center 4px;
+  background-image: url('../public/icons/downArrow.png')
+}
+
+.input::-webkit-scrollbar-button:single-button:vertical:decrement {
+
+  background-position: center 4px;
+  background-image: url('../public/icons/upArrow.png')
+}
+
+.input::-webkit-scrollbar-button:single-button:horizontal:decrement {
+
+  background-position: center 4px;
+  background-image: url('../public/icons/leftArrow.png')
+}
+
+.input::-webkit-scrollbar-button:single-button:horizontal:increment {
+
+  background-position: center 4px;
+  background-image: url('../public/icons/rightArrow.png')
+}
+
+
+
+.input {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  border: none;
+  overflow: auto;
+  outline: none;
+  font-family: 'Windows 95';
+  font-size: 0.6rem;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  letter-spacing: 0.04rem;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.input::after {
+  border: none;
+}
+
+.small3 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 4px;
+  height: 4px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: #bdbdbd;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.small2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: #393939;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.small1 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: white;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.medium3 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: #bdbdbd;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.medium2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: #393939;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.medium1 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: white;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.large3 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: #bdbdbd;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.large2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: #393939;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.large1 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+  background-color: white;
+  border: 1px solid #bdbdbd;
+  border-top-color: #bdbdbd;
+}
+
+.resizeContainer {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background-color: #bdbdbd ;
+  height: 24px;
+  width: 24px;
+  border: inset 2px #bdbdbd;
+  border-bottom-color: white;
+  border-right-color: white;
+}

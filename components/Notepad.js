@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import notepadIcon from '../public/icons/notepadIcon.png';
 import styles from '../styles/Card.module.css';
+import npStyles from '../styles/Notepad.module.css';
 import minimize from '../public/icons/minimize.png';
 import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
@@ -9,8 +10,8 @@ import Draggable from 'react-draggable';
 import { clickOutsideHandler } from '../utils/utils';
 
 const Notepad = ({
-  doubleClick,
-  setDoubleClick,
+  doubleClickNotepad,
+  setDoubleClickNotepad,
   isNotepad,
   setIsNotepad,
   toggleMinimizeNotepad,
@@ -22,6 +23,7 @@ const Notepad = ({
   const [isEdit, setIsEdit] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
+  const [inputText, setInputText] = useState('');
 
   const notepadRef = useRef(null);
   const fileRef = useRef(null);
@@ -36,7 +38,11 @@ const Notepad = ({
   clickOutsideHandler(helpRef);
 
   function minimizeHandler() {
-    setDoubleClick((prevState) => !prevState);
+    setDoubleClickNotepad(true);
+  }
+
+  function textHandler(e) {
+    setInputText(e.target.value);
   }
 
   return (
@@ -44,7 +50,7 @@ const Notepad = ({
       <div
         className='card'
         onClick={() => {
-          setDoubleClick((prevState) => !prevState);
+          setDoubleClickNotepad(false);
         }}
         ref={notepadRef}
       >
@@ -66,7 +72,9 @@ const Notepad = ({
         `}</style>
         <div
           className={
-            !doubleClick ? styles.header : `${styles.header} ${styles.double}`
+            !doubleClickNotepad
+              ? styles.header
+              : `${styles.header} ${styles.double}`
           }
         >
           <div className={styles.headerLeft}>
@@ -121,6 +129,25 @@ const Notepad = ({
             <span className={styles.underline}>H</span>elp
           </li>
         </ul>
+        <div className={npStyles.body}>
+          <div className={npStyles.textarea}>
+            <textarea
+              className={npStyles.input}
+              onChange={textHandler}
+            ></textarea>
+          </div>
+        </div>
+        <div className={npStyles.resizeContainer}>
+          <div className={npStyles.large1}></div>
+          <div className={npStyles.large2}></div>
+          <div className={npStyles.large3}></div>
+          <div className={npStyles.medium1}></div>
+          <div className={npStyles.medium2}></div>
+          <div className={npStyles.medium3}></div>
+          <div className={npStyles.small1}></div>
+          <div className={npStyles.small2}></div>
+          <div className={npStyles.small3}></div>
+        </div>
       </div>
     </Draggable>
   );
