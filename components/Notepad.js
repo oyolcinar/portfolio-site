@@ -5,20 +5,23 @@ import npStyles from '../styles/Notepad.module.css';
 import minimize from '../public/icons/minimize.png';
 import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 import { clickOutsideHandler } from '../utils/utils';
 
 const Notepad = ({
   doubleClickNotepad,
   setDoubleClickNotepad,
-  isNotepad,
   setIsNotepad,
   toggleMinimizeNotepad,
-  minimizeNotepad,
-  navRef,
+  notepadText,
+  setNotepadText,
+  size,
+  setSize,
+  startResize,
+  dragDisabled,
+  setDragDisabled,
 }) => {
-  const [size, resize] = useState({ x: 400, y: 500 });
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -47,25 +50,24 @@ const Notepad = ({
   }
 
   function textHandler(e) {
-    setInputText(e.target.value);
+    setNotepadText(e.target.value);
   }
 
   return (
-    <Draggable bounds='parent'>
+    <Draggable bounds='parent' disabled={dragDisabled}>
       <div
         className={!fullScreen ? 'card' : styles.fullScreen}
         onClick={() => {
           setDoubleClickNotepad(false);
         }}
-        ref={notepadRef}
       >
         <style jsx>{`
           .card {
             position: absolute;
             left: calc(50% - 200px);
             top: calc(50% - 250px);
-            width: ${size.x}px;
-            height: ${size.y}px;
+            width: ${size.w}px;
+            height: ${size.h}px;
             z-index: 2;
             border-top: 2px solid white;
             border-left: 2px solid white;
@@ -117,7 +119,9 @@ const Notepad = ({
                 src={close}
                 height={21}
                 onClick={() => {
+                  setNotepadText('');
                   setIsNotepad(false);
+                  setSize({ w: 400, h: 500 });
                 }}
               />
             </div>
@@ -142,10 +146,16 @@ const Notepad = ({
             <textarea
               className={npStyles.input}
               onChange={textHandler}
+              value={notepadText}
             ></textarea>
           </div>
         </div>
-        <div className={npStyles.resizeContainer}>
+        <div
+          className={npStyles.resizeContainer}
+          onMouseDown={(e) => {
+            startResize(e), setDragDisabled(true);
+          }}
+        >
           <div className={npStyles.large1}></div>
           <div className={npStyles.large2}></div>
           <div className={npStyles.large3}></div>

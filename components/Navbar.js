@@ -31,6 +31,17 @@ const Navbar = () => {
   const [doubleClickShutdown, setDoubleClickShutdown] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
 
+  const [drag, setDrag] = useState({
+    active: false,
+    x: '',
+    y: '',
+  });
+
+  const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
+  const [dragDisabled, setDragDisabled] = useState(false);
+
+  const [notepadText, setNotepadText] = useState('');
+
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
 
@@ -61,6 +72,40 @@ const Navbar = () => {
     return modemImages[random];
   }
 
+  const startResize = (e) => {
+    setDrag({
+      active: true,
+      x: e.clientX,
+      y: e.clientY,
+    });
+  };
+
+  const resizeFrame = (e, size, setSize) => {
+    const { active, x, y } = drag;
+    if (active) {
+      const xDiff = Math.abs(x - e.clientX);
+      const yDiff = Math.abs(y - e.clientY);
+      const newW = x > e.clientX ? size.w - xDiff : size.w + xDiff;
+      const newH = y > e.clientY ? size.h + yDiff : size.h - yDiff;
+
+      setDrag({ ...drag, x: e.clientX, y: e.clientY });
+
+      if (newH < 150) {
+        setSize({ w: newW, h: 150 });
+      } else if (newW < 250) {
+        setSize({ w: 250, h: newH });
+      } else if (newH < 150 && newW < 250) {
+        setSize({ w: 250, h: 150 });
+      } else {
+        setSize({ w: newW, h: newH });
+      }
+    }
+  };
+
+  const stopResize = (e) => {
+    setDrag({ ...drag, active: false });
+  };
+
   function toggleMinimizeNotepad() {
     setMinimizeNotepad(true);
   }
@@ -82,7 +127,15 @@ const Navbar = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onMouseMove={(e) => {
+        resizeFrame(e, notepadSize, setNotepadSize);
+      }}
+      onMouseUp={(e) => {
+        stopResize(e), setDragDisabled(false);
+      }}
+    >
       <nav className={styles.navbar} ref={navRef}>
         <ul className={styles.list}>
           <li className={styles.start}>
@@ -193,6 +246,7 @@ const Navbar = () => {
           setIsProgramsOpen={setIsProgramsOpen}
           setIsNotepad={setIsNotepad}
           setMinimizeNotepad={setMinimizeNotepad}
+          startResize={startResize}
         />
       )}
       {isShutdown && (
@@ -212,7 +266,13 @@ const Navbar = () => {
           setIsNotepad={setIsNotepad}
           toggleMinimizeNotepad={toggleMinimizeNotepad}
           minimizeNotepad={minimizeNotepad}
-          navRef={navRef}
+          notepadText={notepadText}
+          setNotepadText={setNotepadText}
+          size={notepadSize}
+          setSize={setNotepadSize}
+          startResize={startResize}
+          dragDisabled={dragDisabled}
+          setDragDisabled={setDragDisabled}
         />
       )}
     </div>
