@@ -5,7 +5,7 @@ import shutdownImage from '../public/icons/shutdown.png';
 import close from '../public/icons/close.png';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { clickOutsideHandler } from '../utils/utils';
+import { useClickOutsideHandler } from '../utils/utils';
 
 const Shutdown = ({
   setDoubleClickShutdown,
@@ -28,7 +28,7 @@ const Shutdown = ({
     setDoubleClickShutdown(true);
   }
 
-  clickOutsideHandler(shutdownRef, shutdownDoubleClickHandler);
+  useClickOutsideHandler(shutdownRef, shutdownDoubleClickHandler);
 
   return (
     <div className={`${styles.container} ${styles.shutdown}`} ref={shutdownRef}>

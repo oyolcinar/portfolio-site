@@ -6,7 +6,7 @@ import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
 import { useState, useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
-import { clickOutsideHandler } from '../utils/utils';
+import { useClickOutsideHandler } from '../utils/utils';
 
 const Connection = ({
   toggleMinimize,
@@ -40,7 +40,7 @@ const Connection = ({
     setDoubleClickModem(true);
   }
 
-  clickOutsideHandler(connectionRef, doubleClickHandler);
+  useClickOutsideHandler(connectionRef, doubleClickHandler);
 
   return (
     <Draggable bounds='parent' positionOffset={{ x: '-50%', y: '-50%' }}>

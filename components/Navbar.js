@@ -45,12 +45,16 @@ const Navbar = () => {
   const navRef = useRef(null);
 
   useEffect(() => {
+    function random() {
+      const random = Math.floor(Math.random() * modemImages.length);
+      return modemImages[random];
+    }
     const intervalId = setInterval(() => {
       setCurrentImage(random());
     }, 1500);
 
     return () => clearInterval(intervalId);
-  }, []);
+  });
 
   var today = new Date();
   var time =
@@ -61,11 +65,6 @@ const Navbar = () => {
     today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
 
   const modemImages = [offOff, onOff, offOn, onOn];
-
-  function random() {
-    const random = Math.floor(Math.random() * modemImages.length);
-    return modemImages[random];
-  }
 
   const [drag, setDrag] = useState({
     active: false,

@@ -6,7 +6,7 @@ import outlook from '../public/icons/outlook.png';
 import paint from '../public/icons/paint.png';
 import styles from '../styles/Start.module.css';
 import Image from 'next/image';
-import { clickOutsideHandler } from '../utils/utils';
+import { useClickOutsideHandler } from '../utils/utils';
 import { useRef } from 'react';
 
 const Programs = ({
@@ -17,7 +17,7 @@ const Programs = ({
 }) => {
   const programsRef = useRef(null);
 
-  clickOutsideHandler(programsRef, programsOutsideClickHandler);
+  useClickOutsideHandler(programsRef, programsOutsideClickHandler);
 
   function programsOutsideClickHandler() {
     setIsStartOpen(false);

@@ -7,7 +7,7 @@ import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
 import { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
-import { clickOutsideHandler } from '../utils/utils';
+import { useClickOutsideHandler } from '../utils/utils';
 
 const Notepad = ({
   doubleClickNotepad,
@@ -35,11 +35,11 @@ const Notepad = ({
   const searchRef = useRef(null);
   const helpRef = useRef(null);
 
-  clickOutsideHandler(notepadRef, minimizeHandler);
-  clickOutsideHandler(fileRef);
-  clickOutsideHandler(editRef);
-  clickOutsideHandler(searchRef);
-  clickOutsideHandler(helpRef);
+  useClickOutsideHandler(notepadRef, minimizeHandler);
+  useClickOutsideHandler(fileRef, toggleFile);
+  useClickOutsideHandler(editRef, toggleEdit);
+  useClickOutsideHandler(searchRef, toggleSearch);
+  useClickOutsideHandler(helpRef, toggleHelp);
 
   function minimizeHandler() {
     setDoubleClickNotepad(true);
@@ -155,7 +155,6 @@ const Notepad = ({
         </div>
         <ul className={styles.menu}>
           <li
-            ref={fileRef}
             onClick={() => {
               toggleFile();
             }}
@@ -163,7 +162,10 @@ const Notepad = ({
             <span className={styles.underline}>F</span>ile
           </li>
           {isFile && (
-            <ul className={`${styles.menuDropdown} ${styles.fileMenu}`}>
+            <ul
+              className={`${styles.menuDropdown} ${styles.fileMenu}`}
+              ref={fileRef}
+            >
               <li>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>N</span>ew
@@ -190,7 +192,6 @@ const Notepad = ({
             </ul>
           )}
           <li
-            ref={editRef}
             onClick={() => {
               toggleEdit();
             }}
@@ -198,7 +199,10 @@ const Notepad = ({
             <span className={styles.underline}>E</span>dit
           </li>
           {isEdit && (
-            <ul className={`${styles.menuDropdown} ${styles.editMenu}`}>
+            <ul
+              className={`${styles.menuDropdown} ${styles.editMenu}`}
+              ref={editRef}
+            >
               <li>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>U</span>ndo
@@ -232,7 +236,6 @@ const Notepad = ({
             </ul>
           )}
           <li
-            ref={searchRef}
             onClick={() => {
               toggleSearch();
             }}
@@ -240,7 +243,10 @@ const Notepad = ({
             <span className={styles.underline}>S</span>earch
           </li>
           {isSearch && (
-            <ul className={`${styles.menuDropdown} ${styles.searchMenu}`}>
+            <ul
+              className={`${styles.menuDropdown} ${styles.searchMenu}`}
+              ref={searchRef}
+            >
               <li>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>U</span>ndo
@@ -249,7 +255,6 @@ const Notepad = ({
             </ul>
           )}
           <li
-            ref={helpRef}
             onClick={() => {
               toggleHelp();
             }}
@@ -257,7 +262,10 @@ const Notepad = ({
             <span className={styles.underline}>H</span>elp
           </li>
           {isHelp && (
-            <ul className={`${styles.menuDropdown} ${styles.helpMenu}`}>
+            <ul
+              className={`${styles.menuDropdown} ${styles.helpMenu}`}
+              ref={helpRef}
+            >
               <li>
                 <div className={styles.menuItemCluster}>
                   A<span className={styles.underline}>b</span>out

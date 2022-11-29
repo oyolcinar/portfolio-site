@@ -2,7 +2,7 @@ import notepadImage from '../public/icons/notepadFile.png';
 import styles from '../styles/Start.module.css';
 import Image from 'next/image';
 import { useRef } from 'react';
-import { clickOutsideHandler } from '../utils/utils';
+import { useClickOutsideHandler } from '../utils/utils';
 
 const StartDocuments = ({ setIsStartOpen, setIsDocumentsOpen }) => {
   const documentsRef = useRef(null);
@@ -11,7 +11,7 @@ const StartDocuments = ({ setIsStartOpen, setIsDocumentsOpen }) => {
     setIsStartOpen(false);
   }
 
-  clickOutsideHandler(documentsRef, documentsOutsideClickHandler);
+  useClickOutsideHandler(documentsRef, documentsOutsideClickHandler);
 
   return (
     <div

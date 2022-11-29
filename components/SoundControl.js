@@ -1,5 +1,5 @@
 import styles from '../styles/SoundControl.module.css';
-import { clickOutsideHandler } from '../utils/utils';
+import { useClickOutsideHandler } from '../utils/utils';
 import { useRef } from 'react';
 
 const SoundControl = ({ setSound }) => {
@@ -9,7 +9,7 @@ const SoundControl = ({ setSound }) => {
     setSound(false);
   }
 
-  clickOutsideHandler(soundRef, setSoundHandler);
+  useClickOutsideHandler(soundRef, setSoundHandler);
 
   return (
     <div className={styles.container} ref={soundRef}>

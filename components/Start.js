@@ -25,7 +25,7 @@ const Start = ({
   const [doubleClick, setDoubleClick] = useState(false);
   const startRef = useRef(null);
 
-  function clickOutsideHandler(ref, func) {
+  function useClickOutsideHandler(ref, func) {
     useEffect(() => {
       function handleClickOutside(event) {
         if (!isProgramsOpen && !isDocumentsOpen) {
@@ -60,7 +60,7 @@ const Start = ({
     setIsStartOpen(false);
   }
 
-  clickOutsideHandler(startRef, outsideStartClickHandler);
+  useClickOutsideHandler(startRef, outsideStartClickHandler);
 
   return (
     <>
