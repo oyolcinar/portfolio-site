@@ -19,8 +19,8 @@ const Notepad = ({
   size,
   setSize,
   startResize,
-  dragDisabled,
-  setDragDisabled,
+  draggableDisabled,
+  setIsResizing,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -53,8 +53,34 @@ const Notepad = ({
     setNotepadText(e.target.value);
   }
 
+  function toggleFile() {
+    setIsFile((prevState) => !prevState);
+    setIsEdit(false);
+    setIsSearch(false);
+    setIsHelp(false);
+  }
+
+  function toggleEdit() {
+    setIsEdit((prevState) => !prevState);
+    setIsFile(false);
+    setIsSearch(false);
+    setIsHelp(false);
+  }
+  function toggleSearch() {
+    setIsSearch((prevState) => !prevState);
+    setIsEdit(false);
+    setIsFile(false);
+    setIsHelp(false);
+  }
+  function toggleHelp() {
+    setIsHelp((prevState) => !prevState);
+    setIsEdit(false);
+    setIsSearch(false);
+    setIsFile(false);
+  }
+
   return (
-    <Draggable bounds='parent' disabled={dragDisabled}>
+    <Draggable bounds='parent' disabled={draggableDisabled}>
       <div
         className={!fullScreen ? 'card' : styles.fullScreen}
         onClick={() => {
@@ -128,18 +154,117 @@ const Notepad = ({
           </div>
         </div>
         <ul className={styles.menu}>
-          <li ref={fileRef}>
+          <li
+            ref={fileRef}
+            onClick={() => {
+              toggleFile();
+            }}
+          >
             <span className={styles.underline}>F</span>ile
           </li>
-          <li ref={editRef}>
+          {isFile && (
+            <ul className={`${styles.menuDropdown} ${styles.fileMenu}`}>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>N</span>ew
+                </div>
+              </li>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>O</span>pen
+                </div>
+              </li>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>S</span>ave
+                </div>
+              </li>
+
+              <div className={styles.seperator}></div>
+
+              <li>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>C</span>lose
+                </div>
+              </li>
+            </ul>
+          )}
+          <li
+            ref={editRef}
+            onClick={() => {
+              toggleEdit();
+            }}
+          >
             <span className={styles.underline}>E</span>dit
           </li>
-          <li ref={searchRef}>
+          {isEdit && (
+            <ul className={`${styles.menuDropdown} ${styles.editMenu}`}>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>U</span>ndo
+                </div>
+              </li>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  Cu<span className={styles.underline}>t</span>
+                </div>
+              </li>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>C</span>opy
+                </div>
+              </li>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>P</span>aste
+                </div>
+              </li>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  Dele<span className={styles.underline}>t</span>e
+                </div>
+              </li>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  Select <span className={styles.underline}>A</span>ll
+                </div>
+              </li>
+            </ul>
+          )}
+          <li
+            ref={searchRef}
+            onClick={() => {
+              toggleSearch();
+            }}
+          >
             <span className={styles.underline}>S</span>earch
           </li>
-          <li ref={helpRef}>
+          {isSearch && (
+            <ul className={`${styles.menuDropdown} ${styles.searchMenu}`}>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>U</span>ndo
+                </div>
+              </li>
+            </ul>
+          )}
+          <li
+            ref={helpRef}
+            onClick={() => {
+              toggleHelp();
+            }}
+          >
             <span className={styles.underline}>H</span>elp
           </li>
+          {isHelp && (
+            <ul className={`${styles.menuDropdown} ${styles.helpMenu}`}>
+              <li>
+                <div className={styles.menuItemCluster}>
+                  A<span className={styles.underline}>b</span>out
+                </div>
+              </li>
+            </ul>
+          )}
         </ul>
         <div className={npStyles.body}>
           <div className={npStyles.textarea}>
@@ -153,7 +278,8 @@ const Notepad = ({
         <div
           className={npStyles.resizeContainer}
           onMouseDown={(e) => {
-            startResize(e), setDragDisabled(true);
+            startResize(e);
+            setIsResizing(true);
           }}
         >
           <div className={npStyles.large1}></div>

@@ -50,6 +50,12 @@ const Programs = ({
             <div>Minesweeper</div>
           </div>
         </li>
+        <li className={styles.item}>
+          <div className={styles.cluster}>
+            <Image src={paint} alt='' height={30} />
+            <div>MS Paint</div>
+          </div>
+        </li>
         <li
           className={styles.item}
           onClick={() => {
@@ -68,12 +74,6 @@ const Programs = ({
           <div className={styles.cluster}>
             <Image src={outlook} alt='' height={30} />
             <div>Outlook</div>
-          </div>
-        </li>
-        <li className={styles.item}>
-          <div className={styles.cluster}>
-            <Image src={paint} alt='' height={30} />
-            <div>MS Paint</div>
           </div>
         </li>
       </ul>

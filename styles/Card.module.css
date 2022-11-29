@@ -218,17 +218,80 @@
   padding: 2px 5px;
 }
 
-/* .menu > li:hover {
+.menu > li:hover {
   color: white;
   background-color: #000181;
-} */
-
-.menu > li:active {
-  border: inset 2px #a0a0a0;
 }
+
+/* .menu > li:active {
+  border: inset 2px #a0a0a0;
+} */
 
 .fullScreen {
   width: calc(100vw - 1px);
   height: calc(100vh - 45px);
   background-color: #BDBDBD;
+}
+
+.menuDropdown {
+  position: absolute;
+  background-color: #C0C0C0;
+  border: 2px solid #393939;
+  border-top-color: white;
+  border-left-color: white;
+  box-shadow: 3px 0 4px -2px #393939;
+  z-index: 3;
+  list-style: none;
+  top: 68px;
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+}
+
+.fileMenu {
+  left: 7px;
+}
+
+.editMenu {
+  left: 52px;
+}
+
+.searchMenu {
+  left: 100px;
+}
+
+.helpMenu {
+  left: 170px;
+}
+
+.menuDropdown > li {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.menuDropdown > li:hover {
+  color: white;
+  background-color: #000181;
+}
+
+.menuItemCluster {
+  width: 70px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.seperator {
+  background-color: #393939;
+  height: 5px;
+  border-bottom: 1px solid white;
+  border-top: 1px solid #393939;
 }

@@ -30,15 +30,10 @@ const Navbar = () => {
   const [doubleClickNotepad, setDoubleClickNotepad] = useState(false);
   const [doubleClickShutdown, setDoubleClickShutdown] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
-
-  const [drag, setDrag] = useState({
-    active: false,
-    x: '',
-    y: '',
-  });
+  const [isResizing, setIsResizing] = useState(false);
 
   const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
-  const [dragDisabled, setDragDisabled] = useState(false);
+  const [draggableDisabled, setDraggableDisabled] = useState(false);
 
   const [notepadText, setNotepadText] = useState('');
 
@@ -72,7 +67,15 @@ const Navbar = () => {
     return modemImages[random];
   }
 
+  const [drag, setDrag] = useState({
+    active: false,
+    x: '',
+    y: '',
+  });
+
   const startResize = (e) => {
+    setDraggableDisabled(true);
+
     setDrag({
       active: true,
       x: e.clientX,
@@ -81,12 +84,14 @@ const Navbar = () => {
   };
 
   const resizeFrame = (e, size, setSize) => {
+    setDraggableDisabled(true);
+
     const { active, x, y } = drag;
     if (active) {
       const xDiff = Math.abs(x - e.clientX);
       const yDiff = Math.abs(y - e.clientY);
       const newW = x > e.clientX ? size.w - xDiff : size.w + xDiff;
-      const newH = y > e.clientY ? size.h + yDiff : size.h - yDiff;
+      const newH = y > e.clientY ? size.h - yDiff : size.h + yDiff;
 
       setDrag({ ...drag, x: e.clientX, y: e.clientY });
 
@@ -104,6 +109,8 @@ const Navbar = () => {
 
   const stopResize = (e) => {
     setDrag({ ...drag, active: false });
+    setIsResizing(false);
+    setDraggableDisabled(false);
   };
 
   function toggleMinimizeNotepad() {
@@ -133,7 +140,7 @@ const Navbar = () => {
         resizeFrame(e, notepadSize, setNotepadSize);
       }}
       onMouseUp={(e) => {
-        stopResize(e), setDragDisabled(false);
+        stopResize(e);
       }}
     >
       <nav className={styles.navbar} ref={navRef}>
@@ -271,8 +278,8 @@ const Navbar = () => {
           size={notepadSize}
           setSize={setNotepadSize}
           startResize={startResize}
-          dragDisabled={dragDisabled}
-          setDragDisabled={setDragDisabled}
+          draggableDisabled={draggableDisabled}
+          setIsResizing={setIsResizing}
         />
       )}
     </div>
