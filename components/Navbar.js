@@ -1,12 +1,10 @@
 import styles from '../styles/Navbar.module.css';
-import cardStyles from '../styles/Minimize.module.css';
 import speaker from '../public/icons/loudspeaker.png';
 import offOff from '../public/icons/conn_pcs_off_off.png';
 import onOff from '../public/icons/conn_pcs_on_off.png';
 import offOn from '../public/icons/conn_pcs_off_on.png';
 import onOn from '../public/icons/conn_pcs_on_on.png';
 import windows from '../public/icons/windows.png';
-import dialUp from '../public/icons/conn_dialup.png';
 import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import SoundControl from './SoundControl';
@@ -15,7 +13,8 @@ import { useElapsedTime } from 'use-elapsed-time';
 import Start from './Start';
 import Shutdown from './Shutdown';
 import Notepad from './Notepad';
-import notepadIcon from '../public/icons/notepadIcon.png';
+import ConnectionTray from './TrayComponents/ConnectionTray';
+import NotepadTray from './TrayComponents/NotepadTray';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -30,6 +29,7 @@ const Navbar = () => {
   const [doubleClickNotepad, setDoubleClickNotepad] = useState(false);
   const [doubleClickShutdown, setDoubleClickShutdown] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
+  const [isStartClicked, setIsStartClicked] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
 
   const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
@@ -96,10 +96,10 @@ const Navbar = () => {
 
       if (newH < 150) {
         setSize({ w: newW, h: 150 });
-      } else if (newW < 250) {
-        setSize({ w: 250, h: newH });
-      } else if (newH < 150 && newW < 250) {
-        setSize({ w: 250, h: 150 });
+      } else if (newW < 270) {
+        setSize({ w: 270, h: newH });
+      } else if (newH < 150 && newW < 270) {
+        setSize({ w: 270, h: 150 });
       } else {
         setSize({ w: newW, h: newH });
       }
@@ -156,48 +156,18 @@ const Navbar = () => {
             </button>
           </li>
           {minimizeModem || modem ? (
-            <div
-              className={cardStyles.card}
-              onClick={() => {
-                setMinimizeModem(false);
-                setDoubleClickModem((prevState) => !prevState);
-              }}
-            >
-              <div className={cardStyles.header}>
-                <div className={cardStyles.headerLeft}>
-                  <Image
-                    src={dialUp}
-                    alt=''
-                    height={20}
-                    className={cardStyles.headerModem}
-                  />
-                  Connected to Internet Central
-                </div>
-              </div>
-            </div>
+            <ConnectionTray
+              setMinimizeModem={setMinimizeModem}
+              setDoubleClickModem={setDoubleClickModem}
+            />
           ) : (
             ''
           )}
           {minimizeNotepad || isNotepad ? (
-            <div
-              className={cardStyles.card}
-              onClick={() => {
-                setMinimizeNotepad(false);
-                setDoubleClickNotepad((prevState) => !prevState);
-              }}
-            >
-              <div className={cardStyles.header}>
-                <div className={cardStyles.headerLeft}>
-                  <Image
-                    src={notepadIcon}
-                    alt=''
-                    height={20}
-                    className={cardStyles.headerModem}
-                  />
-                  Notepad
-                </div>
-              </div>
-            </div>
+            <NotepadTray
+              setMinimizeNotepad={setMinimizeNotepad}
+              setDoubleClickNotepad={setDoubleClickNotepad}
+            />
           ) : (
             ''
           )}
@@ -253,6 +223,7 @@ const Navbar = () => {
           setIsNotepad={setIsNotepad}
           setMinimizeNotepad={setMinimizeNotepad}
           startResize={startResize}
+          isStartOpen={isStartOpen}
         />
       )}
       {isShutdown && (

@@ -33,6 +33,7 @@
   color: #C9C9C9;
   border-radius: 0;
   border: 2px solid #BDBDBD;
+  height: 34px;
 }
 
 .headerLeft {
@@ -43,7 +44,15 @@
   text-overflow: ellipsis;
 }
 
+.title {
+  font-family: 'Windows 95 Bold';
+  font-size: 0.73rem;
+  margin-bottom: 5px;
+  padding-top: 0;
+}
+
 .headerRight {
+  margin-top: 3px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -55,7 +64,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 .body{
@@ -133,8 +142,9 @@
 
 .headerShutdown {
   font-family: "Windows 95 Bold";
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   color: white;
+  margin-bottom: 5px;
 }
 
 .sdBodyLeft {
@@ -242,7 +252,7 @@
   box-shadow: 3px 0 4px -2px #393939;
   z-index: 3;
   list-style: none;
-  top: 68px;
+  top: 62px;
   width: 130px;
   display: flex;
   flex-direction: column;
@@ -270,7 +280,7 @@
   left: 170px;
 }
 
-.menuDropdown > li {
+.menuItem {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -278,7 +288,7 @@
   padding-bottom: 5px;
 }
 
-.menuDropdown > li:hover {
+.menuItem:hover {
   color: white;
   background-color: #000181;
 }
@@ -290,8 +300,9 @@
 }
 
 .seperator {
-  background-color: #393939;
-  height: 5px;
+  height: 1px;
+  width: 100%;
+  background-color: #C0C0C0;
   border-bottom: 1px solid white;
   border-top: 1px solid #393939;
 }

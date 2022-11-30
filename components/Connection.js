@@ -14,8 +14,6 @@ const Connection = ({
   doubleClickModem,
   setDoubleClickModem,
   elapsedTime,
-  setIsStartOpen,
-  setDoubleClickNotepad,
 }) => {
   const [currentSpeed, setCurrentSpeed] = useState(20000);
   const connectionRef = useRef(null);
@@ -65,14 +63,14 @@ const Connection = ({
               height={20}
               className={styles.headerModem}
             />
-            Connected to Internet Central
+            <div className={styles.title}>Connected to Internet Central</div>
           </div>
           <div className={styles.headerRight}>
             <div>
               <Image
                 alt=''
                 src={minimize}
-                height={20}
+                height={22}
                 onClick={() => {
                   toggleMinimize();
                 }}
@@ -80,7 +78,7 @@ const Connection = ({
               <Image
                 alt=''
                 src={maximize}
-                height={20}
+                height={22}
                 className={styles.maximize}
               />
             </div>
@@ -88,7 +86,7 @@ const Connection = ({
               <Image
                 alt=''
                 src={close}
-                height={21}
+                height={23}
                 onClick={() => {
                   setModemState(false);
                 }}

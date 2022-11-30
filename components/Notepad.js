@@ -27,6 +27,7 @@ const Notepad = ({
   const [isEdit, setIsEdit] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const [inputText, setInputText] = useState('');
 
   const notepadRef = useRef(null);
@@ -34,14 +35,13 @@ const Notepad = ({
   const editRef = useRef(null);
   const searchRef = useRef(null);
   const helpRef = useRef(null);
+  const menuRef = useRef(null);
 
   useClickOutsideHandler(notepadRef, minimizeHandler);
-  useClickOutsideHandler(fileRef, toggleFile);
-  useClickOutsideHandler(editRef, toggleEdit);
-  useClickOutsideHandler(searchRef, toggleSearch);
-  useClickOutsideHandler(helpRef, toggleHelp);
+  useClickOutsideHandler(menuRef, toggleMenuClickOutside);
 
   function minimizeHandler() {
+    setIsClicked(false);
     setDoubleClickNotepad(true);
   }
 
@@ -53,27 +53,37 @@ const Notepad = ({
     setNotepadText(e.target.value);
   }
 
+  function toggleMenuClickOutside() {
+    setIsClicked(false);
+    setIsFile(false);
+    setIsEdit(false);
+    setIsSearch(false);
+    setIsHelp(false);
+  }
+
   function toggleFile() {
-    setIsFile((prevState) => !prevState);
+    setIsFile(true);
     setIsEdit(false);
     setIsSearch(false);
     setIsHelp(false);
   }
 
   function toggleEdit() {
-    setIsEdit((prevState) => !prevState);
+    setIsEdit(true);
     setIsFile(false);
     setIsSearch(false);
     setIsHelp(false);
   }
+
   function toggleSearch() {
-    setIsSearch((prevState) => !prevState);
+    setIsSearch(true);
     setIsEdit(false);
     setIsFile(false);
     setIsHelp(false);
   }
+
   function toggleHelp() {
-    setIsHelp((prevState) => !prevState);
+    setIsHelp(true);
     setIsEdit(false);
     setIsSearch(false);
     setIsFile(false);
@@ -82,6 +92,7 @@ const Notepad = ({
   return (
     <Draggable bounds='parent' disabled={draggableDisabled}>
       <div
+        ref={notepadRef}
         className={!fullScreen ? 'card' : styles.fullScreen}
         onClick={() => {
           setDoubleClickNotepad(false);
@@ -117,14 +128,14 @@ const Notepad = ({
               height={20}
               className={styles.headerModem}
             />
-            Notepad
+            <div className={styles.title}>Untitled - Notepad</div>
           </div>
           <div className={styles.headerRight}>
             <div>
               <Image
                 alt=''
                 src={minimize}
-                height={20}
+                height={22}
                 onClick={() => {
                   toggleMinimizeNotepad();
                 }}
@@ -132,7 +143,7 @@ const Notepad = ({
               <Image
                 alt=''
                 src={maximize}
-                height={20}
+                height={22}
                 className={styles.maximize}
                 onClick={() => {
                   maximizeHandler();
@@ -143,7 +154,7 @@ const Notepad = ({
               <Image
                 alt=''
                 src={close}
-                height={21}
+                height={23}
                 onClick={() => {
                   setNotepadText('');
                   setIsNotepad(false);
@@ -153,38 +164,46 @@ const Notepad = ({
             </div>
           </div>
         </div>
-        <ul className={styles.menu}>
+        <ul className={styles.menu} ref={menuRef}>
           <li
             onClick={() => {
+              setIsClicked((prevState) => !prevState);
               toggleFile();
+            }}
+            onMouseEnter={() => {
+              isClicked ? toggleFile() : '';
             }}
           >
             <span className={styles.underline}>F</span>ile
           </li>
-          {isFile && (
+          {isFile && isClicked && (
             <ul
               className={`${styles.menuDropdown} ${styles.fileMenu}`}
               ref={fileRef}
             >
-              <li>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>N</span>ew
-                </div>
-              </li>
-              <li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>O</span>pen
                 </div>
               </li>
-              <li>
+              <li className={styles.seperator}></li>
+              <li className={styles.menuItem}>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>N</span>ew
+                </div>
+              </li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>S</span>ave
                 </div>
               </li>
-
-              <div className={styles.seperator}></div>
-
-              <li>
+              <li className={styles.menuItem}>
+                <div className={styles.menuItemCluster}>
+                  <span className={styles.underline}>D</span>elete
+                </div>
+              </li>
+              <li className={styles.seperator}></li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>C</span>lose
                 </div>
@@ -193,42 +212,48 @@ const Notepad = ({
           )}
           <li
             onClick={() => {
+              setIsClicked((prevState) => !prevState);
               toggleEdit();
+            }}
+            onMouseEnter={() => {
+              isClicked ? toggleEdit() : '';
             }}
           >
             <span className={styles.underline}>E</span>dit
           </li>
-          {isEdit && (
+          {isEdit && isClicked && (
             <ul
               className={`${styles.menuDropdown} ${styles.editMenu}`}
               ref={editRef}
             >
-              <li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>U</span>ndo
                 </div>
               </li>
-              <li>
+              <li className={styles.seperator}></li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   Cu<span className={styles.underline}>t</span>
                 </div>
               </li>
-              <li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>C</span>opy
                 </div>
               </li>
-              <li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>P</span>aste
                 </div>
               </li>
-              <li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   Dele<span className={styles.underline}>t</span>e
                 </div>
               </li>
-              <li>
+              <li className={styles.seperator}></li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   Select <span className={styles.underline}>A</span>ll
                 </div>
@@ -237,17 +262,21 @@ const Notepad = ({
           )}
           <li
             onClick={() => {
+              setIsClicked((prevState) => !prevState);
               toggleSearch();
+            }}
+            onMouseEnter={() => {
+              isClicked ? toggleSearch() : '';
             }}
           >
             <span className={styles.underline}>S</span>earch
           </li>
-          {isSearch && (
+          {isSearch && isClicked && (
             <ul
               className={`${styles.menuDropdown} ${styles.searchMenu}`}
               ref={searchRef}
             >
-              <li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>U</span>ndo
                 </div>
@@ -256,17 +285,21 @@ const Notepad = ({
           )}
           <li
             onClick={() => {
+              setIsClicked((prevState) => !prevState);
               toggleHelp();
+            }}
+            onMouseEnter={() => {
+              isClicked ? toggleHelp() : '';
             }}
           >
             <span className={styles.underline}>H</span>elp
           </li>
-          {isHelp && (
+          {isHelp && isClicked && (
             <ul
               className={`${styles.menuDropdown} ${styles.helpMenu}`}
               ref={helpRef}
             >
-              <li>
+              <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   A<span className={styles.underline}>b</span>out
                 </div>
