@@ -21,6 +21,8 @@ const Notepad = ({
   startResize,
   draggableDisabled,
   setIsResizing,
+  orderArrayHandler,
+  indexOfOrderArrayElement,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -105,7 +107,7 @@ const Notepad = ({
             top: calc(50% - 250px);
             width: ${size.w}px;
             height: ${size.h}px;
-            z-index: 2;
+            z-index: ${indexOfOrderArrayElement('notepad')};
             border-top: 2px solid white;
             border-left: 2px solid white;
             border-right: 2px solid #393939;
@@ -158,6 +160,7 @@ const Notepad = ({
                 onClick={() => {
                   setNotepadText('');
                   setIsNotepad(false);
+                  orderArrayHandler('notepad');
                   setSize({ w: 400, h: 500 });
                 }}
               />

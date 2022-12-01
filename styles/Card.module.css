@@ -1,5 +1,5 @@
 .shutdown {
-  z-index: 2 !important;
+  z-index: 100 !important;
   position: absolute;
   left: 50%;
   top: 50%;

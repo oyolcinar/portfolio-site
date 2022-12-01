@@ -4,7 +4,11 @@ import Image from 'next/image';
 import { useRef } from 'react';
 import { useClickOutsideHandler } from '../utils/utils';
 
-const StartDocuments = ({ setIsStartOpen, setIsDocumentsOpen }) => {
+const StartDocuments = ({
+  setIsStartOpen,
+  setIsDocumentsOpen,
+  orderArrayHandler,
+}) => {
   const documentsRef = useRef(null);
 
   function documentsOutsideClickHandler() {

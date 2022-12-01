@@ -14,6 +14,8 @@ const Connection = ({
   doubleClickModem,
   setDoubleClickModem,
   elapsedTime,
+  orderArrayHandler,
+  indexOfOrderArrayElement,
 }) => {
   const [currentSpeed, setCurrentSpeed] = useState(20000);
   const connectionRef = useRef(null);
@@ -49,6 +51,21 @@ const Connection = ({
         }}
         ref={connectionRef}
       >
+        <style jsx>{`
+          .card {
+            position: absolute;
+            z-index: ${indexOfOrderArrayElement('modem')};
+            left: 50%;
+            top: 50%;
+            border-top: 2px solid white;
+            border-left: 2px solid white;
+            border-right: 2px solid #393939;
+            border-bottom: 2px solid #393939;
+            border-radius: 0;
+            background: #c0c0c0;
+            box-shadow: 3px 0 4px -2px #393939;
+          }
+        `}</style>
         <div
           className={
             !doubleClickModem
@@ -88,6 +105,7 @@ const Connection = ({
                 src={close}
                 height={23}
                 onClick={() => {
+                  orderArrayHandler('modem');
                   setModemState(false);
                 }}
               />

@@ -6,7 +6,7 @@ import documents from '../public/icons/documents.png';
 import Image from 'next/image';
 import styles from '../styles/Start.module.css';
 import { RiArrowRightSFill } from 'react-icons/ri';
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import StartDocuments from './StartDocuments';
 import Programs from './Programs';
 
@@ -21,17 +21,21 @@ const Start = ({
   setIsProgramsOpen,
   setIsNotepad,
   setMinimizeNotepad,
+  orderArrayHandler,
+  isNotepad,
+  startButtonRef,
 }) => {
-  const [doubleClick, setDoubleClick] = useState(false);
   const startRef = useRef(null);
 
-  function useClickOutsideHandler(ref, func) {
+  function useClickOutsideHandler(ref, ref2, func) {
     useEffect(() => {
       function handleClickOutside(event) {
         if (!isProgramsOpen && !isDocumentsOpen) {
-          if (ref.current && !ref.current.contains(event.target)) {
-            if (func) {
-              func();
+          if (ref2.current && !ref2.current.contains(event.target)) {
+            if (ref.current && !ref.current.contains(event.target)) {
+              if (func) {
+                func();
+              }
             }
           }
         }
@@ -40,7 +44,7 @@ const Start = ({
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
-    }, [ref, func]);
+    }, [ref, ref2, func]);
   }
 
   function toggleDocuments() {
@@ -60,7 +64,7 @@ const Start = ({
     setIsStartOpen(false);
   }
 
-  useClickOutsideHandler(startRef, outsideStartClickHandler);
+  useClickOutsideHandler(startRef, startButtonRef, outsideStartClickHandler);
 
   return (
     <>
@@ -128,6 +132,7 @@ const Start = ({
         <StartDocuments
           setIsStartOpen={setIsStartOpen}
           setIsDocumentsOpen={setIsDocumentsOpen}
+          orderArrayHandler={orderArrayHandler}
         />
       )}
       {isProgramsOpen && (
@@ -136,6 +141,8 @@ const Start = ({
           setIsProgramsOpen={setIsProgramsOpen}
           setIsNotepad={setIsNotepad}
           setMinimizeNotepad={setMinimizeNotepad}
+          orderArrayHandler={orderArrayHandler}
+          isNotepad={isNotepad}
         />
       )}
     </>

@@ -29,7 +29,6 @@ const Navbar = () => {
   const [doubleClickNotepad, setDoubleClickNotepad] = useState(false);
   const [doubleClickShutdown, setDoubleClickShutdown] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
-  const [isStartClicked, setIsStartClicked] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
 
   const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
@@ -40,9 +39,13 @@ const Navbar = () => {
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
 
+  const [orderArray, setOrderArray] = useState([]);
+
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
 
   const navRef = useRef(null);
+  const startButtonRef = useRef(null);
+  const soundControlRef = useRef(null);
 
   useEffect(() => {
     function random() {
@@ -126,11 +129,55 @@ const Navbar = () => {
     setIsProgramsOpen(false);
   }
 
-  function shutDownHandler() {
-    !isShutdown
-      ? setIsShutdown(true)
-      : setDoubleClickShutdown((prevState) => !prevState);
+  function orderArrayHandler(name) {
+    if (orderArray.includes(name)) {
+      const filteredArray = orderArray.filter((item) => item !== name);
+      setOrderArray(filteredArray);
+    } else {
+      setOrderArray((prevState) => [...prevState, name]);
+    }
   }
+
+  function indexOfOrderArrayElement(name) {
+    return orderArray.indexOf(name) + 1;
+  }
+
+  function makeElementActive(element) {
+    const filteredArray = orderArray.filter((item) => item !== element);
+    setOrderArray([...filteredArray, element]);
+  }
+
+  const trayElements = orderArray.map((item) => {
+    if (item === 'modem') {
+      return (
+        <div key={item}>
+          {minimizeModem || modem ? (
+            <ConnectionTray
+              setMinimizeModem={setMinimizeModem}
+              setDoubleClickModem={setDoubleClickModem}
+            />
+          ) : (
+            ''
+          )}
+        </div>
+      );
+    }
+
+    if (item === 'notepad') {
+      return (
+        <div key={item}>
+          {minimizeNotepad || isNotepad ? (
+            <NotepadTray
+              setMinimizeNotepad={setMinimizeNotepad}
+              setDoubleClickNotepad={setDoubleClickNotepad}
+            />
+          ) : (
+            ''
+          )}
+        </div>
+      );
+    }
+  });
 
   return (
     <div
@@ -150,27 +197,13 @@ const Navbar = () => {
               onClick={() => {
                 toggleStart();
               }}
+              ref={startButtonRef}
             >
               <Image src={windows} height={28} alt='' />
               <div className={styles.text}>Start</div>
             </button>
           </li>
-          {minimizeModem || modem ? (
-            <ConnectionTray
-              setMinimizeModem={setMinimizeModem}
-              setDoubleClickModem={setDoubleClickModem}
-            />
-          ) : (
-            ''
-          )}
-          {minimizeNotepad || isNotepad ? (
-            <NotepadTray
-              setMinimizeNotepad={setMinimizeNotepad}
-              setDoubleClickNotepad={setDoubleClickNotepad}
-            />
-          ) : (
-            ''
-          )}
+          {trayElements}
         </ul>
         <div className={styles.taskbar}>
           <Image
@@ -179,6 +212,7 @@ const Navbar = () => {
             height={24}
             className={styles.modem}
             onClick={() => {
+              orderArrayHandler('modem');
               minimizeModem
                 ? setMinimizeModem(false)
                 : modem
@@ -194,6 +228,7 @@ const Navbar = () => {
             onClick={() => {
               setSound((prevState) => !prevState);
             }}
+            ref={soundControlRef}
           />
           <div>{time}</div>
         </div>
@@ -207,9 +242,13 @@ const Navbar = () => {
           setDoubleClickModem={setDoubleClickModem}
           elapsedTime={elapsedTime}
           setIsStartOpen={setIsStartOpen}
+          orderArrayHandler={orderArrayHandler}
+          indexOfOrderArrayElement={indexOfOrderArrayElement}
         />
       )}
-      {sound && <SoundControl setSound={setSound} />}
+      {sound && (
+        <SoundControl setSound={setSound} soundControlRef={soundControlRef} />
+      )}
       {isStartOpen && (
         <Start
           setIsStartOpen={setIsStartOpen}
@@ -224,6 +263,9 @@ const Navbar = () => {
           setMinimizeNotepad={setMinimizeNotepad}
           startResize={startResize}
           isStartOpen={isStartOpen}
+          orderArrayHandler={orderArrayHandler}
+          isNotepad={isNotepad}
+          startButtonRef={startButtonRef}
         />
       )}
       {isShutdown && (
@@ -250,6 +292,8 @@ const Navbar = () => {
           startResize={startResize}
           draggableDisabled={draggableDisabled}
           setIsResizing={setIsResizing}
+          orderArrayHandler={orderArrayHandler}
+          indexOfOrderArrayElement={indexOfOrderArrayElement}
         />
       )}
     </div>

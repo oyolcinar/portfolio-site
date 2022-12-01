@@ -1,15 +1,32 @@
 import styles from '../styles/SoundControl.module.css';
-import { useClickOutsideHandler } from '../utils/utils';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
-const SoundControl = ({ setSound }) => {
+const SoundControl = ({ setSound, soundControlRef }) => {
   const soundRef = useRef(null);
 
   function setSoundHandler() {
     setSound(false);
   }
 
-  useClickOutsideHandler(soundRef, setSoundHandler);
+  function useClickOutsideHandler(ref, ref2, func) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          if (ref2.current && !ref2.current.contains(event.target)) {
+            if (func) {
+              func();
+            }
+          }
+        }
+      }
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [ref, ref2, func]);
+  }
+
+  useClickOutsideHandler(soundRef, soundControlRef, setSoundHandler);
 
   return (
     <div className={styles.container} ref={soundRef}>
