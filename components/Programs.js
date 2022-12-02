@@ -16,6 +16,7 @@ const Programs = ({
   setMinimizeNotepad,
   orderArrayHandler,
   isNotepad,
+  setActive,
 }) => {
   const programsRef = useRef(null);
 
@@ -62,6 +63,7 @@ const Programs = ({
           className={styles.item}
           onClick={() => {
             !isNotepad ? orderArrayHandler('notepad') : '';
+            setActive('notepad');
             setIsProgramsOpen(false);
             setIsStartOpen(false);
             setIsNotepad(true);

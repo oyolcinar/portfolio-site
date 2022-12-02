@@ -14,8 +14,11 @@ const Connection = ({
   doubleClickModem,
   setDoubleClickModem,
   elapsedTime,
+  orderArray,
   orderArrayHandler,
   indexOfOrderArrayElement,
+  active,
+  setActive,
 }) => {
   const [currentSpeed, setCurrentSpeed] = useState(20000);
   const connectionRef = useRef(null);
@@ -45,16 +48,19 @@ const Connection = ({
   return (
     <Draggable bounds='parent' positionOffset={{ x: '-50%', y: '-50%' }}>
       <div
-        className={styles.card}
+        className='card'
         onClick={() => {
           setDoubleClickModem(false);
+          setActive('modem');
         }}
         ref={connectionRef}
       >
         <style jsx>{`
           .card {
             position: absolute;
-            z-index: ${indexOfOrderArrayElement('modem')};
+            z-index: ${active === 'modem'
+              ? orderArray.length + 1
+              : indexOfOrderArrayElement('modem')};
             left: 50%;
             top: 50%;
             border-top: 2px solid white;
@@ -105,6 +111,7 @@ const Connection = ({
                 src={close}
                 height={23}
                 onClick={() => {
+                  setActive('');
                   orderArrayHandler('modem');
                   setModemState(false);
                 }}

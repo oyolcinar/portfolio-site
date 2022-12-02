@@ -24,6 +24,7 @@ const Start = ({
   orderArrayHandler,
   isNotepad,
   startButtonRef,
+  setActive,
 }) => {
   const startRef = useRef(null);
 
@@ -143,6 +144,7 @@ const Start = ({
           setMinimizeNotepad={setMinimizeNotepad}
           orderArrayHandler={orderArrayHandler}
           isNotepad={isNotepad}
+          setActive={setActive}
         />
       )}
     </>

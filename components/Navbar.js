@@ -40,6 +40,7 @@ const Navbar = () => {
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
 
   const [orderArray, setOrderArray] = useState([]);
+  const [active, setActive] = useState('');
 
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
 
@@ -155,6 +156,7 @@ const Navbar = () => {
             <ConnectionTray
               setMinimizeModem={setMinimizeModem}
               setDoubleClickModem={setDoubleClickModem}
+              setActive={setActive}
             />
           ) : (
             ''
@@ -170,6 +172,7 @@ const Navbar = () => {
             <NotepadTray
               setMinimizeNotepad={setMinimizeNotepad}
               setDoubleClickNotepad={setDoubleClickNotepad}
+              setActive={setActive}
             />
           ) : (
             ''
@@ -212,7 +215,8 @@ const Navbar = () => {
             height={24}
             className={styles.modem}
             onClick={() => {
-              orderArrayHandler('modem');
+              !modem ? orderArrayHandler('modem') : '';
+              setActive('modem');
               minimizeModem
                 ? setMinimizeModem(false)
                 : modem
@@ -242,8 +246,11 @@ const Navbar = () => {
           setDoubleClickModem={setDoubleClickModem}
           elapsedTime={elapsedTime}
           setIsStartOpen={setIsStartOpen}
+          orderArray={orderArray}
           orderArrayHandler={orderArrayHandler}
           indexOfOrderArrayElement={indexOfOrderArrayElement}
+          active={active}
+          setActive={setActive}
         />
       )}
       {sound && (
@@ -266,6 +273,7 @@ const Navbar = () => {
           orderArrayHandler={orderArrayHandler}
           isNotepad={isNotepad}
           startButtonRef={startButtonRef}
+          setActive={setActive}
         />
       )}
       {isShutdown && (
@@ -292,8 +300,11 @@ const Navbar = () => {
           startResize={startResize}
           draggableDisabled={draggableDisabled}
           setIsResizing={setIsResizing}
+          orderArray={orderArray}
           orderArrayHandler={orderArrayHandler}
           indexOfOrderArrayElement={indexOfOrderArrayElement}
+          active={active}
+          setActive={setActive}
         />
       )}
     </div>

@@ -21,8 +21,11 @@ const Notepad = ({
   startResize,
   draggableDisabled,
   setIsResizing,
+  orderArray,
   orderArrayHandler,
   indexOfOrderArrayElement,
+  active,
+  setActive,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -98,6 +101,7 @@ const Notepad = ({
         className={!fullScreen ? 'card' : styles.fullScreen}
         onClick={() => {
           setDoubleClickNotepad(false);
+          setActive('notepad');
         }}
       >
         <style jsx>{`
@@ -107,7 +111,9 @@ const Notepad = ({
             top: calc(50% - 250px);
             width: ${size.w}px;
             height: ${size.h}px;
-            z-index: ${indexOfOrderArrayElement('notepad')};
+            z-index: ${active === 'notepad'
+              ? orderArray.length + 1
+              : indexOfOrderArrayElement('notepad')};
             border-top: 2px solid white;
             border-left: 2px solid white;
             border-right: 2px solid #393939;
@@ -160,6 +166,7 @@ const Notepad = ({
                 onClick={() => {
                   setNotepadText('');
                   setIsNotepad(false);
+                  setActive('');
                   orderArrayHandler('notepad');
                   setSize({ w: 400, h: 500 });
                 }}

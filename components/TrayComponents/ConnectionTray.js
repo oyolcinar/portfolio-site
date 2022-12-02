@@ -2,11 +2,16 @@ import Image from 'next/image';
 import cardStyles from '../../styles/Minimize.module.css';
 import dialUp from '../../public/icons/conn_dialup.png';
 
-const ConnectionTray = ({ setMinimizeModem, setDoubleClickModem }) => {
+const ConnectionTray = ({
+  setMinimizeModem,
+  setDoubleClickModem,
+  setActive,
+}) => {
   return (
     <div
       className={cardStyles.card}
       onClick={() => {
+        setActive('modem');
         setMinimizeModem(false);
         setDoubleClickModem((prevState) => !prevState);
       }}

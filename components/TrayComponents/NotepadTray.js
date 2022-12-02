@@ -2,11 +2,16 @@ import Image from 'next/image';
 import cardStyles from '../../styles/Minimize.module.css';
 import notepadIcon from '../../public/icons/notepad.png';
 
-const NotepadTray = ({ setMinimizeNotepad, setDoubleClickNotepad }) => {
+const NotepadTray = ({
+  setMinimizeNotepad,
+  setDoubleClickNotepad,
+  setActive,
+}) => {
   return (
     <div
       className={cardStyles.card}
       onClick={() => {
+        setActive('notepad');
         setMinimizeNotepad(false);
         setDoubleClickNotepad((prevState) => !prevState);
       }}
