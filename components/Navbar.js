@@ -454,6 +454,7 @@ const Navbar = () => {
           name={'notepad'}
           title={'Notepad'}
           programIcon={notepadIcon}
+          initialSize={{ w: 400, h: 500 }}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -479,6 +480,7 @@ const Navbar = () => {
           name={'paint'}
           title={'MS Paint'}
           programIcon={paintIcon}
+          initialSize={{ w: 600, h: 800 }}
         />
       )}
       {isExplorer && !minimizeExplorer && (
@@ -502,6 +504,7 @@ const Navbar = () => {
           name={'explorer'}
           title={'Explorer'}
           programIcon={explorerIcon}
+          initialSize={{ w: 800, h: 600 }}
         />
       )}
       {isBriefcase && !minimizeBriefcase && (
@@ -525,6 +528,7 @@ const Navbar = () => {
           name={'briefcase'}
           title={'Briefcase'}
           programIcon={briefcaseIcon}
+          initialSize={{ w: 800, h: 600 }}
         />
       )}
       {isOutlook && !minimizeOutlook && (
@@ -548,6 +552,7 @@ const Navbar = () => {
           name={'outlook'}
           title={'Outlook'}
           programIcon={outlookIcon}
+          initialSize={{ w: 600, h: 400 }}
         />
       )}
     </div>

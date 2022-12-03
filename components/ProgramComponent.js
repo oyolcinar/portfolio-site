@@ -29,6 +29,7 @@ const ProgramComponent = ({
   programIcon,
   children,
   setText,
+  initialSize,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -108,8 +109,8 @@ const ProgramComponent = ({
         <style jsx>{`
           .card {
             position: absolute;
-            left: calc(50% - ${size.w / 2}px);
-            top: calc(50% - ${size.h / 2}px);
+            left: calc(50% - ${initialSize.w / 2}px);
+            top: calc(50% - ${initialSize.h / 2}px);
             width: ${size.w}px;
             height: ${size.h}px;
             z-index: ${active === name
@@ -169,7 +170,7 @@ const ProgramComponent = ({
                   setIsProgram(false);
                   setActive('');
                   orderArrayHandler(name);
-                  setSize({ w: 400, h: 500 });
+                  setSize({ w: initialSize.w, h: initialSize.h });
                 }}
               />
             </div>
