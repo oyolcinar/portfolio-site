@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import notepadIcon from '../public/icons/notepadIcon.png';
 import styles from '../styles/Card.module.css';
 import npStyles from '../styles/Notepad.module.css';
 import minimize from '../public/icons/minimize.png';
@@ -9,13 +8,12 @@ import { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 import { useClickOutsideHandler } from '../utils/utils';
 
-const Notepad = ({
-  doubleClickNotepad,
-  setDoubleClickNotepad,
-  setIsNotepad,
-  toggleMinimizeNotepad,
-  notepadText,
-  setNotepadText,
+const ProgramComponent = ({
+  doubleClickProgram,
+  setDoubleClickProgram,
+  isProgram,
+  setIsProgram,
+  toggleMinimizeProgram,
   size,
   setSize,
   startResize,
@@ -26,6 +24,11 @@ const Notepad = ({
   indexOfOrderArrayElement,
   active,
   setActive,
+  name,
+  title,
+  programIcon,
+  children,
+  setText,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -33,25 +36,28 @@ const Notepad = ({
   const [isSearch, setIsSearch] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  const [inputText, setInputText] = useState('');
 
-  const notepadRef = useRef(null);
+  const programRef = useRef(null);
   const fileRef = useRef(null);
   const editRef = useRef(null);
   const searchRef = useRef(null);
   const helpRef = useRef(null);
   const menuRef = useRef(null);
 
-  useClickOutsideHandler(notepadRef, minimizeHandler);
+  useClickOutsideHandler(programRef, minimizeHandler);
   useClickOutsideHandler(menuRef, toggleMenuClickOutside);
 
   function minimizeHandler() {
     setIsClicked(false);
-    setDoubleClickNotepad(true);
+    setDoubleClickProgram(true);
   }
 
   function maximizeHandler() {
     setFullScreen((prevState) => !prevState);
+  }
+
+  function textHandler(e) {
+    setNotepadText(e.target.value);
   }
 
   function toggleMenuClickOutside() {
@@ -89,15 +95,14 @@ const Notepad = ({
     setIsSearch(false);
     setIsFile(false);
   }
-
   return (
     <Draggable bounds='parent' disabled={draggableDisabled}>
       <div
-        ref={notepadRef}
+        ref={programRef}
         className={!fullScreen ? 'card' : styles.fullScreen}
         onClick={() => {
-          setDoubleClickNotepad(false);
-          setActive('notepad');
+          setDoubleClickProgram(false);
+          setActive(name);
         }}
       >
         <style jsx>{`
@@ -107,9 +112,9 @@ const Notepad = ({
             top: calc(50% - 250px);
             width: ${size.w}px;
             height: ${size.h}px;
-            z-index: ${active === 'notepad'
+            z-index: ${active === name
               ? orderArray.length + 1
-              : indexOfOrderArrayElement('notepad')};
+              : indexOfOrderArrayElement(name)};
             border-top: 2px solid white;
             border-left: 2px solid white;
             border-right: 2px solid #393939;
@@ -120,19 +125,19 @@ const Notepad = ({
         `}</style>
         <div
           className={
-            !doubleClickNotepad
+            !doubleClickProgram
               ? styles.header
               : `${styles.header} ${styles.double}`
           }
         >
           <div className={styles.headerLeft}>
             <Image
-              src={notepadIcon}
+              src={programIcon}
               alt=''
               height={20}
               className={styles.headerModem}
             />
-            <div className={styles.title}>Untitled - Notepad</div>
+            <div className={styles.title}>Untitled - {title}</div>
           </div>
           <div className={styles.headerRight}>
             <div>
@@ -141,7 +146,7 @@ const Notepad = ({
                 src={minimize}
                 height={22}
                 onClick={() => {
-                  toggleMinimizeNotepad();
+                  toggleMinimizeProgram();
                 }}
               />
               <Image
@@ -160,10 +165,10 @@ const Notepad = ({
                 src={close}
                 height={23}
                 onClick={() => {
-                  setNotepadText('');
-                  setIsNotepad(false);
+                  setText ? setText('') : '';
+                  setIsProgram(false);
                   setActive('');
-                  orderArrayHandler('notepad');
+                  orderArrayHandler(name);
                   setSize({ w: 400, h: 500 });
                 }}
               />
@@ -313,15 +318,7 @@ const Notepad = ({
             </ul>
           )}
         </ul>
-        <div className={npStyles.body}>
-          <div className={npStyles.textarea}>
-            <textarea
-              className={npStyles.input}
-              onChange={textHandler}
-              value={notepadText}
-            ></textarea>
-          </div>
-        </div>
+        <div className={npStyles.body}>{children}</div>
         <div
           className={npStyles.resizeContainer}
           onMouseDown={(e) => {
@@ -344,4 +341,4 @@ const Notepad = ({
   );
 };
 
-export default Notepad;
+export default ProgramComponent;

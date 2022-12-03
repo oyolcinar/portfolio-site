@@ -25,6 +25,18 @@ const Start = ({
   isNotepad,
   startButtonRef,
   setActive,
+  isPaint,
+  setIsPaint,
+  setMinimizePaint,
+  isExplorer,
+  setIsExplorer,
+  setMinimizeExplorer,
+  isBriefcase,
+  setIsBriefcase,
+  setMinimizeBriefcase,
+  isOutlook,
+  setIsOutlook,
+  setMinimizeOutlook,
 }) => {
   const startRef = useRef(null);
 
@@ -145,6 +157,18 @@ const Start = ({
           orderArrayHandler={orderArrayHandler}
           isNotepad={isNotepad}
           setActive={setActive}
+          isPaint={isPaint}
+          setIsPaint={setIsPaint}
+          setMinimizePaint={setMinimizePaint}
+          isExplorer={isExplorer}
+          setIsExplorer={setIsExplorer}
+          setMinimizeExplorer={setMinimizeExplorer}
+          isBriefcase={isBriefcase}
+          setIsBriefcase={setIsBriefcase}
+          setMinimizeBriefcase={setMinimizeBriefcase}
+          isOutlook={isOutlook}
+          setIsOutlook={setIsOutlook}
+          setMinimizeOutlook={setMinimizeOutlook}
         />
       )}
     </>

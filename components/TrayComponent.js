@@ -1,34 +1,36 @@
 import Image from 'next/image';
-import cardStyles from '../../styles/Minimize.module.css';
-import notepadIcon from '../../public/icons/notepad.png';
+import cardStyles from '../styles/Minimize.module.css';
 
-const NotepadTray = ({
-  setMinimizeNotepad,
-  setDoubleClickNotepad,
+const TrayComponent = ({
+  name,
+  icon,
   setActive,
+  setMinimize,
+  setDoubleClick,
+  title,
 }) => {
   return (
     <div
       className={cardStyles.card}
       onClick={() => {
-        setActive('notepad');
-        setMinimizeNotepad(false);
-        setDoubleClickNotepad((prevState) => !prevState);
+        setActive(name);
+        setMinimize(false);
+        setDoubleClick((prevState) => !prevState);
       }}
     >
       <div className={cardStyles.header}>
         <div className={cardStyles.headerLeft}>
           <Image
-            src={notepadIcon}
+            src={icon}
             alt=''
             height={20}
             className={cardStyles.headerModem}
           />
-          Notepad
+          {title}
         </div>
       </div>
     </div>
   );
 };
 
-export default NotepadTray;
+export default TrayComponent;
