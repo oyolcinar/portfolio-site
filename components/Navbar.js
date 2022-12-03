@@ -49,10 +49,10 @@ const Navbar = () => {
   const [isResizing, setIsResizing] = useState(false);
 
   const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
-  const [paintSize, setPaintSize] = useState({ w: 400, h: 500 });
-  const [explorerSize, setExplorerSize] = useState({ w: 400, h: 500 });
-  const [briefcaseSize, setBriefcaseSize] = useState({ w: 400, h: 500 });
-  const [outlookSize, setOutlookSize] = useState({ w: 400, h: 500 });
+  const [paintSize, setPaintSize] = useState({ w: 600, h: 800 });
+  const [explorerSize, setExplorerSize] = useState({ w: 800, h: 600 });
+  const [briefcaseSize, setBriefcaseSize] = useState({ w: 800, h: 600 });
+  const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
   const [draggableDisabled, setDraggableDisabled] = useState(false);
 
   const [notepadText, setNotepadText] = useState('');

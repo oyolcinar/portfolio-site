@@ -108,8 +108,8 @@ const ProgramComponent = ({
         <style jsx>{`
           .card {
             position: absolute;
-            left: calc(50% - 200px);
-            top: calc(50% - 250px);
+            left: calc(50% - ${size.w / 2}px);
+            top: calc(50% - ${size.h / 2}px);
             width: ${size.w}px;
             height: ${size.h}px;
             z-index: ${active === name
