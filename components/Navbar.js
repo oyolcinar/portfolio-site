@@ -9,6 +9,7 @@ import Shutdown from './Shutdown';
 import ProgramComponent from './ProgramComponent';
 import NotepadText from './BodyComponents/NotepadText';
 import TrayComponent from './TrayComponent';
+import ExplorerBrowser from './BodyComponents/ExplorerBrowser';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -505,7 +506,9 @@ const Navbar = () => {
           title={'Explorer'}
           programIcon={explorerIcon}
           initialSize={{ w: 800, h: 600 }}
-        />
+        >
+          <ExplorerBrowser />
+        </ProgramComponent>
       )}
       {isBriefcase && !minimizeBriefcase && (
         <ProgramComponent

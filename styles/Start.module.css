@@ -26,6 +26,17 @@
   margin-bottom: 2px;
 }
 
+.bannerText {
+  position: absolute;
+  transform: rotate(270deg);
+  left: -109px;
+  bottom: 128px;
+  color: white;
+  font-size: 0.64rem;
+  width: 250px;
+  height: 20px;
+}
+
 .list {
   list-style: none;
   padding-left: 0;

@@ -82,7 +82,9 @@ const Start = ({
   return (
     <>
       <div className={styles.container} ref={startRef}>
-        <div className={styles.banner}></div>
+        <div className={styles.banner}>
+          <div className={styles.bannerText}>Olgun Yolcinar | Web Dev</div>
+        </div>
         <ul className={styles.list}>
           <li
             className={`${styles.item} ${styles.firstTwo}`}
