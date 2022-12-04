@@ -25,6 +25,7 @@ import dialUp from '../public/icons/conn_dialup.png';
 import explorerIcon from '../public/icons/explorer.png';
 import briefcaseIcon from '../public/icons/briefcaseIcon.png';
 import outlookIcon from '../public/icons/outlookIcon.png';
+import minesweeperIcon from '../public/icons/minesweeper.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -38,6 +39,7 @@ const Navbar = () => {
   const [isExplorer, setIsExplorer] = useState(false);
   const [isBriefcase, setIsBriefcase] = useState(false);
   const [isOutlook, setIsOutlook] = useState(false);
+  const [isMinesweeper, setIsMinesweeper] = useState(false);
 
   const [doubleClickModem, setDoubleClickModem] = useState(false);
   const [doubleClickNotepad, setDoubleClickNotepad] = useState(false);
@@ -46,6 +48,7 @@ const Navbar = () => {
   const [doubleClickExplorer, setDoubleClickExplorer] = useState(false);
   const [doubleClickBriefcase, setDoubleClickBriefcase] = useState(false);
   const [doubleClickOutlook, setDoubleClickOutlook] = useState(false);
+  const [doubleClickMinesweeper, setDoubleClickMinesweeper] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
   const [isResizing, setIsResizing] = useState(false);
 
@@ -54,6 +57,7 @@ const Navbar = () => {
   const [explorerSize, setExplorerSize] = useState({ w: 800, h: 600 });
   const [briefcaseSize, setBriefcaseSize] = useState({ w: 800, h: 600 });
   const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
+  const [minesweeperSize, setMinesweeperSize] = useState({ w: 400, h: 500 });
   const [draggableDisabled, setDraggableDisabled] = useState(false);
 
   const [notepadText, setNotepadText] = useState('');
@@ -64,6 +68,7 @@ const Navbar = () => {
   const [minimizeExplorer, setMinimizeExplorer] = useState(false);
   const [minimizeBriefcase, setMinimizeBriefcase] = useState(false);
   const [minimizeOutlook, setMinimizeOutlook] = useState(false);
+  const [minimizeMinesweeper, setMinimizeMinesweeper] = useState(false);
 
   const [orderArray, setOrderArray] = useState([]);
   const [active, setActive] = useState('');
@@ -126,6 +131,9 @@ const Navbar = () => {
     if (active === 'outlook') {
       resizeFrame(e, outlookSize, setOutlookSize);
     }
+    if (active === 'minesweeper') {
+      resizeFrame(e, minesweeperSize, setMinesweeperSize);
+    }
   }
 
   const resizeFrame = (e, size, setSize) => {
@@ -180,6 +188,10 @@ const Navbar = () => {
 
   function toggleMinimizeOutlook() {
     setMinimizeOutlook(true);
+  }
+
+  function toggleMinimizeMinesweeper() {
+    setMinimizeMinesweeper(true);
   }
 
   function toggleMinimize() {
@@ -315,6 +327,24 @@ const Navbar = () => {
         </div>
       );
     }
+    if (item === 'minesweeper') {
+      return (
+        <div key={item}>
+          {minimizeMinesweeper || isMinesweeper ? (
+            <TrayComponent
+              setMinimize={setMinimizeMinesweeper}
+              setDoubleClick={setDoubleClickMinesweeper}
+              setActive={setActive}
+              name={'minesweeper'}
+              title={'Minesweeper'}
+              icon={minesweeperIcon}
+            />
+          ) : (
+            ''
+          )}
+        </div>
+      );
+    }
   });
 
   return (
@@ -421,6 +451,9 @@ const Navbar = () => {
           isOutlook={isOutlook}
           setIsOutlook={setIsOutlook}
           setMinimizeOutlook={setMinimizeOutlook}
+          isMinesweeper={isMinesweeper}
+          setIsMinesweeper={setIsMinesweeper}
+          setMinimizeMinesweeper={setMinimizeMinesweeper}
         />
       )}
       {isShutdown && (
@@ -556,6 +589,30 @@ const Navbar = () => {
           title={'Outlook'}
           programIcon={outlookIcon}
           initialSize={{ w: 600, h: 400 }}
+        />
+      )}
+      {isMinesweeper && !minimizeMinesweeper && (
+        <ProgramComponent
+          doubleClickProgram={doubleClickMinesweeper}
+          setDoubleClickProgram={setDoubleClickMinesweeper}
+          isProgram={isMinesweeper}
+          setIsProgram={setIsMinesweeper}
+          toggleMinimizeProgram={toggleMinimizeMinesweeper}
+          minimizeProgram={minimizeMinesweeper}
+          size={minesweeperSize}
+          setSize={setMinesweeperSize}
+          startResize={startResize}
+          draggableDisabled={draggableDisabled}
+          setIsResizing={setIsResizing}
+          orderArray={orderArray}
+          orderArrayHandler={orderArrayHandler}
+          indexOfOrderArrayElement={indexOfOrderArrayElement}
+          active={active}
+          setActive={setActive}
+          name={'minesweeper'}
+          title={'Minesweeper'}
+          programIcon={minesweeperIcon}
+          initialSize={{ w: 400, h: 500 }}
         />
       )}
     </div>

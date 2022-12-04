@@ -37,6 +37,9 @@ const Start = ({
   isOutlook,
   setIsOutlook,
   setMinimizeOutlook,
+  isMinesweeper,
+  setIsMinesweeper,
+  setMinimizeMinesweeper,
 }) => {
   const startRef = useRef(null);
 
@@ -171,6 +174,9 @@ const Start = ({
           isOutlook={isOutlook}
           setIsOutlook={setIsOutlook}
           setMinimizeOutlook={setMinimizeOutlook}
+          isMinesweeper={isMinesweeper}
+          setIsMinesweeper={setIsMinesweeper}
+          setMinimizeMinesweeper={setMinimizeMinesweeper}
         />
       )}
     </>

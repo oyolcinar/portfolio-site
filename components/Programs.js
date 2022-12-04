@@ -29,6 +29,9 @@ const Programs = ({
   isOutlook,
   setIsOutlook,
   setMinimizeOutlook,
+  isMinesweeper,
+  setIsMinesweeper,
+  setMinimizeMinesweeper,
 }) => {
   const programsRef = useRef(null);
 
@@ -79,7 +82,17 @@ const Programs = ({
             <div>Internet Explorer</div>
           </div>
         </li>
-        <li className={styles.item}>
+        <li
+          className={styles.item}
+          onClick={() => {
+            !isMinesweeper ? orderArrayHandler('minesweeper') : '';
+            setActive('minesweeper');
+            setIsProgramsOpen(false);
+            setIsStartOpen(false);
+            setIsMinesweeper(true);
+            setMinimizeMinesweeper(false);
+          }}
+        >
           <div className={styles.cluster}>
             <Image src={minesweeper} alt='' height={30} />
             <div>Minesweeper</div>
