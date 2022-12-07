@@ -175,6 +175,39 @@ const Navbar = () => {
     setDraggableDisabled(false);
   };
 
+  function briefcaseHandler() {
+    !isBriefcase ? orderArrayHandler('briefcase') : '';
+    setActive('briefcase');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsBriefcase(true);
+    setMinimizeBriefcase(false);
+  }
+
+  function explorerHandler() {
+    !isExplorer ? orderArrayHandler('explorer') : '';
+    setActive('explorer');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsExplorer(true);
+    setMinimizeExplorer(false);
+  }
+
+  function outlookHandler() {
+    !isOutlook ? orderArrayHandler('outlook') : '';
+    setActive('outlook');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsOutlook(true);
+    setMinimizeOutlook(false);
+  }
+
+  function handleDoubleClick(e, func) {
+    if (e.detail === 2) {
+      func();
+    }
+  }
+
   function textHandler(e) {
     setNotepadText(e.target.value);
   }
@@ -378,13 +411,8 @@ const Navbar = () => {
       <Draggable bounds='parent'>
         <div
           className={styles.desktopItems}
-          onClick={() => {
-            !isBriefcase ? orderArrayHandler('briefcase') : '';
-            setActive('briefcase');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsBriefcase(true);
-            setMinimizeBriefcase(false);
+          onClick={(e) => {
+            handleDoubleClick(e, briefcaseHandler);
           }}
         >
           <Image src={briefcase} height={30} alt='' />
@@ -400,13 +428,8 @@ const Navbar = () => {
       <Draggable bounds='parent'>
         <div
           className={styles.desktopItems}
-          onClick={() => {
-            !isExplorer ? orderArrayHandler('explorer') : '';
-            setActive('explorer');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsExplorer(true);
-            setMinimizeExplorer(false);
+          onClick={(e) => {
+            handleDoubleClick(e, explorerHandler);
           }}
         >
           <Image src={explorer} height={30} alt='' />
@@ -422,13 +445,8 @@ const Navbar = () => {
       <Draggable bounds='parent'>
         <div
           className={styles.desktopItems}
-          onClick={() => {
-            !isOutlook ? orderArrayHandler('outlook') : '';
-            setActive('outlook');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsOutlook(true);
-            setMinimizeOutlook(false);
+          onClick={(e) => {
+            handleDoubleClick(e, outlookHandler);
           }}
         >
           <Image src={outlook} height={30} alt='' />
