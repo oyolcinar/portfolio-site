@@ -229,6 +229,7 @@ const Navbar = () => {
               setMinimize={setMinimizeModem}
               setDoubleClick={setDoubleClickModem}
               setActive={setActive}
+              active={active}
               name={'modem'}
               title={'Connected to Internet Central'}
               icon={dialUp}
@@ -248,6 +249,7 @@ const Navbar = () => {
               setMinimize={setMinimizeNotepad}
               setDoubleClick={setDoubleClickNotepad}
               setActive={setActive}
+              active={active}
               name={'notepad'}
               title={'Notepad'}
               icon={notepadIcon}
@@ -266,6 +268,7 @@ const Navbar = () => {
               setMinimize={setMinimizePaint}
               setDoubleClick={setDoubleClickPaint}
               setActive={setActive}
+              active={active}
               name={'paint'}
               title={'MS Paint'}
               icon={paintIcon}
@@ -284,6 +287,7 @@ const Navbar = () => {
               setMinimize={setMinimizeExplorer}
               setDoubleClick={setDoubleClickExplorer}
               setActive={setActive}
+              active={active}
               name={'explorer'}
               title={'Internet Explorer'}
               icon={explorerIcon}
@@ -302,6 +306,7 @@ const Navbar = () => {
               setMinimize={setMinimizeBriefcase}
               setDoubleClick={setDoubleClickBriefcase}
               setActive={setActive}
+              active={active}
               name={'briefcase'}
               title={'Briefcase'}
               icon={briefcaseIcon}
@@ -320,6 +325,7 @@ const Navbar = () => {
               setMinimize={setMinimizeOutlook}
               setDoubleClick={setDoubleClickOutlook}
               setActive={setActive}
+              active={active}
               name={'outlook'}
               title={'Outlook'}
               icon={outlookIcon}
@@ -340,6 +346,7 @@ const Navbar = () => {
               setMinimize={setMinimizeMinesweeper}
               setDoubleClick={setDoubleClickMinesweeper}
               setActive={setActive}
+              active={active}
               name={'minesweeper'}
               title={'Minesweeper'}
               icon={minesweeperIcon}

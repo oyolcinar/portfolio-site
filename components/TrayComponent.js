@@ -4,6 +4,7 @@ import cardStyles from '../styles/Minimize.module.css';
 const TrayComponent = ({
   name,
   icon,
+  active,
   setActive,
   setMinimize,
   setDoubleClick,
@@ -13,7 +14,7 @@ const TrayComponent = ({
 }) => {
   return (
     <div
-      className={cardStyles.card}
+      className={active === name ? cardStyles.activeCard : cardStyles.card}
       onClick={() => {
         setActive(name);
         setMinimize(false);

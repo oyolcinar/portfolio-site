@@ -1,0 +1,91 @@
+.seperator {
+  border: 1px inset #c0c0c0;
+  border-bottom-color: white;
+}
+
+.textarea {
+  flex-grow: 1;
+  background-color: white;
+  border: inset 2px #a0a0a0;
+  border-right-color: white;
+  height: 100%;
+}
+
+.input::-webkit-scrollbar {
+  width: 24px !important;
+  margin-bottom: 24px;
+  background-color: #BDBDBD;
+  height: 24px;
+}
+
+.input::-webkit-scrollbar-thumb {
+  width: 24px;
+  border: 2px solid #393939;
+  border-left-color: white;
+  border-top-color: white;
+}
+
+.input::-webkit-scrollbar-button {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #393939;
+  border-left-color: white;
+  border-top-color: white;
+  background-size: 12px;
+  background-repeat: no-repeat;
+}
+
+.input::-webkit-scrollbar-button:single-button:vertical:increment {
+
+  background-position: center 4px;
+  background-image: url('../public/icons/downArrow.png')
+}
+
+.input::-webkit-scrollbar-button:single-button:vertical:decrement {
+
+  background-position: center 4px;
+  background-image: url('../public/icons/upArrow.png')
+}
+
+.input::-webkit-scrollbar-button:single-button:horizontal:decrement {
+
+  background-position: center 4px;
+  background-image: url('../public/icons/leftArrow.png')
+}
+
+.input::-webkit-scrollbar-button:single-button:horizontal:increment {
+
+  background-position: center 4px;
+  background-image: url('../public/icons/rightArrow.png')
+}
+
+.input {
+  box-sizing: border-box;
+  height: calc(100% - 24px);
+  width: calc(100% - 24px);
+  border: none;
+  overflow: auto;
+  outline: none;
+  font-family: 'Windows 95';
+  font-size: 0.6rem;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  letter-spacing: 0.04rem;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.input::after {
+  border: none;
+}
+
+.body {
+  position: absolute;
+  padding: 0 1px;
+  border-top: 2px solid #BDBDBD;
+  border-left: 2px solid #BDBDBD;
+  border-right: 2px solid #BDBDBD;
+  height: calc(100% - 148px);
+  width: 100%;
+}
