@@ -89,3 +89,18 @@
 .modem {
   margin-right: 7px;
 }
+
+.desktopItems {
+  font-size: 0.55rem;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  text-align: center;
+  gap: 3px;
+}
+
+.shortcut {
+  position: absolute;
+}

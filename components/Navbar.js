@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import { useElapsedTime } from 'use-elapsed-time';
+import Draggable from 'react-draggable';
 
 import SoundControl from './SoundControl';
 import Connection from './Connection';
@@ -28,6 +29,11 @@ import explorerIcon from '../public/icons/explorer.png';
 import briefcaseIcon from '../public/icons/briefcaseIcon.png';
 import outlookIcon from '../public/icons/outlookIcon.png';
 import minesweeperIcon from '../public/icons/minesweeper.png';
+import briefcase from '../public/icons/briefcase.png';
+import shortcut from '../public/icons/shortcut.png';
+import explorer from '../public/icons/explorer.png';
+import outlook from '../public/icons/outlook.png';
+import notepadFile from '../public/icons/notepadFile.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -369,6 +375,96 @@ const Navbar = () => {
         stopResize(e);
       }}
     >
+      <Draggable bounds='parent'>
+        <div
+          className={styles.desktopItems}
+          onClick={() => {
+            !isBriefcase ? orderArrayHandler('briefcase') : '';
+            setActive('briefcase');
+            setIsProgramsOpen(false);
+            setIsStartOpen(false);
+            setIsBriefcase(true);
+            setMinimizeBriefcase(false);
+          }}
+        >
+          <Image src={briefcase} height={30} alt='' />
+          <Image
+            src={shortcut}
+            height={30}
+            alt=''
+            className={styles.shortcut}
+          />
+          Briefcase
+        </div>
+      </Draggable>
+      <Draggable bounds='parent'>
+        <div
+          className={styles.desktopItems}
+          onClick={() => {
+            !isExplorer ? orderArrayHandler('explorer') : '';
+            setActive('explorer');
+            setIsProgramsOpen(false);
+            setIsStartOpen(false);
+            setIsExplorer(true);
+            setMinimizeExplorer(false);
+          }}
+        >
+          <Image src={explorer} height={30} alt='' />
+          <Image
+            src={shortcut}
+            height={30}
+            alt=''
+            className={styles.shortcut}
+          />
+          Internet Explorer
+        </div>
+      </Draggable>
+      <Draggable bounds='parent'>
+        <div
+          className={styles.desktopItems}
+          onClick={() => {
+            !isOutlook ? orderArrayHandler('outlook') : '';
+            setActive('outlook');
+            setIsProgramsOpen(false);
+            setIsStartOpen(false);
+            setIsOutlook(true);
+            setMinimizeOutlook(false);
+          }}
+        >
+          <Image src={outlook} height={30} alt='' />
+          <Image
+            src={shortcut}
+            height={30}
+            alt=''
+            className={styles.shortcut}
+          />
+          Outlook
+        </div>
+      </Draggable>
+      <Draggable bounds='parent'>
+        <div className={styles.desktopItems}>
+          <Image src={notepadFile} height={30} alt='' />
+          <Image
+            src={shortcut}
+            height={30}
+            alt=''
+            className={styles.shortcut}
+          />
+          CV.txt
+        </div>
+      </Draggable>
+      <Draggable bounds='parent'>
+        <div className={styles.desktopItems}>
+          <Image src={notepadFile} height={30} alt='' />
+          <Image
+            src={shortcut}
+            height={30}
+            alt=''
+            className={styles.shortcut}
+          />
+          Works.txt
+        </div>
+      </Draggable>
       <nav className={styles.navbar}>
         <ul className={styles.list}>
           <li className={styles.start}>
