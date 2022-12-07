@@ -30,6 +30,8 @@ const ProgramComponent = ({
   children,
   setText,
   initialSize,
+  titleData,
+  titled,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -138,7 +140,10 @@ const ProgramComponent = ({
               height={20}
               className={styles.headerModem}
             />
-            <div className={styles.title}>Untitled - {title}</div>
+            <div className={styles.title}>
+              {titled ? (titleData ? `${titleData} - ` : 'Untitled - ') : ''}
+              {title}
+            </div>
           </div>
           <div className={styles.headerRight}>
             <div>

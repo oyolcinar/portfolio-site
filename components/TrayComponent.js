@@ -8,6 +8,8 @@ const TrayComponent = ({
   setMinimize,
   setDoubleClick,
   title,
+  titleData,
+  titled,
 }) => {
   return (
     <div
@@ -26,7 +28,11 @@ const TrayComponent = ({
             height={20}
             className={cardStyles.headerModem}
           />
-          {title}
+          {titled
+            ? titleData
+              ? `${titleData} - ${title}`
+              : `Untitled - ${title}`
+            : title}
         </div>
       </div>
     </div>

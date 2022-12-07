@@ -1,0 +1,107 @@
+.seperator {
+  border: 1px inset #c0c0c0;
+  border-bottom-color: white;
+}
+
+.cluster {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  padding: 1px 6px;
+}
+
+.buttonCluster {
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+}
+
+.button:hover {
+  background-color: #000181;
+}
+
+.button:active {
+  background-color: #000181;
+}
+
+.vertSeperator {
+  height: 26px;
+  border: 1px inset #c0c0c0;
+  border-right-color: white;
+  margin: 0 6px;
+}
+
+.body {
+  position: absolute;
+  padding: 0 1px;
+  border-top: 2px solid #BDBDBD;
+  border-left: 2px solid #BDBDBD;
+  border-right: 2px solid #BDBDBD;
+  height: calc(100% - 148px);
+  width: 100%;
+}
+
+.label{
+  display: inline-block;
+  font-size: 0.55rem;
+  width: 68px;
+  padding-left: 7px;
+}
+
+.input {
+  box-sizing: border-box;
+  width: calc(100% - 160px);
+  border: inset 2px #a0a0a0;
+  overflow: auto;
+  outline: none;
+  font-family: 'Windows 95';
+  font-size: 0.6rem;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.lastInput {
+  margin-bottom: 10px;
+}
+
+.submit {
+  border: 2px solid #a0a0a0;
+  background-color: #c0c0c0;
+  border-top-color: white;
+  border-left-color: white;
+  width: 70px;
+  right: 10px;
+  top: 20px;
+  position: absolute;
+  font-family: 'Windows 95';
+  font-size: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.successfulSubmit {
+  background-color: #000181;
+  color: white;
+  border: 2px solid #a0a0a0;
+  border-top-color: white;
+  border-left-color: white;
+  width: 70px;
+  right: 10px;
+  top: 20px;
+  position: absolute;
+  font-family: 'Windows 95';
+  font-size: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit:active {
+  border: inset 2px #393939;
+  border-right-color: white;
+  border-bottom-color: white ;
+}

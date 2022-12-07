@@ -10,6 +10,8 @@ import ProgramComponent from './ProgramComponent';
 import NotepadText from './BodyComponents/NotepadText';
 import TrayComponent from './TrayComponent';
 import ExplorerBrowser from './BodyComponents/ExplorerBrowser';
+import PaintComponent from './BodyComponents/PaintComponent';
+import OutlookComponent from './BodyComponents/OutlookComponent';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -61,6 +63,7 @@ const Navbar = () => {
   const [draggableDisabled, setDraggableDisabled] = useState(false);
 
   const [notepadText, setNotepadText] = useState('');
+  const [subject, setSubject] = useState('');
 
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
@@ -148,12 +151,12 @@ const Navbar = () => {
 
       setDrag({ ...drag, x: e.clientX, y: e.clientY });
 
-      if (newH < 150) {
-        setSize({ w: newW, h: 150 });
-      } else if (newW < 270) {
-        setSize({ w: 270, h: newH });
-      } else if (newH < 150 && newW < 270) {
-        setSize({ w: 270, h: 150 });
+      if (newH < 300) {
+        setSize({ w: newW, h: 300 });
+      } else if (newW < 300) {
+        setSize({ w: 300, h: newH });
+      } else if (newH < 300 && newW < 300) {
+        setSize({ w: 300, h: 300 });
       } else {
         setSize({ w: newW, h: newH });
       }
@@ -264,7 +267,7 @@ const Navbar = () => {
               setDoubleClick={setDoubleClickPaint}
               setActive={setActive}
               name={'paint'}
-              title={'Paint'}
+              title={'MS Paint'}
               icon={paintIcon}
             />
           ) : (
@@ -282,7 +285,7 @@ const Navbar = () => {
               setDoubleClick={setDoubleClickExplorer}
               setActive={setActive}
               name={'explorer'}
-              title={'Explorer'}
+              title={'Internet Explorer'}
               icon={explorerIcon}
             />
           ) : (
@@ -320,6 +323,8 @@ const Navbar = () => {
               name={'outlook'}
               title={'Outlook'}
               icon={outlookIcon}
+              titled={true}
+              titleData={subject}
             />
           ) : (
             ''
@@ -487,6 +492,7 @@ const Navbar = () => {
           setActive={setActive}
           name={'notepad'}
           title={'Notepad'}
+          titled={true}
           programIcon={notepadIcon}
           initialSize={{ w: 400, h: 500 }}
         >
@@ -513,9 +519,12 @@ const Navbar = () => {
           setActive={setActive}
           name={'paint'}
           title={'MS Paint'}
+          titled={true}
           programIcon={paintIcon}
           initialSize={{ w: 600, h: 800 }}
-        />
+        >
+          <PaintComponent size={paintSize} />
+        </ProgramComponent>
       )}
       {isExplorer && !minimizeExplorer && (
         <ProgramComponent
@@ -536,7 +545,7 @@ const Navbar = () => {
           active={active}
           setActive={setActive}
           name={'explorer'}
-          title={'Explorer'}
+          title={'Internet Explorer'}
           programIcon={explorerIcon}
           initialSize={{ w: 800, h: 600 }}
         >
@@ -587,9 +596,13 @@ const Navbar = () => {
           setActive={setActive}
           name={'outlook'}
           title={'Outlook'}
+          titled={true}
           programIcon={outlookIcon}
           initialSize={{ w: 600, h: 400 }}
-        />
+          titleData={subject}
+        >
+          <OutlookComponent subject={subject} setSubject={setSubject} />
+        </ProgramComponent>
       )}
       {isMinesweeper && !minimizeMinesweeper && (
         <ProgramComponent
