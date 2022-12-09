@@ -12,26 +12,14 @@ import { useRef } from 'react';
 const Programs = ({
   setIsStartOpen,
   setIsProgramsOpen,
-  setIsNotepad,
-  setMinimizeNotepad,
+  notepadHandler,
   orderArrayHandler,
-  isNotepad,
   setActive,
-  isPaint,
-  setIsPaint,
-  setMinimizePaint,
-  isExplorer,
-  setIsExplorer,
-  setMinimizeExplorer,
-  isBriefcase,
-  setIsBriefcase,
-  setMinimizeBriefcase,
-  isOutlook,
-  setIsOutlook,
-  setMinimizeOutlook,
-  isMinesweeper,
-  setIsMinesweeper,
-  setMinimizeMinesweeper,
+  paintHandler,
+  explorerHandler,
+  briefcaseHandler,
+  outlookHandler,
+  minesweeperHandler,
 }) => {
   const programsRef = useRef(null);
 
@@ -53,12 +41,7 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
-            !isBriefcase ? orderArrayHandler('briefcase') : '';
-            setActive('briefcase');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsBriefcase(true);
-            setMinimizeBriefcase(false);
+            briefcaseHandler();
           }}
         >
           <div className={styles.cluster}>
@@ -69,12 +52,7 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
-            !isExplorer ? orderArrayHandler('explorer') : '';
-            setActive('explorer');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsExplorer(true);
-            setMinimizeExplorer(false);
+            explorerHandler();
           }}
         >
           <div className={styles.cluster}>
@@ -85,12 +63,7 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
-            !isMinesweeper ? orderArrayHandler('minesweeper') : '';
-            setActive('minesweeper');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsMinesweeper(true);
-            setMinimizeMinesweeper(false);
+            minesweeperHandler();
           }}
         >
           <div className={styles.cluster}>
@@ -101,12 +74,7 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
-            !isPaint ? orderArrayHandler('paint') : '';
-            setActive('paint');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsPaint(true);
-            setMinimizePaint(false);
+            paintHandler();
           }}
         >
           <div className={styles.cluster}>
@@ -117,12 +85,7 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
-            !isNotepad ? orderArrayHandler('notepad') : '';
-            setActive('notepad');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsNotepad(true);
-            setMinimizeNotepad(false);
+            notepadHandler();
           }}
         >
           <div className={styles.cluster}>
@@ -133,12 +96,7 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
-            !isOutlook ? orderArrayHandler('outlook') : '';
-            setActive('outlook');
-            setIsProgramsOpen(false);
-            setIsStartOpen(false);
-            setIsOutlook(true);
-            setMinimizeOutlook(false);
+            outlookHandler();
           }}
         >
           <div className={styles.cluster}>

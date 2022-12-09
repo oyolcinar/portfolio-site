@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import { useElapsedTime } from 'use-elapsed-time';
-import Draggable from 'react-draggable';
 
 import SoundControl from './SoundControl';
 import Connection from './Connection';
@@ -13,6 +12,7 @@ import TrayComponent from './TrayComponent';
 import ExplorerBrowser from './BodyComponents/ExplorerBrowser';
 import PaintComponent from './BodyComponents/PaintComponent';
 import OutlookComponent from './BodyComponents/OutlookComponent';
+import DesktopItem from './DesktopItem';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -200,6 +200,33 @@ const Navbar = () => {
     setIsStartOpen(false);
     setIsOutlook(true);
     setMinimizeOutlook(false);
+  }
+
+  function notepadHandler() {
+    !isNotepad ? orderArrayHandler('notepad') : '';
+    setActive('notepad');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsNotepad(true);
+    setMinimizeNotepad(false);
+  }
+
+  function paintHandler() {
+    !isNotepad ? orderArrayHandler('paint') : '';
+    setActive('paint');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsPaint(true);
+    setMinimizePaint(false);
+  }
+
+  function minesweeperHandler() {
+    !isNotepad ? orderArrayHandler('minesweeper') : '';
+    setActive('minesweeper');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsMinesweeper(true);
+    setMinimizeMinesweeper(false);
   }
 
   function handleDoubleClick(e, func) {
@@ -408,81 +435,41 @@ const Navbar = () => {
         stopResize(e);
       }}
     >
-      <Draggable bounds='parent'>
-        <div
-          className={styles.desktopItems}
-          onClick={(e) => {
-            handleDoubleClick(e, briefcaseHandler);
-          }}
-        >
-          <Image src={briefcase} height={30} alt='' />
-          <Image
-            src={shortcut}
-            height={30}
-            alt=''
-            className={styles.shortcut}
-          />
-          Briefcase
-        </div>
-      </Draggable>
-      <Draggable bounds='parent'>
-        <div
-          className={styles.desktopItems}
-          onClick={(e) => {
-            handleDoubleClick(e, explorerHandler);
-          }}
-        >
-          <Image src={explorer} height={30} alt='' />
-          <Image
-            src={shortcut}
-            height={30}
-            alt=''
-            className={styles.shortcut}
-          />
-          Internet Explorer
-        </div>
-      </Draggable>
-      <Draggable bounds='parent'>
-        <div
-          className={styles.desktopItems}
-          onClick={(e) => {
-            handleDoubleClick(e, outlookHandler);
-          }}
-        >
-          <Image src={outlook} height={30} alt='' />
-          <Image
-            src={shortcut}
-            height={30}
-            alt=''
-            className={styles.shortcut}
-          />
-          Outlook
-        </div>
-      </Draggable>
-      <Draggable bounds='parent'>
-        <div className={styles.desktopItems}>
-          <Image src={notepadFile} height={30} alt='' />
-          <Image
-            src={shortcut}
-            height={30}
-            alt=''
-            className={styles.shortcut}
-          />
-          CV.txt
-        </div>
-      </Draggable>
-      <Draggable bounds='parent'>
-        <div className={styles.desktopItems}>
-          <Image src={notepadFile} height={30} alt='' />
-          <Image
-            src={shortcut}
-            height={30}
-            alt=''
-            className={styles.shortcut}
-          />
-          Works.txt
-        </div>
-      </Draggable>
+      <DesktopItem
+        shortcut={shortcut}
+        name={'Briefcase'}
+        image={briefcase}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={briefcaseHandler}
+      />
+      <DesktopItem
+        shortcut={shortcut}
+        name={'Internet Explorer'}
+        image={explorer}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={explorerHandler}
+      />
+      <DesktopItem
+        shortcut={shortcut}
+        name={'Outlook'}
+        image={outlook}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={outlookHandler}
+      />
+      <DesktopItem
+        shortcut={shortcut}
+        name={'CV.txt'}
+        image={notepadFile}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={notepadHandler}
+      />
+      <DesktopItem
+        shortcut={shortcut}
+        name={'Works.txt'}
+        image={notepadFile}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={notepadHandler}
+      />
       <nav className={styles.navbar}>
         <ul className={styles.list}>
           <li className={styles.start}>
@@ -557,29 +544,17 @@ const Navbar = () => {
           setIsDocumentsOpen={setIsDocumentsOpen}
           isProgramsOpen={isProgramsOpen}
           setIsProgramsOpen={setIsProgramsOpen}
-          setIsNotepad={setIsNotepad}
-          setMinimizeNotepad={setMinimizeNotepad}
           startResize={startResize}
           isStartOpen={isStartOpen}
           orderArrayHandler={orderArrayHandler}
-          isNotepad={isNotepad}
+          notepadHandler={notepadHandler}
           startButtonRef={startButtonRef}
           setActive={setActive}
-          isPaint={isPaint}
-          setIsPaint={setIsPaint}
-          setMinimizePaint={setMinimizePaint}
-          isExplorer={isExplorer}
-          setIsExplorer={setIsExplorer}
-          setMinimizeExplorer={setMinimizeExplorer}
-          isBriefcase={isBriefcase}
-          setIsBriefcase={setIsBriefcase}
-          setMinimizeBriefcase={setMinimizeBriefcase}
-          isOutlook={isOutlook}
-          setIsOutlook={setIsOutlook}
-          setMinimizeOutlook={setMinimizeOutlook}
-          isMinesweeper={isMinesweeper}
-          setIsMinesweeper={setIsMinesweeper}
-          setMinimizeMinesweeper={setMinimizeMinesweeper}
+          paintHandler={paintHandler}
+          explorerHandler={explorerHandler}
+          briefcaseHandler={briefcaseHandler}
+          outlookHandler={outlookHandler}
+          minesweeperHandler={minesweeperHandler}
         />
       )}
       {isShutdown && (

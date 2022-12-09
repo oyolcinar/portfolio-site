@@ -19,27 +19,15 @@ const Start = ({
   setIsDocumentsOpen,
   isProgramsOpen,
   setIsProgramsOpen,
-  setIsNotepad,
-  setMinimizeNotepad,
+  notepadHandler,
   orderArrayHandler,
-  isNotepad,
   startButtonRef,
   setActive,
-  isPaint,
-  setIsPaint,
-  setMinimizePaint,
-  isExplorer,
-  setIsExplorer,
-  setMinimizeExplorer,
-  isBriefcase,
-  setIsBriefcase,
-  setMinimizeBriefcase,
-  isOutlook,
-  setIsOutlook,
-  setMinimizeOutlook,
-  isMinesweeper,
-  setIsMinesweeper,
-  setMinimizeMinesweeper,
+  paintHandler,
+  explorerHandler,
+  briefcaseHandler,
+  outlookHandler,
+  minesweeperHandler,
 }) => {
   const startRef = useRef(null);
 
@@ -157,26 +145,14 @@ const Start = ({
         <Programs
           setIsStartOpen={setIsStartOpen}
           setIsProgramsOpen={setIsProgramsOpen}
-          setIsNotepad={setIsNotepad}
-          setMinimizeNotepad={setMinimizeNotepad}
+          notepadHandler={notepadHandler}
           orderArrayHandler={orderArrayHandler}
-          isNotepad={isNotepad}
           setActive={setActive}
-          isPaint={isPaint}
-          setIsPaint={setIsPaint}
-          setMinimizePaint={setMinimizePaint}
-          isExplorer={isExplorer}
-          setIsExplorer={setIsExplorer}
-          setMinimizeExplorer={setMinimizeExplorer}
-          isBriefcase={isBriefcase}
-          setIsBriefcase={setIsBriefcase}
-          setMinimizeBriefcase={setMinimizeBriefcase}
-          isOutlook={isOutlook}
-          setIsOutlook={setIsOutlook}
-          setMinimizeOutlook={setMinimizeOutlook}
-          isMinesweeper={isMinesweeper}
-          setIsMinesweeper={setIsMinesweeper}
-          setMinimizeMinesweeper={setMinimizeMinesweeper}
+          paintHandler={paintHandler}
+          explorerHandler={explorerHandler}
+          briefcaseHandler={briefcaseHandler}
+          outlookHandler={outlookHandler}
+          minesweeperHandler={minesweeperHandler}
         />
       )}
     </>
