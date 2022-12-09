@@ -99,7 +99,11 @@ const ProgramComponent = ({
     setIsFile(false);
   }
   return (
-    <Draggable bounds='parent' disabled={draggableDisabled}>
+    <Draggable
+      bounds='parent'
+      disabled={draggableDisabled}
+      position={fullScreen ? { x: 0, y: 0 } : ''}
+    >
       <div
         ref={programRef}
         className={!fullScreen ? 'card' : styles.fullScreen}

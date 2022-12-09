@@ -99,6 +99,7 @@
   margin: 10px 0;
   text-align: center;
   gap: 3px;
+  z-index: -1;
 }
 
 .shortcut {

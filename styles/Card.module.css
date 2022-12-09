@@ -241,6 +241,9 @@
   width: calc(100vw - 1px);
   height: calc(100vh - 45px);
   background-color: #BDBDBD;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .menuDropdown {
