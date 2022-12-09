@@ -5,6 +5,7 @@ const TrayComponent = ({
   name,
   icon,
   active,
+  minimize,
   setActive,
   setMinimize,
   setDoubleClick,
@@ -14,7 +15,9 @@ const TrayComponent = ({
 }) => {
   return (
     <div
-      className={active === name ? cardStyles.activeCard : cardStyles.card}
+      className={
+        active === name && !minimize ? cardStyles.activeCard : cardStyles.card
+      }
       onClick={() => {
         setActive(name);
         setMinimize(false);

@@ -292,6 +292,7 @@ const Navbar = () => {
         <div key={item}>
           {minimizeModem || modem ? (
             <TrayComponent
+              minimize={minimizeModem}
               setMinimize={setMinimizeModem}
               setDoubleClick={setDoubleClickModem}
               setActive={setActive}
@@ -312,6 +313,7 @@ const Navbar = () => {
         <div key={item}>
           {minimizeNotepad || isNotepad ? (
             <TrayComponent
+              minimize={minimizeNotepad}
               setMinimize={setMinimizeNotepad}
               setDoubleClick={setDoubleClickNotepad}
               setActive={setActive}
@@ -331,6 +333,7 @@ const Navbar = () => {
         <div key={item}>
           {minimizePaint || isPaint ? (
             <TrayComponent
+              minimize={minimizePaint}
               setMinimize={setMinimizePaint}
               setDoubleClick={setDoubleClickPaint}
               setActive={setActive}
@@ -350,6 +353,7 @@ const Navbar = () => {
         <div key={item}>
           {minimizeExplorer || isExplorer ? (
             <TrayComponent
+              minimize={minimizeExplorer}
               setMinimize={setMinimizeExplorer}
               setDoubleClick={setDoubleClickExplorer}
               setActive={setActive}
@@ -369,6 +373,7 @@ const Navbar = () => {
         <div key={item}>
           {minimizeBriefcase || isBriefcase ? (
             <TrayComponent
+              minimize={minimizeBriefcase}
               setMinimize={setMinimizeBriefcase}
               setDoubleClick={setDoubleClickBriefcase}
               setActive={setActive}
@@ -388,6 +393,7 @@ const Navbar = () => {
         <div key={item}>
           {minimizeOutlook || isOutlook ? (
             <TrayComponent
+              minimize={minimizeOutlook}
               setMinimize={setMinimizeOutlook}
               setDoubleClick={setDoubleClickOutlook}
               setActive={setActive}
@@ -409,6 +415,7 @@ const Navbar = () => {
         <div key={item}>
           {minimizeMinesweeper || isMinesweeper ? (
             <TrayComponent
+              minimize={minimizeMinesweeper}
               setMinimize={setMinimizeMinesweeper}
               setDoubleClick={setDoubleClickMinesweeper}
               setActive={setActive}
