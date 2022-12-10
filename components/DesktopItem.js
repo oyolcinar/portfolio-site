@@ -1,5 +1,7 @@
 import Draggable from 'react-draggable';
 import Image from 'next/image';
+import { useState, useRef } from 'react';
+import { useClickOutsideHandler } from '../utils/utils';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -10,17 +12,65 @@ const DesktopItem = ({
   handlerFunction,
   name,
 }) => {
+  const [selected, setSelected] = useState(false);
+  const desktopItemRef = useRef(null);
+
+  function toggleSelected() {
+    setSelected(false);
+  }
+
+  useClickOutsideHandler(desktopItemRef, toggleSelected);
+
   return (
     <Draggable bounds='parent'>
       <div
-        className={styles.desktopItems}
+        ref={desktopItemRef}
+        className={
+          selected
+            ? `${styles.selected} ${styles.desktopItems}`
+            : `${styles.desktopItems}`
+        }
         onClick={(e) => {
+          setSelected(true);
           handleDoubleClick(e, handlerFunction);
         }}
       >
-        <Image src={image} height={30} alt='' />
+        <Image
+          src={image}
+          height={30}
+          alt=''
+          className={
+            selected
+              ? `${styles.desktopItemImageSelected}`
+              : `${styles.destopItemImage}`
+          }
+        />
         <Image src={shortcut} height={30} alt='' className={styles.shortcut} />
-        {name}
+        <div
+          className={
+            selected
+              ? `${styles.imageOverlaySelected} ${styles.imageOverlay}`
+              : styles.imageOverlay
+          }
+        ></div>
+        <div
+          className={
+            selected
+              ? `${styles.desktopItemNameSelected}`
+              : `${styles.desktopItemName}`
+          }
+        >
+          <div
+            className={
+              selected
+                ? `${styles.nameOverlay} ${styles.nameOverlaySelected}`
+                : styles.nameOverlay
+            }
+          >
+            {name}
+          </div>
+          {name}
+        </div>
       </div>
     </Draggable>
   );

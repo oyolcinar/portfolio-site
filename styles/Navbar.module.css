@@ -98,10 +98,53 @@
   align-items: center;
   margin: 10px 0;
   text-align: center;
-  gap: 3px;
   z-index: -1;
 }
 
 .shortcut {
   position: absolute;
+  z-index: 0;
+}
+
+.nameOverlay {
+  position: absolute;
+  color: transparent;
+  z-index: 0;
+}
+
+.nameOverlaySelected {
+  background-color: #000181;
+  opacity: 40%;
+}
+
+.desktopItemImage {
+  border: 1px solid transparent;
+  border-bottom: none;
+}
+
+.desktopItemName {
+  border: 1px solid transparent;
+}
+
+.desktopItemImageSelected {
+  border: 1px dashed #08080E;
+  border-bottom: none;
+
+}
+
+.desktopItemNameSelected {
+  border: 1px dashed #08080E;
+  color: white;
+}
+
+.imageOverlay {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+}
+
+.imageOverlaySelected {
+  z-index: 1;
+  background-color: #000181;
+  opacity: 40%;
 }
