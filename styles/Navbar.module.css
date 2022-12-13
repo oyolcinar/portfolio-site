@@ -99,6 +99,18 @@
   margin: 10px 0;
   text-align: center;
   z-index: -1;
+  color: white;
+}
+
+.desktopItemName {
+  margin-top: 3px;
+  border: 1px solid transparent;
+}
+
+.desktopItemNameSelected {
+  margin-top: 3px;
+  border: 1px dotted white;
+  background-color: #000181;
 }
 
 .shortcut {
@@ -106,45 +118,6 @@
   z-index: 0;
 }
 
-.nameOverlay {
-  position: absolute;
-  color: transparent;
-  z-index: 0;
-}
-
-.nameOverlaySelected {
-  background-color: #000181;
-  opacity: 40%;
-}
-
 .desktopItemImage {
-  border: 1px solid transparent;
-  border-bottom: none;
-}
-
-.desktopItemName {
-  border: 1px solid transparent;
-}
-
-.desktopItemImageSelected {
-  border: 1px dashed #08080E;
-  border-bottom: none;
-
-}
-
-.desktopItemNameSelected {
-  border: 1px dashed #08080E;
-  color: white;
-}
-
-.imageOverlay {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-}
-
-.imageOverlaySelected {
-  z-index: 1;
-  background-color: #000181;
-  opacity: 40%;
+  filter: sepia(120%) saturate(1200%) contrast(100%) brightness(30%) hue-rotate(210deg); 
 }

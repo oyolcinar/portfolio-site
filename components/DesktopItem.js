@@ -39,20 +39,9 @@ const DesktopItem = ({
           src={image}
           height={30}
           alt=''
-          className={
-            selected
-              ? `${styles.desktopItemImageSelected}`
-              : `${styles.destopItemImage}`
-          }
+          className={selected ? styles.desktopItemImage : ''}
         />
         <Image src={shortcut} height={30} alt='' className={styles.shortcut} />
-        <div
-          className={
-            selected
-              ? `${styles.imageOverlaySelected} ${styles.imageOverlay}`
-              : styles.imageOverlay
-          }
-        ></div>
         <div
           className={
             selected
@@ -60,15 +49,6 @@ const DesktopItem = ({
               : `${styles.desktopItemName}`
           }
         >
-          <div
-            className={
-              selected
-                ? `${styles.nameOverlay} ${styles.nameOverlaySelected}`
-                : styles.nameOverlay
-            }
-          >
-            {name}
-          </div>
           {name}
         </div>
       </div>
