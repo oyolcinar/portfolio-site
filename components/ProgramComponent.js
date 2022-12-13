@@ -1,17 +1,19 @@
+import { useState, useRef } from 'react';
+import Draggable from 'react-draggable';
+import { useClickOutsideHandler } from '../utils/utils';
 import Image from 'next/image';
+
+import SaveQuestionMenu from './SaveQuestionMenu';
+
 import styles from '../styles/Card.module.css';
 import npStyles from '../styles/Notepad.module.css';
 import minimize from '../public/icons/minimize.png';
 import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
-import { useState, useRef } from 'react';
-import Draggable from 'react-draggable';
-import { useClickOutsideHandler } from '../utils/utils';
 
 const ProgramComponent = ({
   doubleClickProgram,
   setDoubleClickProgram,
-  isProgram,
   setIsProgram,
   toggleMinimizeProgram,
   size,
@@ -32,6 +34,7 @@ const ProgramComponent = ({
   initialSize,
   titleData,
   titled,
+  saveable,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -39,6 +42,8 @@ const ProgramComponent = ({
   const [isSearch, setIsSearch] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [saveQuestion, setSaveQuestion] = useState(false);
 
   const programRef = useRef(null);
   const fileRef = useRef(null);
@@ -57,6 +62,28 @@ const ProgramComponent = ({
 
   function maximizeHandler() {
     setFullScreen((prevState) => !prevState);
+  }
+
+  function closeHandler() {
+    setText ? setText('') : '';
+    setSaveQuestion(false);
+    setIsSaved(false);
+    setIsProgram(false);
+    setActive('');
+    orderArrayHandler(name);
+    setSize({ w: initialSize.w, h: initialSize.h });
+  }
+
+  function toggleClose() {
+    if (!saveable) {
+      closeHandler();
+    } else {
+      if (!isSaved) {
+        setSaveQuestion(true);
+      } else {
+        closeHandler();
+      }
+    }
   }
 
   function textHandler(e) {
@@ -98,6 +125,7 @@ const ProgramComponent = ({
     setIsSearch(false);
     setIsFile(false);
   }
+
   return (
     <Draggable
       bounds='parent'
@@ -137,6 +165,15 @@ const ProgramComponent = ({
               : `${styles.header} ${styles.double}`
           }
         >
+          {saveQuestion && (
+            <SaveQuestionMenu
+              setSaveQuestion={setSaveQuestion}
+              setIsSaved={setIsSaved}
+              toggleClose={toggleClose}
+              titleData={titleData}
+              title={title}
+            />
+          )}
           <div className={styles.headerLeft}>
             <Image
               src={programIcon}
@@ -175,11 +212,7 @@ const ProgramComponent = ({
                 src={close}
                 height={23}
                 onClick={() => {
-                  setText ? setText('') : '';
-                  setIsProgram(false);
-                  setActive('');
-                  orderArrayHandler(name);
-                  setSize({ w: initialSize.w, h: initialSize.h });
+                  toggleClose();
                 }}
               />
             </div>

@@ -1,5 +1,4 @@
 import styles from '../styles/Card.module.css';
-import shutdownStyles from '../styles/Shutdown.module.css';
 import Image from 'next/image';
 import shutdownImage from '../public/icons/shutdown.png';
 import close from '../public/icons/close.png';
@@ -10,9 +9,7 @@ import { useClickOutsideHandler } from '../utils/utils';
 const Shutdown = ({
   setDoubleClickShutdown,
   doubleClickShutdown,
-  isShutdown,
   setIsShutdown,
-  setIsStartOpen,
 }) => {
   const [redirect, setRedirect] = useState('http://www.google.com');
   const router = useRouter();
@@ -53,7 +50,7 @@ const Shutdown = ({
               <Image
                 alt=''
                 src={close}
-                height={21}
+                height={23}
                 onClick={() => {
                   setIsShutdown(false);
                 }}
