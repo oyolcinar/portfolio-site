@@ -257,7 +257,12 @@ const ProgramComponent = ({
                 </div>
               </li>
               <li className={styles.seperator}></li>
-              <li className={styles.menuItem}>
+              <li
+                className={styles.menuItem}
+                onClick={() => {
+                  toggleClose();
+                }}
+              >
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>C</span>lose
                 </div>
