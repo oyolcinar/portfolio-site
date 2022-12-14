@@ -2,18 +2,18 @@ import styles from '../styles/Card.module.css';
 import Image from 'next/image';
 import close from '../public/icons/close.png';
 import questionIcon from '../public/icons/question.png';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useClickOutsideHandler } from '../utils/utils';
 
 const SaveQuestionMenu = ({
-  doubleClickSavemenu,
-  setDoubleClickSavemenu,
   setSaveQuestion,
   setIsSaved,
   toggleClose,
   titleData,
   title,
 }) => {
+  const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
+
   useEffect(() => {
     toggleClose();
   }, [setIsSaved, toggleClose]);
@@ -27,7 +27,13 @@ const SaveQuestionMenu = ({
   useClickOutsideHandler(saveRef, saveDoubleClickHandler);
 
   return (
-    <div className={`${styles.container} ${styles.shutdown}`} ref={saveRef}>
+    <div
+      className={`${styles.container} ${styles.shutdown}`}
+      ref={saveRef}
+      onClick={() => {
+        setDoubleClickSavemenu(false);
+      }}
+    >
       <div
         className={`${styles.card} ${styles.shutdown} ${styles.questionContainer}`}
       >

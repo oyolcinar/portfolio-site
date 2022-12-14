@@ -4,6 +4,7 @@ import { useClickOutsideHandler } from '../utils/utils';
 import Image from 'next/image';
 
 import SaveQuestionMenu from './SaveQuestionMenu';
+import SaveMenu from './SaveMenu';
 
 import styles from '../styles/Card.module.css';
 import npStyles from '../styles/Notepad.module.css';
@@ -35,6 +36,8 @@ const ProgramComponent = ({
   titleData,
   titled,
   saveable,
+  setItems,
+  notepadText,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -42,8 +45,10 @@ const ProgramComponent = ({
   const [isSearch, setIsSearch] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+
   const [isSaved, setIsSaved] = useState(false);
   const [saveQuestion, setSaveQuestion] = useState(false);
+  const [saveMenu, setSaveMenu] = useState(false);
 
   const programRef = useRef(null);
   const fileRef = useRef(null);
@@ -84,10 +89,6 @@ const ProgramComponent = ({
         closeHandler();
       }
     }
-  }
-
-  function textHandler(e) {
-    setNotepadText(e.target.value);
   }
 
   function toggleMenuClickOutside() {
@@ -165,6 +166,9 @@ const ProgramComponent = ({
               : `${styles.header} ${styles.double}`
           }
         >
+          {saveMenu && (
+            <SaveMenu setSaveMenu={setSaveMenu} setIsSaved={setIsSaved} />
+          )}
           {saveQuestion && (
             <SaveQuestionMenu
               setSaveQuestion={setSaveQuestion}
@@ -246,11 +250,19 @@ const ProgramComponent = ({
                   <span className={styles.underline}>N</span>ew
                 </div>
               </li>
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>S</span>ave
-                </div>
-              </li>
+              {saveable && (
+                <li
+                  className={styles.menuItem}
+                  onClick={() => {
+                    toggleMenuClickOutside();
+                    setSaveMenu(true);
+                  }}
+                >
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>S</span>ave
+                  </div>
+                </li>
+              )}
               <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>D</span>elete
@@ -260,6 +272,7 @@ const ProgramComponent = ({
               <li
                 className={styles.menuItem}
                 onClick={() => {
+                  toggleMenuClickOutside();
                   toggleClose();
                 }}
               >

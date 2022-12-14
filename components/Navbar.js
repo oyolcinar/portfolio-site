@@ -70,6 +70,7 @@ const Navbar = () => {
 
   const [notepadText, setNotepadText] = useState('');
   const [subject, setSubject] = useState('');
+  const [items, setItems] = useState([]);
 
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
@@ -86,6 +87,17 @@ const Navbar = () => {
 
   const startButtonRef = useRef(null);
   const soundControlRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(items));
+  }, [items]);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('items'));
+    if (items) {
+      setItems(items);
+    }
+  }, []);
 
   useEffect(() => {
     function random() {
@@ -600,6 +612,7 @@ const Navbar = () => {
           initialSize={{ w: 400, h: 500 }}
           setText={setNotepadText}
           saveable={true}
+          setItems={setItems}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -628,6 +641,7 @@ const Navbar = () => {
           programIcon={paintIcon}
           initialSize={{ w: 600, h: 800 }}
           saveable={true}
+          setItems={setItems}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>

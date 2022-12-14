@@ -76,7 +76,7 @@ const OutlookComponent = ({ subject, setSubject }) => {
       <div className={styles.seperator}></div>
       <div className={styles.buttonCluster}>
         <div className={styles.cluster}>
-          <div className={styles.button}>
+          <div className={styles.button} onClick={handleSubmit}>
             <Image src={envelopeOpenIcon} alt='' height={20} />
           </div>
         </div>

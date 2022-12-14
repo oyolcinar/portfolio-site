@@ -325,3 +325,90 @@
   width: 400px;
   color: #000;
 }
+
+.saveBodyTop {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.saveDirectoryField {
+  display: flex;
+  justify-content: space-between;
+  height: 24px;
+  width: 250px;
+  border: inset #393939 2px;
+  background-color: white;
+  border-bottom: white;
+  border-right: white;
+}
+
+.saveDirectoryButton {
+  background-color: #C0C0C0;
+  height: 20px;
+  width: 20px;
+  border: 2px #393939 solid;
+  border-top-color: white;
+  border-left-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.saveDirectoryButton:active {
+  border: 2px #C0C0C0 inset;
+  border-bottom-color: white;
+  border-right-color: white;
+}
+
+.saveDirectoryDropdown {
+  position: absolute;
+  top: 68px;
+  left: 65px;
+  background-color: white;
+  width: 232px;
+  height: 100px;
+  border: 2px #C0C0C0 solid;
+  border-top: none;
+  border-left-color: #393939;
+}
+
+.saveBodyMiddle {
+  margin-left: 6px;
+  margin-bottom: 10px;
+  height: 200px;
+  width: 96%;
+  background-color: white;
+  border: inset 2px #393939;
+  border-bottom-color: white;
+  border-right-color: white;
+}
+
+.saveBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.saveBodyBottom {
+  display: flex;
+}
+
+.saveBodyBottomFields {
+  display: flex;
+  flex-direction: column;
+}
+
+.saveBodyField {
+  display: flex;
+}
+
+.saveBodyInput {
+  height: 24px;
+  border: inset #393939 2px;
+  background-color: white;
+  border-bottom: white;
+  border-right: white;
+  outline: none;
+}
