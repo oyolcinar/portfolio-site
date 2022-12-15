@@ -329,7 +329,7 @@
 .saveBodyTop {
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 6px;
+  margin-left: 12px;
   display: flex;
   align-items: center;
 }
@@ -338,7 +338,7 @@
   display: flex;
   justify-content: space-between;
   height: 24px;
-  width: 250px;
+  width: 330px;
   border: inset #393939 2px;
   background-color: white;
   border-bottom: white;
@@ -366,9 +366,9 @@
 .saveDirectoryDropdown {
   position: absolute;
   top: 68px;
-  left: 65px;
+  left: 112px;
   background-color: white;
-  width: 232px;
+  width: 312px;
   height: 100px;
   border: 2px #C0C0C0 solid;
   border-top: none;
@@ -376,7 +376,7 @@
 }
 
 .saveBodyMiddle {
-  margin-left: 6px;
+  margin-left: 10px;
   margin-bottom: 10px;
   height: 200px;
   width: 96%;
@@ -396,12 +396,18 @@
 }
 
 .saveBodyBottomFields {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 12px;
+  margin-right: 30px;
   display: flex;
   flex-direction: column;
 }
 
 .saveBodyField {
+  margin-bottom: 10px;
   display: flex;
+  align-items: center;
 }
 
 .saveBodyInput {
@@ -411,4 +417,49 @@
   border-bottom: white;
   border-right: white;
   outline: none;
+  width: 330px;
+}
+
+.saveMenuContainer {
+  top: 200px;
+  width: 600px;
+  color: #000;
+}
+
+.saveBodyButtonCluster {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.saveBodyLabel {
+  width: 100px;
+}
+
+.filetypeDropdown {
+  top: 350px;
+}
+
+.saveBodyTopButtonCluster {
+  display: flex;
+}
+
+.saveBodyTopButtons {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
+  border: 2px solid #393939;
+  border-top-color: white;
+  border-left-color: white;
+}
+
+.saveBodyTopButtons:active {
+  border: 2px inset #393939;
+  border-right-color: white;
+  border-bottom-color: white;
 }

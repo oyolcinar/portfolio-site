@@ -4,7 +4,7 @@ import { useClickOutsideHandler } from '../utils/utils';
 import Image from 'next/image';
 
 import SaveQuestionMenu from './SaveQuestionMenu';
-import SaveMenu from './SaveMenu';
+import MenuComponent from './MenuComponent';
 
 import styles from '../styles/Card.module.css';
 import npStyles from '../styles/Notepad.module.css';
@@ -36,6 +36,7 @@ const ProgramComponent = ({
   titleData,
   titled,
   saveable,
+  opennable,
   setItems,
   notepadText,
 }) => {
@@ -49,6 +50,7 @@ const ProgramComponent = ({
   const [isSaved, setIsSaved] = useState(false);
   const [saveQuestion, setSaveQuestion] = useState(false);
   const [saveMenu, setSaveMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const programRef = useRef(null);
   const fileRef = useRef(null);
@@ -166,8 +168,15 @@ const ProgramComponent = ({
               : `${styles.header} ${styles.double}`
           }
         >
+          {openMenu && (
+            <MenuComponent isSave={false} setOpenMenu={setOpenMenu} />
+          )}
           {saveMenu && (
-            <SaveMenu setSaveMenu={setSaveMenu} setIsSaved={setIsSaved} />
+            <MenuComponent
+              setSaveMenu={setSaveMenu}
+              setIsSaved={setIsSaved}
+              isSave={true}
+            />
           )}
           {saveQuestion && (
             <SaveQuestionMenu
@@ -239,12 +248,20 @@ const ProgramComponent = ({
               className={`${styles.menuDropdown} ${styles.fileMenu}`}
               ref={fileRef}
             >
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>O</span>pen
-                </div>
-              </li>
-              <li className={styles.seperator}></li>
+              {opennable && (
+                <li
+                  className={styles.menuItem}
+                  onClick={() => {
+                    toggleMenuClickOutside();
+                    setOpenMenu(true);
+                  }}
+                >
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>O</span>pen
+                  </div>
+                </li>
+              )}
+              {opennable && <li className={styles.seperator}></li>}
               <li className={styles.menuItem}>
                 <div className={styles.menuItemCluster}>
                   <span className={styles.underline}>N</span>ew

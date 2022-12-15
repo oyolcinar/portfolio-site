@@ -613,6 +613,7 @@ const Navbar = () => {
           setText={setNotepadText}
           saveable={true}
           setItems={setItems}
+          opennable={true}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -642,6 +643,7 @@ const Navbar = () => {
           initialSize={{ w: 600, h: 800 }}
           saveable={true}
           setItems={setItems}
+          opennable={true}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -669,6 +671,7 @@ const Navbar = () => {
           programIcon={explorerIcon}
           initialSize={{ w: 800, h: 600 }}
           saveable={false}
+          opennable={false}
         >
           <ExplorerBrowser />
         </ProgramComponent>
@@ -696,6 +699,7 @@ const Navbar = () => {
           programIcon={briefcaseIcon}
           initialSize={{ w: 800, h: 600 }}
           saveable={false}
+          opennable={true}
         />
       )}
       {isOutlook && !minimizeOutlook && (
@@ -723,6 +727,7 @@ const Navbar = () => {
           initialSize={{ w: 600, h: 400 }}
           titleData={subject}
           saveable={false}
+          opennable={false}
         >
           <OutlookComponent subject={subject} setSubject={setSubject} />
         </ProgramComponent>
@@ -750,6 +755,7 @@ const Navbar = () => {
           programIcon={minesweeperIcon}
           initialSize={{ w: 400, h: 500 }}
           saveable={false}
+          opennable={false}
         />
       )}
     </div>
