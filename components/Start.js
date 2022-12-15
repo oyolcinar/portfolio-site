@@ -28,6 +28,7 @@ const Start = ({
   briefcaseHandler,
   outlookHandler,
   minesweeperHandler,
+  helpHandler,
 }) => {
   const startRef = useRef(null);
 
@@ -112,7 +113,12 @@ const Start = ({
             </div>
             <RiArrowRightSFill className={styles.arrow} />
           </li>
-          <li className={styles.item}>
+          <li
+            className={styles.item}
+            onClick={() => {
+              helpHandler();
+            }}
+          >
             <Image src={help} alt='' height={30} className={styles.helpImage} />
             <div className={styles.help}>Help</div>
           </li>

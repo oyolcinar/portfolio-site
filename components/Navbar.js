@@ -12,6 +12,8 @@ import TrayComponent from './TrayComponent';
 import ExplorerBrowser from './BodyComponents/ExplorerBrowser';
 import PaintComponent from './BodyComponents/PaintComponent';
 import OutlookComponent from './BodyComponents/OutlookComponent';
+import BriefcaseComponent from './BodyComponents/BriefcaseComponent';
+import HelpComponent from './BodyComponents/HelpComponent';
 import DesktopItem from './DesktopItem';
 
 import styles from '../styles/Navbar.module.css';
@@ -34,6 +36,7 @@ import shortcut from '../public/icons/shortcut.png';
 import explorer from '../public/icons/explorer.png';
 import outlook from '../public/icons/outlook.png';
 import notepadFile from '../public/icons/notepadFile.png';
+import helpIcon from '../public/icons/helpIcon.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -48,6 +51,7 @@ const Navbar = () => {
   const [isBriefcase, setIsBriefcase] = useState(false);
   const [isOutlook, setIsOutlook] = useState(false);
   const [isMinesweeper, setIsMinesweeper] = useState(false);
+  const [isHelp, setIsHelp] = useState(false);
 
   const [doubleClickModem, setDoubleClickModem] = useState(false);
   const [doubleClickNotepad, setDoubleClickNotepad] = useState(false);
@@ -57,6 +61,7 @@ const Navbar = () => {
   const [doubleClickBriefcase, setDoubleClickBriefcase] = useState(false);
   const [doubleClickOutlook, setDoubleClickOutlook] = useState(false);
   const [doubleClickMinesweeper, setDoubleClickMinesweeper] = useState(false);
+  const [doubleClickHelp, setDoubleClickHelp] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
   const [isResizing, setIsResizing] = useState(false);
 
@@ -66,6 +71,7 @@ const Navbar = () => {
   const [briefcaseSize, setBriefcaseSize] = useState({ w: 800, h: 600 });
   const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
   const [minesweeperSize, setMinesweeperSize] = useState({ w: 400, h: 500 });
+  const [helpSize, setHelpSize] = useState({ w: 400, h: 300 });
   const [draggableDisabled, setDraggableDisabled] = useState(false);
 
   const [notepadText, setNotepadText] = useState('');
@@ -78,6 +84,7 @@ const Navbar = () => {
   const [minimizeExplorer, setMinimizeExplorer] = useState(false);
   const [minimizeBriefcase, setMinimizeBriefcase] = useState(false);
   const [minimizeOutlook, setMinimizeOutlook] = useState(false);
+  const [minimizeHelp, setMinimizeHelp] = useState(false);
   const [minimizeMinesweeper, setMinimizeMinesweeper] = useState(false);
 
   const [orderArray, setOrderArray] = useState([]);
@@ -155,6 +162,9 @@ const Navbar = () => {
     if (active === 'minesweeper') {
       resizeFrame(e, minesweeperSize, setMinesweeperSize);
     }
+    if (active === 'help') {
+      resizeFrame(e, helpSize, setHelpSize);
+    }
   }
 
   const resizeFrame = (e, size, setSize) => {
@@ -224,7 +234,7 @@ const Navbar = () => {
   }
 
   function paintHandler() {
-    !isNotepad ? orderArrayHandler('paint') : '';
+    !isPaint ? orderArrayHandler('paint') : '';
     setActive('paint');
     setIsProgramsOpen(false);
     setIsStartOpen(false);
@@ -233,12 +243,21 @@ const Navbar = () => {
   }
 
   function minesweeperHandler() {
-    !isNotepad ? orderArrayHandler('minesweeper') : '';
+    !isMinesweeper ? orderArrayHandler('minesweeper') : '';
     setActive('minesweeper');
     setIsProgramsOpen(false);
     setIsStartOpen(false);
     setIsMinesweeper(true);
     setMinimizeMinesweeper(false);
+  }
+
+  function helpHandler() {
+    !isHelp ? orderArrayHandler('help') : '';
+    setActive('help');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsHelp(true);
+    setMinimizeHelp(false);
   }
 
   function handleDoubleClick(e, func) {
@@ -273,6 +292,10 @@ const Navbar = () => {
 
   function toggleMinimizeMinesweeper() {
     setMinimizeMinesweeper(true);
+  }
+
+  function toggleMinimizeHelp() {
+    setMinimizeHelp(true);
   }
 
   function toggleMinimize() {
@@ -353,6 +376,26 @@ const Navbar = () => {
               name={'paint'}
               title={'MS Paint'}
               icon={paintIcon}
+            />
+          ) : (
+            ''
+          )}
+        </div>
+      );
+    }
+    if (item === 'help') {
+      return (
+        <div key={item}>
+          {minimizeHelp || isHelp ? (
+            <TrayComponent
+              minimize={minimizeHelp}
+              setMinimize={setMinimizeHelp}
+              setDoubleClick={setDoubleClickHelp}
+              setActive={setActive}
+              active={active}
+              name={'help'}
+              title={'Help'}
+              icon={helpIcon}
             />
           ) : (
             ''
@@ -574,6 +617,7 @@ const Navbar = () => {
           briefcaseHandler={briefcaseHandler}
           outlookHandler={outlookHandler}
           minesweeperHandler={minesweeperHandler}
+          helpHandler={helpHandler}
         />
       )}
       {isShutdown && (
@@ -614,6 +658,7 @@ const Navbar = () => {
           saveable={true}
           setItems={setItems}
           opennable={true}
+          help={false}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -644,6 +689,7 @@ const Navbar = () => {
           saveable={true}
           setItems={setItems}
           opennable={true}
+          help={false}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -672,6 +718,7 @@ const Navbar = () => {
           initialSize={{ w: 800, h: 600 }}
           saveable={false}
           opennable={false}
+          help={false}
         >
           <ExplorerBrowser />
         </ProgramComponent>
@@ -700,7 +747,10 @@ const Navbar = () => {
           initialSize={{ w: 800, h: 600 }}
           saveable={false}
           opennable={true}
-        />
+          help={false}
+        >
+          <BriefcaseComponent />
+        </ProgramComponent>
       )}
       {isOutlook && !minimizeOutlook && (
         <ProgramComponent
@@ -728,6 +778,7 @@ const Navbar = () => {
           titleData={subject}
           saveable={false}
           opennable={false}
+          help={false}
         >
           <OutlookComponent subject={subject} setSubject={setSubject} />
         </ProgramComponent>
@@ -756,7 +807,37 @@ const Navbar = () => {
           initialSize={{ w: 400, h: 500 }}
           saveable={false}
           opennable={false}
+          help={false}
         />
+      )}
+      {isHelp && !minimizeHelp && (
+        <ProgramComponent
+          doubleClickProgram={doubleClickHelp}
+          setDoubleClickProgram={setDoubleClickHelp}
+          isProgram={isHelp}
+          setIsProgram={setIsHelp}
+          toggleMinimizeProgram={toggleMinimizeHelp}
+          minimizeProgram={minimizeHelp}
+          size={helpSize}
+          setSize={setHelpSize}
+          startResize={startResize}
+          draggableDisabled={draggableDisabled}
+          setIsResizing={setIsResizing}
+          orderArray={orderArray}
+          orderArrayHandler={orderArrayHandler}
+          indexOfOrderArrayElement={indexOfOrderArrayElement}
+          active={active}
+          setActive={setActive}
+          name={'help'}
+          title={'Help'}
+          programIcon={helpIcon}
+          initialSize={{ w: 400, h: 300 }}
+          saveable={false}
+          opennable={false}
+          help={true}
+        >
+          <HelpComponent />
+        </ProgramComponent>
       )}
     </div>
   );

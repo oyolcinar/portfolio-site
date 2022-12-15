@@ -8,6 +8,7 @@ import MenuComponent from './MenuComponent';
 
 import styles from '../styles/Card.module.css';
 import npStyles from '../styles/Notepad.module.css';
+import bcStyles from '../styles/Briefcase.module.css';
 import minimize from '../public/icons/minimize.png';
 import maximize from '../public/icons/maximize.png';
 import close from '../public/icons/close.png';
@@ -37,6 +38,7 @@ const ProgramComponent = ({
   titled,
   saveable,
   opennable,
+  help,
   setItems,
   notepadText,
 }) => {
@@ -231,172 +233,174 @@ const ProgramComponent = ({
             </div>
           </div>
         </div>
-        <ul className={styles.menu} ref={menuRef}>
-          <li
-            onClick={() => {
-              setIsClicked((prevState) => !prevState);
-              toggleFile();
-            }}
-            onMouseEnter={() => {
-              isClicked ? toggleFile() : '';
-            }}
-          >
-            <span className={styles.underline}>F</span>ile
-          </li>
-          {isFile && isClicked && (
-            <ul
-              className={`${styles.menuDropdown} ${styles.fileMenu}`}
-              ref={fileRef}
+        {!help && (
+          <ul className={styles.menu} ref={menuRef}>
+            <li
+              onClick={() => {
+                setIsClicked((prevState) => !prevState);
+                toggleFile();
+              }}
+              onMouseEnter={() => {
+                isClicked ? toggleFile() : '';
+              }}
             >
-              {opennable && (
-                <li
-                  className={styles.menuItem}
-                  onClick={() => {
-                    toggleMenuClickOutside();
-                    setOpenMenu(true);
-                  }}
-                >
-                  <div className={styles.menuItemCluster}>
-                    <span className={styles.underline}>O</span>pen
-                  </div>
-                </li>
-              )}
-              {opennable && <li className={styles.seperator}></li>}
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>N</span>ew
-                </div>
-              </li>
-              {saveable && (
-                <li
-                  className={styles.menuItem}
-                  onClick={() => {
-                    toggleMenuClickOutside();
-                    setSaveMenu(true);
-                  }}
-                >
-                  <div className={styles.menuItemCluster}>
-                    <span className={styles.underline}>S</span>ave
-                  </div>
-                </li>
-              )}
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>D</span>elete
-                </div>
-              </li>
-              <li className={styles.seperator}></li>
-              <li
-                className={styles.menuItem}
-                onClick={() => {
-                  toggleMenuClickOutside();
-                  toggleClose();
-                }}
+              <span className={styles.underline}>F</span>ile
+            </li>
+            {isFile && isClicked && (
+              <ul
+                className={`${styles.menuDropdown} ${styles.fileMenu}`}
+                ref={fileRef}
               >
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>C</span>lose
-                </div>
-              </li>
-            </ul>
-          )}
-          <li
-            onClick={() => {
-              setIsClicked((prevState) => !prevState);
-              toggleEdit();
-            }}
-            onMouseEnter={() => {
-              isClicked ? toggleEdit() : '';
-            }}
-          >
-            <span className={styles.underline}>E</span>dit
-          </li>
-          {isEdit && isClicked && (
-            <ul
-              className={`${styles.menuDropdown} ${styles.editMenu}`}
-              ref={editRef}
+                {opennable && (
+                  <li
+                    className={styles.menuItem}
+                    onClick={() => {
+                      toggleMenuClickOutside();
+                      setOpenMenu(true);
+                    }}
+                  >
+                    <div className={styles.menuItemCluster}>
+                      <span className={styles.underline}>O</span>pen
+                    </div>
+                  </li>
+                )}
+                {opennable && <li className={styles.seperator}></li>}
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>N</span>ew
+                  </div>
+                </li>
+                {saveable && (
+                  <li
+                    className={styles.menuItem}
+                    onClick={() => {
+                      toggleMenuClickOutside();
+                      setSaveMenu(true);
+                    }}
+                  >
+                    <div className={styles.menuItemCluster}>
+                      <span className={styles.underline}>S</span>ave
+                    </div>
+                  </li>
+                )}
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>D</span>elete
+                  </div>
+                </li>
+                <li className={styles.seperator}></li>
+                <li
+                  className={styles.menuItem}
+                  onClick={() => {
+                    toggleMenuClickOutside();
+                    toggleClose();
+                  }}
+                >
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>C</span>lose
+                  </div>
+                </li>
+              </ul>
+            )}
+            <li
+              onClick={() => {
+                setIsClicked((prevState) => !prevState);
+                toggleEdit();
+              }}
+              onMouseEnter={() => {
+                isClicked ? toggleEdit() : '';
+              }}
             >
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>U</span>ndo
-                </div>
-              </li>
-              <li className={styles.seperator}></li>
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  Cu<span className={styles.underline}>t</span>
-                </div>
-              </li>
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>C</span>opy
-                </div>
-              </li>
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>P</span>aste
-                </div>
-              </li>
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  Dele<span className={styles.underline}>t</span>e
-                </div>
-              </li>
-              <li className={styles.seperator}></li>
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  Select <span className={styles.underline}>A</span>ll
-                </div>
-              </li>
-            </ul>
-          )}
-          <li
-            onClick={() => {
-              setIsClicked((prevState) => !prevState);
-              toggleSearch();
-            }}
-            onMouseEnter={() => {
-              isClicked ? toggleSearch() : '';
-            }}
-          >
-            <span className={styles.underline}>S</span>earch
-          </li>
-          {isSearch && isClicked && (
-            <ul
-              className={`${styles.menuDropdown} ${styles.searchMenu}`}
-              ref={searchRef}
+              <span className={styles.underline}>E</span>dit
+            </li>
+            {isEdit && isClicked && (
+              <ul
+                className={`${styles.menuDropdown} ${styles.editMenu}`}
+                ref={editRef}
+              >
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>U</span>ndo
+                  </div>
+                </li>
+                <li className={styles.seperator}></li>
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    Cu<span className={styles.underline}>t</span>
+                  </div>
+                </li>
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>C</span>opy
+                  </div>
+                </li>
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>P</span>aste
+                  </div>
+                </li>
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    Dele<span className={styles.underline}>t</span>e
+                  </div>
+                </li>
+                <li className={styles.seperator}></li>
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    Select <span className={styles.underline}>A</span>ll
+                  </div>
+                </li>
+              </ul>
+            )}
+            <li
+              onClick={() => {
+                setIsClicked((prevState) => !prevState);
+                toggleSearch();
+              }}
+              onMouseEnter={() => {
+                isClicked ? toggleSearch() : '';
+              }}
             >
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  <span className={styles.underline}>U</span>ndo
-                </div>
-              </li>
-            </ul>
-          )}
-          <li
-            onClick={() => {
-              setIsClicked((prevState) => !prevState);
-              toggleHelp();
-            }}
-            onMouseEnter={() => {
-              isClicked ? toggleHelp() : '';
-            }}
-          >
-            <span className={styles.underline}>H</span>elp
-          </li>
-          {isHelp && isClicked && (
-            <ul
-              className={`${styles.menuDropdown} ${styles.helpMenu}`}
-              ref={helpRef}
+              <span className={styles.underline}>S</span>earch
+            </li>
+            {isSearch && isClicked && (
+              <ul
+                className={`${styles.menuDropdown} ${styles.searchMenu}`}
+                ref={searchRef}
+              >
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    <span className={styles.underline}>U</span>ndo
+                  </div>
+                </li>
+              </ul>
+            )}
+            <li
+              onClick={() => {
+                setIsClicked((prevState) => !prevState);
+                toggleHelp();
+              }}
+              onMouseEnter={() => {
+                isClicked ? toggleHelp() : '';
+              }}
             >
-              <li className={styles.menuItem}>
-                <div className={styles.menuItemCluster}>
-                  A<span className={styles.underline}>b</span>out
-                </div>
-              </li>
-            </ul>
-          )}
-        </ul>
-        <div className={npStyles.body}>{children}</div>
+              <span className={styles.underline}>H</span>elp
+            </li>
+            {isHelp && isClicked && (
+              <ul
+                className={`${styles.menuDropdown} ${styles.helpMenu}`}
+                ref={helpRef}
+              >
+                <li className={styles.menuItem}>
+                  <div className={styles.menuItemCluster}>
+                    A<span className={styles.underline}>b</span>out
+                  </div>
+                </li>
+              </ul>
+            )}
+          </ul>
+        )}
+        <div className={!help ? npStyles.body : bcStyles.body}>{children}</div>
         <div
           className={npStyles.resizeContainer}
           onMouseDown={(e) => {
