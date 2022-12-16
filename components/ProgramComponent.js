@@ -188,6 +188,7 @@ const ProgramComponent = ({
               setIsSaved={setIsSaved}
               isSave={true}
               setIsDirectory={setIsDirectory}
+              notepad={name === 'notepad' ? true : false}
             />
           )}
           {saveQuestion && (
