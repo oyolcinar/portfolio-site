@@ -2,6 +2,9 @@ import { useRef, useEffect, useState } from 'react';
 import { useClickOutsideHandler } from '../utils/utils';
 import Draggable from 'react-draggable';
 
+import DesktopDirectory from './BodyComponents/DesktopDirectory';
+import BriefcaseDirectory from './BodyComponents/BriefcaseDirectory';
+
 import styles from '../styles/Card.module.css';
 
 import Image from 'next/image';
@@ -11,7 +14,13 @@ import close from '../public/icons/close.png';
 import briefcaseIcon from '../public/icons/briefcaseIcon.png';
 import downArrow from '../public/icons/downArrow.png';
 
-const MenuComponent = ({ setSaveMenu, setIsSaved, isSave, setOpenMenu }) => {
+const MenuComponent = ({
+  setSaveMenu,
+  setIsSaved,
+  isSave,
+  setOpenMenu,
+  setIsDirectory,
+}) => {
   const [doubleClickSave, setDoubleClickSave] = useState(false);
   const [directory, setDirectory] = useState(false);
   const [selectFileType, setSelectFileType] = useState(false);
@@ -76,7 +85,10 @@ const MenuComponent = ({ setSaveMenu, setIsSaved, isSave, setOpenMenu }) => {
                   <Image src={downArrow} alt='' height={12} />
                 </div>
                 {directory && (
-                  <div className={styles.saveDirectoryDropdown}></div>
+                  <div className={styles.saveDirectoryDropdown}>
+                    <DesktopDirectory />
+                    <BriefcaseDirectory />
+                  </div>
                 )}
               </div>
               <div className={styles.saveBodyTopButtonCluster}>

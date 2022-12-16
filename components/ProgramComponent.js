@@ -39,6 +39,9 @@ const ProgramComponent = ({
   saveable,
   opennable,
   help,
+  isDirectory,
+  setIsDirectory,
+  selectedBriefcaseFile,
   setItems,
   notepadText,
 }) => {
@@ -142,7 +145,9 @@ const ProgramComponent = ({
         className={!fullScreen ? 'card' : styles.fullScreen}
         onClick={() => {
           setDoubleClickProgram(false);
-          setActive(name);
+          if (!isDirectory) {
+            setActive(name);
+          }
         }}
       >
         <style jsx>{`
@@ -171,13 +176,18 @@ const ProgramComponent = ({
           }
         >
           {openMenu && (
-            <MenuComponent isSave={false} setOpenMenu={setOpenMenu} />
+            <MenuComponent
+              isSave={false}
+              setOpenMenu={setOpenMenu}
+              setIsDirectory={setIsDirectory}
+            />
           )}
           {saveMenu && (
             <MenuComponent
               setSaveMenu={setSaveMenu}
               setIsSaved={setIsSaved}
               isSave={true}
+              setIsDirectory={setIsDirectory}
             />
           )}
           {saveQuestion && (
@@ -265,11 +275,13 @@ const ProgramComponent = ({
                   </li>
                 )}
                 {opennable && <li className={styles.seperator}></li>}
-                <li className={styles.menuItem}>
-                  <div className={styles.menuItemCluster}>
-                    <span className={styles.underline}>N</span>ew
-                  </div>
-                </li>
+                {name !== 'briefcase' && (
+                  <li className={styles.menuItem}>
+                    <div className={styles.menuItemCluster}>
+                      <span className={styles.underline}>N</span>ew
+                    </div>
+                  </li>
+                )}
                 {saveable && (
                   <li
                     className={styles.menuItem}

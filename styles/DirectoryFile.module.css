@@ -1,0 +1,22 @@
+.container {
+  margin-top: 5px;
+  margin-left: 6px;
+  display: flex;
+  align-items: center;
+  font-size: .55rem;
+  width: 100px;
+}
+
+.selected {
+  color: white;
+  border: 1px dotted white;
+  background-color: #000181;
+}
+
+.text {
+  border: 1px solid transparent;
+}
+
+.image {
+  filter: sepia(120%) saturate(1200%) contrast(100%) brightness(30%) hue-rotate(210deg); 
+}

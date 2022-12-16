@@ -52,6 +52,7 @@ const Navbar = () => {
   const [isOutlook, setIsOutlook] = useState(false);
   const [isMinesweeper, setIsMinesweeper] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
+  const [isDirectory, setIsDirectory] = useState(false);
 
   const [doubleClickModem, setDoubleClickModem] = useState(false);
   const [doubleClickNotepad, setDoubleClickNotepad] = useState(false);
@@ -77,6 +78,7 @@ const Navbar = () => {
   const [notepadText, setNotepadText] = useState('');
   const [subject, setSubject] = useState('');
   const [items, setItems] = useState([]);
+  const [selectedBriefcaseFile, setSelectedBriefcaseFile] = useState('');
 
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
@@ -356,6 +358,7 @@ const Navbar = () => {
               name={'notepad'}
               title={'Notepad'}
               icon={notepadIcon}
+              titled={true}
             />
           ) : (
             ''
@@ -376,6 +379,7 @@ const Navbar = () => {
               name={'paint'}
               title={'MS Paint'}
               icon={paintIcon}
+              titled={true}
             />
           ) : (
             ''
@@ -659,6 +663,8 @@ const Navbar = () => {
           setItems={setItems}
           opennable={true}
           help={false}
+          isDirectory={isDirectory}
+          setIsDirectory={setIsDirectory}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -690,6 +696,8 @@ const Navbar = () => {
           setItems={setItems}
           opennable={true}
           help={false}
+          isDirectory={isDirectory}
+          setIsDirectory={setIsDirectory}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -748,8 +756,18 @@ const Navbar = () => {
           saveable={false}
           opennable={true}
           help={false}
+          isDirectory={isDirectory}
+          setIsDirectory={setIsDirectory}
+          selectedBriefcaseFile={selectedBriefcaseFile}
         >
-          <BriefcaseComponent />
+          <BriefcaseComponent
+            handleDoubleClick={handleDoubleClick}
+            notepadHandler={notepadHandler}
+            paintHandler={paintHandler}
+            isDirectory={isDirectory}
+            setIsDirectory={setIsDirectory}
+            setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+          />
         </ProgramComponent>
       )}
       {isOutlook && !minimizeOutlook && (

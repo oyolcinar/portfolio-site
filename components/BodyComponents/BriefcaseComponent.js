@@ -1,9 +1,35 @@
 import styles from '../../styles/Briefcase.module.css';
+import DirectoryFile from './DirectoryFile';
 
-const BriefcaseComponent = () => {
+import notepadFileIcon from '../../public/icons/notepadFileIcon.png';
+
+const BriefcaseComponent = ({
+  handleDoubleClick,
+  notepadHandler,
+  paintHandler,
+  setIsDirectory,
+  setSelectedBriefcaseFile,
+}) => {
   return (
     <div className={styles.card}>
-      <div></div>
+      <div className={styles.briefcaseBody}>
+        <DirectoryFile
+          name={'CV.txt'}
+          image={notepadFileIcon}
+          handleDoubleClick={handleDoubleClick}
+          handlerFunction={notepadHandler}
+          setIsDirectory={setIsDirectory}
+          setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+        />
+        <DirectoryFile
+          name={'Works.txt'}
+          image={notepadFileIcon}
+          handleDoubleClick={handleDoubleClick}
+          handlerFunction={notepadHandler}
+          setIsDirectory={setIsDirectory}
+          setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+        />
+      </div>
     </div>
   );
 };

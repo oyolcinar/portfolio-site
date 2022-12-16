@@ -26,3 +26,8 @@
   height: calc(100% - 37px);
   width: 100%;
 }
+
+.briefcaseBody {
+  height: 100%;
+  width: 100%;
+}
