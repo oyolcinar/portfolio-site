@@ -180,6 +180,9 @@ const ProgramComponent = ({
               isSave={false}
               setOpenMenu={setOpenMenu}
               setIsDirectory={setIsDirectory}
+              notepad={name === 'notepad' ? true : false}
+              briefcase={name === 'briefcase' ? true : false}
+              paint={name === 'paint' ? true : false}
             />
           )}
           {saveMenu && (
@@ -189,6 +192,8 @@ const ProgramComponent = ({
               isSave={true}
               setIsDirectory={setIsDirectory}
               notepad={name === 'notepad' ? true : false}
+              briefcase={name === 'briefcase' ? true : false}
+              paint={name === 'paint' ? true : false}
             />
           )}
           {saveQuestion && (

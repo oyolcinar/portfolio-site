@@ -446,7 +446,31 @@
 }
 
 .filetypeDropdown {
+  position: absolute;
+  left: 112px;
+  background-color: white;
+  width: 312px;
+  height: 25px;
+  border: 2px #C0C0C0 solid;
+  border-top: none;
+  border-left-color: #393939;
   top: 350px;
+}
+
+.filetypeDropdownBriefcase {
+  height: 100px;
+}
+
+.filetypeDropdownNotepadSave {
+  height: 0;
+}
+
+.filetypeDropdownNotepadOpen {
+  height: 25px;
+}
+
+.filetypeDropdownPaint {
+  height: 50px;
 }
 
 .saveBodyTopButtonCluster {

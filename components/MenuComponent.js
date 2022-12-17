@@ -20,38 +20,24 @@ const MenuComponent = ({
   setOpenMenu,
   setIsDirectory,
   notepad,
+  briefcase,
+  paint,
 }) => {
   const [doubleClickSave, setDoubleClickSave] = useState(false);
   const [directory, setDirectory] = useState(false);
   const [selectFileType, setSelectFileType] = useState(false);
   const [selectedDirectory, setSelectedDirectory] = useState('desktop');
-  const [selectedFileType, setSelectedFileType] = useState('.txt');
+  const [selectedFileType, setSelectedFileType] = useState(
+    notepad ? '.txt' : paint ? '.bmp' : 'all',
+  );
 
   const all = 'All Documents (*)';
-  const bitmap = 'Bitmap File (*.bmp)';
+  const bitmap = 'Bitmap Files (*.bmp)';
   const text = 'Text Documents (*.txt)';
-  const jpg = 'JPG File (*.jpg)';
-  const jpeg = 'JPEG File (*.jpeg)';
+  const jpg = 'JPG Files (*.jpg)';
+  const jpeg = 'JPEG Files (*.jpeg)';
 
   const saveMenuRef = useRef();
-
-  function toggleFileType() {
-    if (selectFileType === '.txt') {
-      return text;
-    }
-    if (selectFileType === 'all') {
-      return all;
-    }
-    if (selectFileType === '.bmp') {
-      return bitmap;
-    }
-    if (selectFileType === '.jpg') {
-      return jpg;
-    }
-    if (selectFileType === '.jpeg') {
-      return jpeg;
-    }
-  }
 
   function saveDoubleClickHandler() {
     setDoubleClickSave(true);
@@ -169,7 +155,15 @@ const MenuComponent = ({
                       }}
                     >
                       <div className={styles.selectedFileType}>
-                        {toggleFileType}
+                        {selectedFileType === 'all'
+                          ? all
+                          : selectedFileType === '.txt'
+                          ? text
+                          : selectedFileType === '.bmp'
+                          ? bitmap
+                          : selectedFileType === '.jpg'
+                          ? jpg
+                          : jpeg}
                       </div>
                     </div>
                     <div
@@ -182,19 +176,49 @@ const MenuComponent = ({
                     </div>
                     {selectFileType && (
                       <div
-                        className={`${styles.saveDirectoryDropdown} ${styles.filetypeDropdown}`}
+                        className={
+                          briefcase
+                            ? `${styles.filetypeDropdown} ${styles.filetypeDropdownBriefcase}`
+                            : notepad && isSave
+                            ? `${styles.filetypeDropdown} ${styles.filetypeDropdownNotepadSave}`
+                            : notepad && !isSave
+                            ? `${styles.filetypeDropdown} ${styles.filetypeDropdownNotepadOpen}`
+                            : `${styles.filetypeDropdown} ${styles.filetypeDropdownPaint}`
+                        }
                       >
-                        {notepad &&
-                          selectedFileType !==
-                            '.txt'(
-                              <div
-                                className={styles.selectedFileType}
-                                onClick={() => setSelectedFileType('.txt')}
-                              >
-                                {text}
-                              </div>,
-                            )}
-                        {!isSave && (
+                        {!paint && selectedFileType !== '.txt' && (
+                          <div
+                            className={styles.selectedFileType}
+                            onClick={() => setSelectedFileType('.txt')}
+                          >
+                            {text}
+                          </div>
+                        )}
+                        {!notepad && selectedFileType !== '.bmp' && (
+                          <div
+                            className={styles.selectedFileType}
+                            onClick={() => setSelectedFileType('.bmp')}
+                          >
+                            {bitmap}
+                          </div>
+                        )}
+                        {!notepad && selectedFileType !== '.jpg' && (
+                          <div
+                            className={styles.selectedFileType}
+                            onClick={() => setSelectedFileType('.jpg')}
+                          >
+                            {jpg}
+                          </div>
+                        )}
+                        {!notepad && selectedFileType !== '.jpeg' && (
+                          <div
+                            className={styles.selectedFileType}
+                            onClick={() => setSelectedFileType('.jpeg')}
+                          >
+                            {jpeg}
+                          </div>
+                        )}
+                        {!isSave && selectedFileType !== 'all' && (
                           <div
                             className={styles.selectedFileType}
                             onClick={() => setSelectedFileType('all')}
@@ -202,36 +226,6 @@ const MenuComponent = ({
                             {all}
                           </div>
                         )}
-                        {/* {!notepad &&
-                          selectedFileType !==
-                            '.bmp'(
-                              <div
-                                className={styles.selectedFileType}
-                                onClick={() => setSelectedFileType('.bmp')}
-                              >
-                                {bitmap}
-                              </div>,
-                            )}
-                        {!notepad &&
-                          selectedFileType !==
-                            '.jpg'(
-                              <div
-                                className={styles.selectedFileType}
-                                onClick={() => setSelectedFileType('.jpg')}
-                              >
-                                {jpg}
-                              </div>,
-                            )}
-                        {!notepad &&
-                          selectedFileType !==
-                            '.jpeg'(
-                              <div
-                                className={styles.selectedFileType}
-                                onClick={() => setSelectedFileType('.jpeg')}
-                              >
-                                {jpeg}
-                              </div>,
-                            )} */}
                       </div>
                     )}
                   </div>
