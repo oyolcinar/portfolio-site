@@ -42,8 +42,12 @@ const ProgramComponent = ({
   isDirectory,
   setIsDirectory,
   selectedBriefcaseFile,
-  setItems,
   notepadText,
+  saveHandler,
+  setProgramFileTitle,
+  briefCaseFiles,
+  desktopFilesForMenu,
+  desktopPermanentItems,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -78,6 +82,7 @@ const ProgramComponent = ({
 
   function closeHandler() {
     setText ? setText('') : '';
+    setProgramFileTitle ? setProgramFileTitle('') : '';
     setSaveQuestion(false);
     setIsSaved(false);
     setIsProgram(false);
@@ -183,6 +188,9 @@ const ProgramComponent = ({
               notepad={name === 'notepad' ? true : false}
               briefcase={name === 'briefcase' ? true : false}
               paint={name === 'paint' ? true : false}
+              briefCaseFiles={briefCaseFiles}
+              desktopFilesForMenu={desktopFilesForMenu}
+              desktopPermanentItems={desktopPermanentItems}
             />
           )}
           {saveMenu && (
@@ -194,6 +202,12 @@ const ProgramComponent = ({
               notepad={name === 'notepad' ? true : false}
               briefcase={name === 'briefcase' ? true : false}
               paint={name === 'paint' ? true : false}
+              notepadText={notepadText}
+              saveHandler={saveHandler}
+              setTitleData={setProgramFileTitle}
+              briefCaseFiles={briefCaseFiles}
+              desktopFilesForMenu={desktopFilesForMenu}
+              desktopPermanentItems={desktopPermanentItems}
             />
           )}
           {saveQuestion && (
@@ -203,6 +217,7 @@ const ProgramComponent = ({
               toggleClose={toggleClose}
               titleData={titleData}
               title={title}
+              setSaveMenu={setSaveMenu}
             />
           )}
           <div className={styles.headerLeft}>

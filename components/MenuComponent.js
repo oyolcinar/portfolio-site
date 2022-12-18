@@ -22,11 +22,18 @@ const MenuComponent = ({
   notepad,
   briefcase,
   paint,
+  notepadText,
+  saveHandler,
+  setTitleData,
+  briefCaseFiles,
+  desktopFilesForMenu,
+  desktopPermanentItems,
 }) => {
   const [doubleClickSave, setDoubleClickSave] = useState(false);
   const [directory, setDirectory] = useState(false);
   const [selectFileType, setSelectFileType] = useState(false);
   const [selectedDirectory, setSelectedDirectory] = useState('desktop');
+  const [fileName, setFileName] = useState('');
   const [selectedFileType, setSelectedFileType] = useState(
     notepad ? '.txt' : paint ? '.bmp' : 'all',
   );
@@ -39,9 +46,50 @@ const MenuComponent = ({
 
   const saveMenuRef = useRef();
 
+  function toggleOpen() {
+    openHandler();
+    setTitleData();
+    setOpenMenu(false);
+  }
+
+  function toggleSave() {
+    saveHandler(
+      fileName,
+      selectedFileType,
+      notepadText,
+      selectedDirectory,
+      notepad ? 'notepad' : 'paint',
+    );
+    setTitleData(fileName + selectedFileType);
+    setSaveMenu(false);
+  }
+
+  function fileNameHandler(e) {
+    setFileName(e.target.value);
+  }
+
   function saveDoubleClickHandler() {
     setDoubleClickSave(true);
   }
+
+  function isSameType(item) {
+    return item.type === selectedFileType;
+  }
+
+  const desktopPermanentListedItems = desktopPermanentItems.filter((item) =>
+    isSameType(item),
+  );
+
+  const desktopMenuListedItems = desktopFilesForMenu.filter((item) =>
+    isSameType(item),
+  );
+
+  console.log(desktopPermanentListedItems);
+  console.log(selectedFileType);
+
+  const briefcaseFilesListed = briefCaseFiles.filter((item) =>
+    isSameType(item),
+  );
 
   useClickOutsideHandler(saveMenuRef, saveDoubleClickHandler);
 
@@ -133,14 +181,25 @@ const MenuComponent = ({
                 </div>
               </div>
             </div>
-            <div className={styles.saveBodyMiddle}></div>
+            <div className={styles.saveBodyMiddle}>
+              {desktopPermanentListedItems}
+              {selectedDirectory === 'desktop'
+                ? desktopFilesForMenu
+                : briefCaseFiles}
+            </div>
             <div className={styles.saveBodyBottom}>
               <div className={styles.saveBodyBottomFields}>
                 <div className={styles.saveBodyField}>
                   <div className={styles.saveBodyLabel}>
                     File <span className={styles.underline}>n</span>ame:
                   </div>
-                  <input type='text' className={styles.saveBodyInput}></input>
+                  <input
+                    type='text'
+                    className={styles.saveBodyInput}
+                    onChange={(e) => {
+                      fileNameHandler(e);
+                    }}
+                  ></input>
                 </div>
                 <div className={styles.saveBodyField}>
                   <div className={styles.saveBodyLabel}>
@@ -189,7 +248,10 @@ const MenuComponent = ({
                         {!paint && selectedFileType !== '.txt' && (
                           <div
                             className={styles.selectedFileType}
-                            onClick={() => setSelectedFileType('.txt')}
+                            onClick={() => {
+                              setSelectedFileType('.txt');
+                              setSelectFileType(false);
+                            }}
                           >
                             {text}
                           </div>
@@ -197,7 +259,10 @@ const MenuComponent = ({
                         {!notepad && selectedFileType !== '.bmp' && (
                           <div
                             className={styles.selectedFileType}
-                            onClick={() => setSelectedFileType('.bmp')}
+                            onClick={() => {
+                              setSelectedFileType('.bmp');
+                              setSelectFileType(false);
+                            }}
                           >
                             {bitmap}
                           </div>
@@ -205,7 +270,10 @@ const MenuComponent = ({
                         {!notepad && selectedFileType !== '.jpg' && (
                           <div
                             className={styles.selectedFileType}
-                            onClick={() => setSelectedFileType('.jpg')}
+                            onClick={() => {
+                              setSelectedFileType('.jpg');
+                              setSelectFileType(false);
+                            }}
                           >
                             {jpg}
                           </div>
@@ -213,7 +281,10 @@ const MenuComponent = ({
                         {!notepad && selectedFileType !== '.jpeg' && (
                           <div
                             className={styles.selectedFileType}
-                            onClick={() => setSelectedFileType('.jpeg')}
+                            onClick={() => {
+                              setSelectedFileType('.jpeg');
+                              setSelectFileType(false);
+                            }}
                           >
                             {jpeg}
                           </div>
@@ -221,7 +292,10 @@ const MenuComponent = ({
                         {!isSave && selectedFileType !== 'all' && (
                           <div
                             className={styles.selectedFileType}
-                            onClick={() => setSelectedFileType('all')}
+                            onClick={() => {
+                              setSelectedFileType('all');
+                              setSelectFileType(false);
+                            }}
                           >
                             {all}
                           </div>
@@ -232,7 +306,12 @@ const MenuComponent = ({
                 </div>
               </div>
               <div className={styles.saveBodyButtonCluster}>
-                <button className={`${styles.button} ${styles.sdButton} `}>
+                <button
+                  className={`${styles.button} ${styles.sdButton} `}
+                  onClick={() => {
+                    isSave ? toggleSave() : toggleOpen();
+                  }}
+                >
                   <span className={styles.underline}>{isSave ? 'S' : 'O'}</span>
                   {isSave ? 'ave' : 'pen'}
                 </button>

@@ -11,6 +11,7 @@ const SaveQuestionMenu = ({
   toggleClose,
   titleData,
   title,
+  setSaveMenu,
 }) => {
   const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
 
@@ -72,7 +73,13 @@ const SaveQuestionMenu = ({
           </div>
         </div>
         <div className={styles.buttonCluster}>
-          <button className={`${styles.button} ${styles.sdButton} `}>
+          <button
+            className={`${styles.button} ${styles.sdButton} `}
+            onClick={() => {
+              setSaveQuestion(false);
+              setSaveMenu(true);
+            }}
+          >
             <span className={styles.underline}>Y</span>es
           </button>
           <button

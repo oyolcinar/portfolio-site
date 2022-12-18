@@ -15,6 +15,7 @@ import OutlookComponent from './BodyComponents/OutlookComponent';
 import BriefcaseComponent from './BodyComponents/BriefcaseComponent';
 import HelpComponent from './BodyComponents/HelpComponent';
 import DesktopItem from './DesktopItem';
+import DirectoryFile from './BodyComponents/DirectoryFile';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -37,6 +38,7 @@ import explorer from '../public/icons/explorer.png';
 import outlook from '../public/icons/outlook.png';
 import notepadFile from '../public/icons/notepadFile.png';
 import helpIcon from '../public/icons/helpIcon.png';
+import notepadFileIcon from '../public/icons/notepadFileIcon.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -79,6 +81,8 @@ const Navbar = () => {
   const [subject, setSubject] = useState('');
   const [items, setItems] = useState([]);
   const [selectedBriefcaseFile, setSelectedBriefcaseFile] = useState('');
+  const [notepadTitle, setNotepadTitle] = useState('');
+  const [paintTitle, setPaintTitle] = useState('');
 
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
@@ -198,6 +202,17 @@ const Navbar = () => {
     setIsResizing(false);
     setDraggableDisabled(false);
   };
+
+  function saveHandler(filename, filetype, data, directory, program) {
+    const newFile = {
+      name: filename,
+      type: filetype,
+      data: data,
+      directory: directory,
+      program: program,
+    };
+    setItems([...items, newFile]);
+  }
 
   function briefcaseHandler() {
     !isBriefcase ? orderArrayHandler('briefcase') : '';
@@ -323,6 +338,70 @@ const Navbar = () => {
     return orderArray.indexOf(name) + 1;
   }
 
+  const desktopPermanentItems = [
+    <DirectoryFile
+      name={'CV.txt'}
+      image={notepadFileIcon}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={notepadHandler}
+      setIsDirectory={setIsDirectory}
+      setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+      key={'cvDesktop'}
+    />,
+    <DirectoryFile
+      name={'Works.txt'}
+      image={notepadFileIcon}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={notepadHandler}
+      setIsDirectory={setIsDirectory}
+      setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+      key={'worksDesktop'}
+    />,
+  ];
+
+  const briefCaseFiles = items.map((item) => {
+    if (item.directory === 'briefcase') {
+      return (
+        <DirectoryFile
+          key={item.name}
+          name={item.name + item.type}
+          image={item.program === 'notepad' ? notepadFile : paintIcon}
+          handleDoubleClick={handleDoubleClick}
+          handlerFunction={outlookHandler}
+          setIsDirectory={setIsDirectory}
+          setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+        />
+      );
+    }
+  });
+
+  const desktopFilesForMenu = items.map((item) => {
+    return (
+      <DirectoryFile
+        key={item.name}
+        name={item.name + item.type}
+        image={item.program === 'notepad' ? notepadFile : paintIcon}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={outlookHandler}
+        setIsDirectory={setIsDirectory}
+        setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+      />
+    );
+  });
+
+  const desktopFiles = items.map((item) => {
+    return (
+      <DesktopItem
+        shortcut={shortcut}
+        name={item.name + item.type}
+        image={item.program === 'notepad' ? notepadFile : paintIcon}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={outlookHandler}
+        key={item.name}
+      />
+    );
+  });
+
   const trayElements = orderArray.map((item) => {
     if (item === 'modem') {
       return (
@@ -359,6 +438,7 @@ const Navbar = () => {
               title={'Notepad'}
               icon={notepadIcon}
               titled={true}
+              titleData={notepadTitle}
             />
           ) : (
             ''
@@ -380,6 +460,7 @@ const Navbar = () => {
               title={'MS Paint'}
               icon={paintIcon}
               titled={true}
+              titleData={paintTitle}
             />
           ) : (
             ''
@@ -536,6 +617,7 @@ const Navbar = () => {
         handleDoubleClick={handleDoubleClick}
         handlerFunction={notepadHandler}
       />
+      {desktopFiles}
       <nav className={styles.navbar}>
         <ul className={styles.list}>
           <li className={styles.start}>
@@ -665,6 +747,12 @@ const Navbar = () => {
           help={false}
           isDirectory={isDirectory}
           setIsDirectory={setIsDirectory}
+          saveHandler={saveHandler}
+          setProgramFileTitle={setNotepadTitle}
+          titleData={notepadTitle}
+          briefCaseFiles={briefCaseFiles}
+          desktopFilesForMenu={desktopFilesForMenu}
+          desktopPermanentItems={desktopPermanentItems}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -698,6 +786,11 @@ const Navbar = () => {
           help={false}
           isDirectory={isDirectory}
           setIsDirectory={setIsDirectory}
+          saveHandler={saveHandler}
+          setProgramFileTitle={setPaintTitle}
+          titleData={paintTitle}
+          briefCaseFiles={briefCaseFiles}
+          desktopFilesForMenu={desktopFilesForMenu}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -767,6 +860,8 @@ const Navbar = () => {
             isDirectory={isDirectory}
             setIsDirectory={setIsDirectory}
             setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+            briefCaseFiles={briefCaseFiles}
+            desktopPermanentItems={desktopPermanentItems}
           />
         </ProgramComponent>
       )}
