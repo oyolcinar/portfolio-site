@@ -347,6 +347,9 @@ const Navbar = () => {
       setIsDirectory={setIsDirectory}
       setSelectedBriefcaseFile={setSelectedBriefcaseFile}
       key={'cvDesktop'}
+      setTitle={setNotepadTitle}
+      setData={setNotepadText}
+      type={'.txt'}
     />,
     <DirectoryFile
       name={'Works.txt'}
@@ -356,6 +359,9 @@ const Navbar = () => {
       setIsDirectory={setIsDirectory}
       setSelectedBriefcaseFile={setSelectedBriefcaseFile}
       key={'worksDesktop'}
+      setTitle={setNotepadTitle}
+      setData={setNotepadText}
+      type={'.txt'}
     />,
   ];
 
@@ -363,12 +369,20 @@ const Navbar = () => {
     if (item.directory === 'briefcase') {
       return (
         <DirectoryFile
+          type={item.type}
+          data={item.data}
           key={item.name}
           name={item.name + item.type}
           image={item.program === 'notepad' ? notepadFile : paintIcon}
           handleDoubleClick={handleDoubleClick}
-          handlerFunction={outlookHandler}
+          handlerFunction={
+            item.program === 'notepad' ? notepadHandler : paintHandler
+          }
           setIsDirectory={setIsDirectory}
+          setTitle={
+            item.program === 'notepad' ? setNotepadTitle : setPaintTitle
+          }
+          setData={item.program === 'notepad' ? setNotepadText : ''}
           setSelectedBriefcaseFile={setSelectedBriefcaseFile}
         />
       );
@@ -382,9 +396,15 @@ const Navbar = () => {
         name={item.name + item.type}
         image={item.program === 'notepad' ? notepadFile : paintIcon}
         handleDoubleClick={handleDoubleClick}
-        handlerFunction={outlookHandler}
+        handlerFunction={
+          item.program === 'notepad' ? notepadHandler : paintHandler
+        }
+        type={item.type}
+        data={item.data}
+        setTitle={item.program === 'notepad' ? setNotepadTitle : setPaintTitle}
         setIsDirectory={setIsDirectory}
         setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+        setData={item.program === 'notepad' ? setNotepadText : ''}
       />
     );
   });
@@ -392,11 +412,17 @@ const Navbar = () => {
   const desktopFiles = items.map((item) => {
     return (
       <DesktopItem
+        type={item.type}
         shortcut={shortcut}
         name={item.name + item.type}
         image={item.program === 'notepad' ? notepadFile : paintIcon}
         handleDoubleClick={handleDoubleClick}
-        handlerFunction={outlookHandler}
+        handlerFunction={
+          item.program === 'notepad' ? notepadHandler : paintHandler
+        }
+        setTitle={item.program === 'notepad' ? setNotepadTitle : setPaintTitle}
+        setData={item.program === 'notepad' ? setNotepadText : ''}
+        data={item.data}
         key={item.name}
       />
     );
@@ -609,6 +635,8 @@ const Navbar = () => {
         image={notepadFile}
         handleDoubleClick={handleDoubleClick}
         handlerFunction={notepadHandler}
+        setTitle={setNotepadTitle}
+        setData={notepadText}
       />
       <DesktopItem
         shortcut={shortcut}
@@ -616,6 +644,8 @@ const Navbar = () => {
         image={notepadFile}
         handleDoubleClick={handleDoubleClick}
         handlerFunction={notepadHandler}
+        setTitle={setNotepadTitle}
+        setData={notepadText}
       />
       {desktopFiles}
       <nav className={styles.navbar}>

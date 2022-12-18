@@ -72,25 +72,6 @@ const MenuComponent = ({
     setDoubleClickSave(true);
   }
 
-  function isSameType(item) {
-    return item.type === selectedFileType;
-  }
-
-  const desktopPermanentListedItems = desktopPermanentItems.filter((item) =>
-    isSameType(item),
-  );
-
-  const desktopMenuListedItems = desktopFilesForMenu.filter((item) =>
-    isSameType(item),
-  );
-
-  console.log(desktopPermanentListedItems);
-  console.log(selectedFileType);
-
-  const briefcaseFilesListed = briefCaseFiles.filter((item) =>
-    isSameType(item),
-  );
-
   useClickOutsideHandler(saveMenuRef, saveDoubleClickHandler);
 
   return (
@@ -182,7 +163,7 @@ const MenuComponent = ({
               </div>
             </div>
             <div className={styles.saveBodyMiddle}>
-              {desktopPermanentListedItems}
+              {desktopPermanentItems}
               {selectedDirectory === 'desktop'
                 ? desktopFilesForMenu
                 : briefCaseFiles}

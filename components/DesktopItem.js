@@ -11,6 +11,10 @@ const DesktopItem = ({
   handleDoubleClick,
   handlerFunction,
   name,
+  type,
+  data,
+  setTitle,
+  setData,
 }) => {
   const [selected, setSelected] = useState(false);
   const desktopItemRef = useRef(null);
@@ -32,6 +36,8 @@ const DesktopItem = ({
         }
         onClick={(e) => {
           setSelected(true);
+          setTitle ? setTitle(name) : '';
+          setData ? setData(data) : '';
           handleDoubleClick(e, handlerFunction);
         }}
       >

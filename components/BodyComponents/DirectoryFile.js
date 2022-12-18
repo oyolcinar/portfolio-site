@@ -10,6 +10,10 @@ const DirectoryFile = ({
   handleDoubleClick,
   setIsDirectory,
   setSelectedBriefcaseFile,
+  type,
+  data,
+  setData,
+  setTitle,
 }) => {
   const [selected, setSelected] = useState(false);
   const directoryFileRef = useRef(null);
@@ -36,6 +40,8 @@ const DirectoryFile = ({
         setIsDirectory(true);
         setSelectedBriefcaseFile(name);
         setSelected(true);
+        setTitle(name);
+        setData(data);
         handleDoubleClick(e, handlerFunction);
       }}
     >
