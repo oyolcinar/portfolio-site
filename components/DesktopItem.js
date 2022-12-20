@@ -15,6 +15,8 @@ const DesktopItem = ({
   data,
   setTitle,
   setData,
+  directory,
+  setSelectedFile,
 }) => {
   const [selected, setSelected] = useState(false);
   const desktopItemRef = useRef(null);
@@ -36,6 +38,13 @@ const DesktopItem = ({
         }
         onClick={(e) => {
           setSelected(true);
+          directory && name && type
+            ? setSelectedFile({
+                filename: name,
+                filetype: type,
+                directory: directory,
+              })
+            : '';
           setTitle ? setTitle(name) : '';
           setData ? setData(data) : '';
           handleDoubleClick(e, handlerFunction);

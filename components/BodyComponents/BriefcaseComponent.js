@@ -9,6 +9,7 @@ const BriefcaseComponent = ({
   setSelectedBriefcaseFile,
   briefCaseFiles,
   desktopPermanentItems,
+  checkFiles,
 }) => {
   return (
     <div className={styles.card}>

@@ -466,7 +466,7 @@
 }
 
 .filetypeDropdownNotepadOpen {
-  height: 25px;
+  height: 0;
 }
 
 .filetypeDropdownPaint {

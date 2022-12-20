@@ -83,6 +83,13 @@ const Navbar = () => {
   const [selectedBriefcaseFile, setSelectedBriefcaseFile] = useState('');
   const [notepadTitle, setNotepadTitle] = useState('');
   const [paintTitle, setPaintTitle] = useState('');
+  const [saveNameSameNotepad, setSaveNameSameNotepad] = useState(false);
+  const [saveNameSamePaint, setSaveNameSamePaint] = useState(false);
+  const [selectedFile, setSelectedFile] = useState({
+    filename: '',
+    filetype: '',
+    directory: '',
+  });
 
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
@@ -204,14 +211,59 @@ const Navbar = () => {
   };
 
   function saveHandler(filename, filetype, data, directory, program) {
-    const newFile = {
-      name: filename,
-      type: filetype,
-      data: data,
-      directory: directory,
-      program: program,
-    };
-    setItems([...items, newFile]);
+    if ((filetype === '.txt' && filename === 'CV') || filename === 'Works') {
+      setSaveNameSameNotepad(true);
+      return;
+    } else {
+      const findFile = items.find((item) => {
+        if (
+          item.name === filename &&
+          item.type === filetype &&
+          item.directory === directory
+        ) {
+          return item;
+        }
+      });
+
+      if (!findFile) {
+        const newFile = {
+          name: filename,
+          type: filetype,
+          data: data,
+          directory: directory,
+          program: program,
+        };
+        program === 'notepad'
+          ? setSaveNameSameNotepad(false)
+          : setSaveNameSamePaint(false);
+        setItems([...items, newFile]);
+      } else {
+        if (program === 'notepad') {
+          setSaveNameSameNotepad(true);
+          return;
+        } else {
+          setSaveNameSamePaint(true);
+          return;
+        }
+      }
+    }
+  }
+
+  function deleteHandler() {
+    if (!selectedFile) {
+      return;
+    } else {
+      const newItems = items.filter((item) => {
+        if (
+          item.name !== selectedFile.filename &&
+          item.type !== selectedFile.filetype &&
+          item.directory !== selectedFile.directory
+        ) {
+          return item;
+        }
+      });
+      setItems(newItems);
+    }
   }
 
   function briefcaseHandler() {
@@ -365,6 +417,35 @@ const Navbar = () => {
     />,
   ];
 
+  function checkFiles(type, directory) {
+    const files = items.map((item) => {
+      if (item.type === type && item.directory === directory) {
+        return (
+          <DirectoryFile
+            type={item.type}
+            data={item.data}
+            key={item.name}
+            name={item.name + item.type}
+            image={item.program === 'notepad' ? notepadFile : paintIcon}
+            handleDoubleClick={handleDoubleClick}
+            handlerFunction={
+              item.program === 'notepad' ? notepadHandler : paintHandler
+            }
+            setIsDirectory={setIsDirectory}
+            setTitle={
+              item.program === 'notepad' ? setNotepadTitle : setPaintTitle
+            }
+            setData={item.program === 'notepad' ? setNotepadText : ''}
+            directory={item.directory}
+            setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+            setSelectedFile={setSelectedFile}
+          />
+        );
+      }
+    });
+    return files;
+  }
+
   const briefCaseFiles = items.map((item) => {
     if (item.directory === 'briefcase') {
       return (
@@ -384,6 +465,8 @@ const Navbar = () => {
           }
           setData={item.program === 'notepad' ? setNotepadText : ''}
           setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+          directory={item.directory}
+          setSelectedFile={setSelectedFile}
         />
       );
     }
@@ -405,27 +488,35 @@ const Navbar = () => {
         setIsDirectory={setIsDirectory}
         setSelectedBriefcaseFile={setSelectedBriefcaseFile}
         setData={item.program === 'notepad' ? setNotepadText : ''}
+        directory={item.directory}
+        setSelectedFile={setSelectedFile}
       />
     );
   });
 
   const desktopFiles = items.map((item) => {
-    return (
-      <DesktopItem
-        type={item.type}
-        shortcut={shortcut}
-        name={item.name + item.type}
-        image={item.program === 'notepad' ? notepadFile : paintIcon}
-        handleDoubleClick={handleDoubleClick}
-        handlerFunction={
-          item.program === 'notepad' ? notepadHandler : paintHandler
-        }
-        setTitle={item.program === 'notepad' ? setNotepadTitle : setPaintTitle}
-        setData={item.program === 'notepad' ? setNotepadText : ''}
-        data={item.data}
-        key={item.name}
-      />
-    );
+    if (item.directory === 'desktop') {
+      return (
+        <DesktopItem
+          type={item.type}
+          shortcut={shortcut}
+          name={item.name + item.type}
+          image={item.program === 'notepad' ? notepadFile : paintIcon}
+          handleDoubleClick={handleDoubleClick}
+          handlerFunction={
+            item.program === 'notepad' ? notepadHandler : paintHandler
+          }
+          setTitle={
+            item.program === 'notepad' ? setNotepadTitle : setPaintTitle
+          }
+          setData={item.program === 'notepad' ? setNotepadText : ''}
+          data={item.data}
+          key={item.name}
+          directory={item.directory}
+          setSelectedFile={setSelectedFile}
+        />
+      );
+    }
   });
 
   const trayElements = orderArray.map((item) => {
@@ -783,6 +874,8 @@ const Navbar = () => {
           briefCaseFiles={briefCaseFiles}
           desktopFilesForMenu={desktopFilesForMenu}
           desktopPermanentItems={desktopPermanentItems}
+          checkFiles={checkFiles}
+          deleteHandler={deleteHandler}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -821,6 +914,8 @@ const Navbar = () => {
           titleData={paintTitle}
           briefCaseFiles={briefCaseFiles}
           desktopFilesForMenu={desktopFilesForMenu}
+          checkFiles={checkFiles}
+          deleteHandler={deleteHandler}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -882,6 +977,8 @@ const Navbar = () => {
           isDirectory={isDirectory}
           setIsDirectory={setIsDirectory}
           selectedBriefcaseFile={selectedBriefcaseFile}
+          desktopPermanentItems={desktopPermanentItems}
+          deleteHandler={deleteHandler}
         >
           <BriefcaseComponent
             handleDoubleClick={handleDoubleClick}
@@ -892,6 +989,7 @@ const Navbar = () => {
             setSelectedBriefcaseFile={setSelectedBriefcaseFile}
             briefCaseFiles={briefCaseFiles}
             desktopPermanentItems={desktopPermanentItems}
+            checkFiles={checkFiles}
           />
         </ProgramComponent>
       )}

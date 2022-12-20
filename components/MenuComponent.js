@@ -28,6 +28,7 @@ const MenuComponent = ({
   briefCaseFiles,
   desktopFilesForMenu,
   desktopPermanentItems,
+  checkFiles,
 }) => {
   const [doubleClickSave, setDoubleClickSave] = useState(false);
   const [directory, setDirectory] = useState(false);
@@ -37,6 +38,7 @@ const MenuComponent = ({
   const [selectedFileType, setSelectedFileType] = useState(
     notepad ? '.txt' : paint ? '.bmp' : 'all',
   );
+  const [activeList, setActiveList] = useState([]);
 
   const all = 'All Documents (*)';
   const bitmap = 'Bitmap Files (*.bmp)';
@@ -45,6 +47,11 @@ const MenuComponent = ({
   const jpeg = 'JPEG Files (*.jpeg)';
 
   const saveMenuRef = useRef();
+
+  useEffect(() => {
+    const filtered = checkFiles(selectedFileType, selectedDirectory);
+    setActiveList(filtered);
+  }, [selectedFileType, selectedDirectory, checkFiles]);
 
   function toggleOpen() {
     openHandler();
@@ -163,10 +170,10 @@ const MenuComponent = ({
               </div>
             </div>
             <div className={styles.saveBodyMiddle}>
-              {desktopPermanentItems}
-              {selectedDirectory === 'desktop'
-                ? desktopFilesForMenu
-                : briefCaseFiles}
+              {selectedFileType === 'all' || '.txt'
+                ? desktopPermanentItems
+                : ''}
+              {selectedFileType !== 'all' ? activeList : ''}
             </div>
             <div className={styles.saveBodyBottom}>
               <div className={styles.saveBodyBottomFields}>
@@ -270,17 +277,20 @@ const MenuComponent = ({
                             {jpeg}
                           </div>
                         )}
-                        {!isSave && selectedFileType !== 'all' && (
-                          <div
-                            className={styles.selectedFileType}
-                            onClick={() => {
-                              setSelectedFileType('all');
-                              setSelectFileType(false);
-                            }}
-                          >
-                            {all}
-                          </div>
-                        )}
+                        {!isSave &&
+                          !notepad &&
+                          !paint &&
+                          selectedFileType !== 'all' && (
+                            <div
+                              className={styles.selectedFileType}
+                              onClick={() => {
+                                setSelectedFileType('all');
+                                setSelectFileType(false);
+                              }}
+                            >
+                              {all}
+                            </div>
+                          )}
                       </div>
                     )}
                   </div>

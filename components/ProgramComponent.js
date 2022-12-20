@@ -48,6 +48,8 @@ const ProgramComponent = ({
   briefCaseFiles,
   desktopFilesForMenu,
   desktopPermanentItems,
+  checkFiles,
+  deleteHandler,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -191,6 +193,7 @@ const ProgramComponent = ({
               briefCaseFiles={briefCaseFiles}
               desktopFilesForMenu={desktopFilesForMenu}
               desktopPermanentItems={desktopPermanentItems}
+              checkFiles={checkFiles}
             />
           )}
           {saveMenu && (
@@ -208,6 +211,7 @@ const ProgramComponent = ({
               briefCaseFiles={briefCaseFiles}
               desktopFilesForMenu={desktopFilesForMenu}
               desktopPermanentItems={desktopPermanentItems}
+              checkFiles={checkFiles}
             />
           )}
           {saveQuestion && (
@@ -316,7 +320,13 @@ const ProgramComponent = ({
                     </div>
                   </li>
                 )}
-                <li className={styles.menuItem}>
+                <li
+                  className={styles.menuItem}
+                  onClick={() => {
+                    toggleMenuClickOutside();
+                    deleteHandler();
+                  }}
+                >
                   <div className={styles.menuItemCluster}>
                     <span className={styles.underline}>D</span>elete
                   </div>
