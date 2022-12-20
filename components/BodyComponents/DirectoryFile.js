@@ -44,6 +44,7 @@ const DirectoryFile = ({
               filename: name,
               filetype: type,
               directory: directory,
+              data: data,
             })
           : '';
         setIsDirectory(true);

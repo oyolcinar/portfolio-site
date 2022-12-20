@@ -50,6 +50,9 @@ const ProgramComponent = ({
   desktopPermanentItems,
   checkFiles,
   deleteHandler,
+  selectedFile,
+  setSelectedFile,
+  setBrowserData,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -83,6 +86,7 @@ const ProgramComponent = ({
   }
 
   function closeHandler() {
+    name === 'explorer' ? setBrowserData('https://www.wikipedia.org/') : '';
     setText ? setText('') : '';
     setProgramFileTitle ? setProgramFileTitle('') : '';
     setSaveQuestion(false);
@@ -222,6 +226,8 @@ const ProgramComponent = ({
               titleData={titleData}
               title={title}
               setSaveMenu={setSaveMenu}
+              selectedFile={selectedFile}
+              saveHandler={saveHandler}
             />
           )}
           <div className={styles.headerLeft}>
@@ -312,7 +318,7 @@ const ProgramComponent = ({
                     className={styles.menuItem}
                     onClick={() => {
                       toggleMenuClickOutside();
-                      setSaveMenu(true);
+                      !titleData ? setSaveMenu(true) : '';
                     }}
                   >
                     <div className={styles.menuItemCluster}>
@@ -324,7 +330,9 @@ const ProgramComponent = ({
                   className={styles.menuItem}
                   onClick={() => {
                     toggleMenuClickOutside();
-                    deleteHandler();
+                    name === 'briefcase' || openMenu || saveMenu
+                      ? deleteHandler()
+                      : '';
                   }}
                 >
                   <div className={styles.menuItemCluster}>

@@ -17,6 +17,7 @@ const DesktopItem = ({
   setData,
   directory,
   setSelectedFile,
+  program,
 }) => {
   const [selected, setSelected] = useState(false);
   const desktopItemRef = useRef(null);
@@ -43,6 +44,8 @@ const DesktopItem = ({
                 filename: name,
                 filetype: type,
                 directory: directory,
+                data: data,
+                program: program,
               })
             : '';
           setTitle ? setTitle(name) : '';

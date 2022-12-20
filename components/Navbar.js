@@ -85,10 +85,12 @@ const Navbar = () => {
   const [paintTitle, setPaintTitle] = useState('');
   const [saveNameSameNotepad, setSaveNameSameNotepad] = useState(false);
   const [saveNameSamePaint, setSaveNameSamePaint] = useState(false);
+  const [browserData, setBrowserData] = useState('https://www.wikipedia.org/');
   const [selectedFile, setSelectedFile] = useState({
     filename: '',
     filetype: '',
     directory: '',
+    data: '',
   });
 
   const [minimizeModem, setMinimizeModem] = useState(false);
@@ -210,6 +212,8 @@ const Navbar = () => {
     setDraggableDisabled(false);
   };
 
+  console.log(selectedFile);
+
   function saveHandler(filename, filetype, data, directory, program) {
     if ((filetype === '.txt' && filename === 'CV') || filename === 'Works') {
       setSaveNameSameNotepad(true);
@@ -240,9 +244,10 @@ const Navbar = () => {
       } else {
         if (program === 'notepad') {
           setSaveNameSameNotepad(true);
-          return;
+          overwriteHandler(filename, filetype, directory, data);
         } else {
           setSaveNameSamePaint(true);
+          overwriteHandler(filename, filetype, directory, data);
           return;
         }
       }
@@ -264,6 +269,19 @@ const Navbar = () => {
       });
       setItems(newItems);
     }
+  }
+
+  function overwriteHandler(filename, filetype, directory, data) {
+    const newItems = items.map((item) => {
+      if (
+        item.name === filename &&
+        item.filetype === filetype &&
+        item.directory === directory
+      ) {
+        return { ...item, data: data };
+      }
+    });
+    setItems(newItems);
   }
 
   function briefcaseHandler() {
@@ -402,6 +420,8 @@ const Navbar = () => {
       setTitle={setNotepadTitle}
       setData={setNotepadText}
       type={'.txt'}
+      program={'notepad'}
+      data={''}
     />,
     <DirectoryFile
       name={'Works.txt'}
@@ -414,6 +434,8 @@ const Navbar = () => {
       setTitle={setNotepadTitle}
       setData={setNotepadText}
       type={'.txt'}
+      program={'notepad'}
+      data={''}
     />,
   ];
 
@@ -439,6 +461,7 @@ const Navbar = () => {
             directory={item.directory}
             setSelectedBriefcaseFile={setSelectedBriefcaseFile}
             setSelectedFile={setSelectedFile}
+            program={item.program}
           />
         );
       }
@@ -467,6 +490,7 @@ const Navbar = () => {
           setSelectedBriefcaseFile={setSelectedBriefcaseFile}
           directory={item.directory}
           setSelectedFile={setSelectedFile}
+          program={item.program}
         />
       );
     }
@@ -490,6 +514,7 @@ const Navbar = () => {
         setData={item.program === 'notepad' ? setNotepadText : ''}
         directory={item.directory}
         setSelectedFile={setSelectedFile}
+        program={item.program}
       />
     );
   });
@@ -514,6 +539,7 @@ const Navbar = () => {
           key={item.name}
           directory={item.directory}
           setSelectedFile={setSelectedFile}
+          program={item.program}
         />
       );
     }
@@ -876,6 +902,8 @@ const Navbar = () => {
           desktopPermanentItems={desktopPermanentItems}
           checkFiles={checkFiles}
           deleteHandler={deleteHandler}
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -916,6 +944,8 @@ const Navbar = () => {
           desktopFilesForMenu={desktopFilesForMenu}
           checkFiles={checkFiles}
           deleteHandler={deleteHandler}
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -945,8 +975,12 @@ const Navbar = () => {
           saveable={false}
           opennable={false}
           help={false}
+          setBrowserData={setBrowserData}
         >
-          <ExplorerBrowser />
+          <ExplorerBrowser
+            browserData={browserData}
+            setBrowserData={setBrowserData}
+          />
         </ProgramComponent>
       )}
       {isBriefcase && !minimizeBriefcase && (
@@ -979,6 +1013,7 @@ const Navbar = () => {
           selectedBriefcaseFile={selectedBriefcaseFile}
           desktopPermanentItems={desktopPermanentItems}
           deleteHandler={deleteHandler}
+          setSelectedFile={setSelectedFile}
         >
           <BriefcaseComponent
             handleDoubleClick={handleDoubleClick}

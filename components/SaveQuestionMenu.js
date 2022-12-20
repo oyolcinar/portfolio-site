@@ -12,6 +12,8 @@ const SaveQuestionMenu = ({
   titleData,
   title,
   setSaveMenu,
+  selectedFile,
+  saveHandler,
 }) => {
   const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
 
@@ -76,8 +78,15 @@ const SaveQuestionMenu = ({
           <button
             className={`${styles.button} ${styles.sdButton} `}
             onClick={() => {
+              titleData
+                ? saveHandler(
+                    selectedFile.name,
+                    selectedFile.type,
+                    selectedFile.data,
+                    selectedFile.directory,
+                  )
+                : setSaveMenu(true);
               setSaveQuestion(false);
-              setSaveMenu(true);
             }}
           >
             <span className={styles.underline}>Y</span>es

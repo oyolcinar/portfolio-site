@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 import styles from '../../styles/Explorer.module.css';
 import outStyles from '../../styles/Outlook.module.css';
@@ -7,14 +8,21 @@ import npStyles from '../../styles/Notepad.module.css';
 import backArrow from '../../public/icons/backArrow.png';
 import favorites from '../../public/icons/favoritesEXP.png';
 import forwardArrow from '../../public/icons/forwardArrow.png';
-import history from '../../public/icons/history.png';
+import historyIcon from '../../public/icons/history.png';
 import home from '../../public/icons/home.png';
 import refresh from '../../public/icons/refresh.png';
 import search from '../../public/icons/search.png';
 import stop from '../../public/icons/stopEXP.png';
 import goArrow from '../../public/icons/goArrow.png';
 
-const ExplorerBrowser = () => {
+const ExplorerBrowser = ({ browserData, setBrowserData }) => {
+  const [history, setHistory] = useState([]);
+
+  function toggleBrowserData(e) {
+    setBrowserData(e.target.value);
+  }
+
+  function toggleGo() {}
   return (
     <div>
       <div className={styles.seperator}></div>
@@ -50,7 +58,7 @@ const ExplorerBrowser = () => {
           <div>Favorites</div>
         </div>
         <div className={styles.icon}>
-          <Image src={history} alt='' height={24} />
+          <Image src={historyIcon} alt='' height={24} />
           <div>History</div>
         </div>
         <div className={styles.verticalSeperator}></div>
@@ -64,6 +72,10 @@ const ExplorerBrowser = () => {
           className={`${outStyles.input} ${outStyles.lastInput}`}
           type='text'
           name='browser'
+          value={browserData}
+          onChange={(e) => {
+            toggleBrowserData(e);
+          }}
         />
         <div className={styles.goArrow}>
           <div className={styles.verticalSeperator}></div>
