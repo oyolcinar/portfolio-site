@@ -16,13 +16,15 @@ import stop from '../../public/icons/stopEXP.png';
 import goArrow from '../../public/icons/goArrow.png';
 
 const ExplorerBrowser = ({ browserData, setBrowserData }) => {
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(['https://www.wikipedia.org/']);
 
   function toggleBrowserData(e) {
     setBrowserData(e.target.value);
   }
 
-  function toggleGo() {}
+  function toggleGo() {
+    setHistory((prevState) => [...prevState, browserData]);
+  }
   return (
     <div>
       <div className={styles.seperator}></div>
@@ -77,7 +79,12 @@ const ExplorerBrowser = ({ browserData, setBrowserData }) => {
             toggleBrowserData(e);
           }}
         />
-        <div className={styles.goArrow}>
+        <div
+          className={styles.goArrow}
+          onClick={() => {
+            toggleGo();
+          }}
+        >
           <div className={styles.verticalSeperator}></div>
           <div className={styles.go}>
             <Image src={goArrow} height={24} alt='' />
@@ -89,7 +96,7 @@ const ExplorerBrowser = ({ browserData, setBrowserData }) => {
         <div className={npStyles.textarea}>
           <iframe
             className={npStyles.input}
-            src='https://www.wikipedia.org/'
+            src={history[history.length - 1]}
           ></iframe>
         </div>
       </form>
