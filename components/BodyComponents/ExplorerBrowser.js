@@ -17,6 +17,21 @@ import goArrow from '../../public/icons/goArrow.png';
 
 const ExplorerBrowser = ({ browserData, setBrowserData }) => {
   const [history, setHistory] = useState(['https://www.wikipedia.org/']);
+  const [currentHistoryIndex, setCurrentHistoryIndex] = useState(1);
+
+  function toggleBack() {
+    if (currentHistoryIndex < history.length) {
+      setCurrentHistoryIndex((prevState) => prevState + 1);
+      setBrowserData(history[history.length - (currentHistoryIndex + 1)]);
+    }
+  }
+
+  function toggleForward() {
+    if (currentHistoryIndex > 0) {
+      setCurrentHistoryIndex((prevState) => prevState - 1);
+      setBrowserData(history[history.length - (currentHistoryIndex - 1)]);
+    }
+  }
 
   function toggleBrowserData(e) {
     setBrowserData(e.target.value);
@@ -25,15 +40,31 @@ const ExplorerBrowser = ({ browserData, setBrowserData }) => {
   function toggleGo() {
     setHistory((prevState) => [...prevState, browserData]);
   }
+
+  function toggleHome() {
+    setCurrentHistoryIndex(history.length);
+    setBrowserData(history[0]);
+  }
+
   return (
     <div>
       <div className={styles.seperator}></div>
       <div className={styles.iconCluster}>
-        <div className={styles.icon}>
+        <div
+          className={styles.icon}
+          onClick={() => {
+            toggleBack();
+          }}
+        >
           <Image src={backArrow} alt='' height={24} />
           <div>Back</div>
         </div>
-        <div className={styles.icon}>
+        <div
+          className={styles.icon}
+          onClick={() => {
+            toggleForward();
+          }}
+        >
           <Image src={forwardArrow} alt='' height={24} />
           <div>Forward</div>
         </div>
@@ -46,7 +77,12 @@ const ExplorerBrowser = ({ browserData, setBrowserData }) => {
           <Image src={refresh} alt='' height={24} />
           <div>Refresh</div>
         </div>
-        <div className={styles.icon}>
+        <div
+          className={styles.icon}
+          onClick={() => {
+            toggleHome();
+          }}
+        >
           <Image src={home} alt='' height={24} />
           <div>Home</div>
         </div>
@@ -96,7 +132,7 @@ const ExplorerBrowser = ({ browserData, setBrowserData }) => {
         <div className={npStyles.textarea}>
           <iframe
             className={npStyles.input}
-            src={history[history.length - 1]}
+            src={history[history.length - currentHistoryIndex]}
           ></iframe>
         </div>
       </form>
