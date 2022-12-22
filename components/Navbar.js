@@ -16,6 +16,7 @@ import BriefcaseComponent from './BodyComponents/BriefcaseComponent';
 import HelpComponent from './BodyComponents/HelpComponent';
 import DesktopItem from './DesktopItem';
 import DirectoryFile from './BodyComponents/DirectoryFile';
+import StartDocumentFile from './StartDocumentFile';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -212,10 +213,8 @@ const Navbar = () => {
     setDraggableDisabled(false);
   };
 
-  console.log(selectedFile);
-
   function saveHandler(filename, filetype, data, directory, program) {
-    if ((filetype === '.txt' && filename === 'CV') || filename === 'Works') {
+    if (filetype === '.txt' && filename === 'Works') {
       setSaveNameSameNotepad(true);
       return;
     } else {
@@ -248,7 +247,6 @@ const Navbar = () => {
         } else {
           setSaveNameSamePaint(true);
           overwriteHandler(filename, filetype, directory, data);
-          return;
         }
       }
     }
@@ -277,9 +275,8 @@ const Navbar = () => {
         item.name === filename &&
         item.filetype === filetype &&
         item.directory === directory
-      ) {
+      )
         return { ...item, data: data };
-      }
     });
     setItems(newItems);
   }
@@ -410,23 +407,25 @@ const Navbar = () => {
 
   const desktopPermanentItems = [
     <DirectoryFile
-      name={'CV.txt'}
+      name={'Works.txt'}
       image={notepadFileIcon}
       handleDoubleClick={handleDoubleClick}
       handlerFunction={notepadHandler}
       setIsDirectory={setIsDirectory}
       setSelectedBriefcaseFile={setSelectedBriefcaseFile}
-      key={'cvDesktop'}
+      key={'worksDesktop'}
       setTitle={setNotepadTitle}
       setData={setNotepadText}
       type={'.txt'}
       program={'notepad'}
       data={''}
     />,
-    <DirectoryFile
+  ];
+
+  const documentPermanentItems = [
+    <StartDocumentFile
       name={'Works.txt'}
-      image={notepadFileIcon}
-      handleDoubleClick={handleDoubleClick}
+      image={notepadFile}
       handlerFunction={notepadHandler}
       setIsDirectory={setIsDirectory}
       setSelectedBriefcaseFile={setSelectedBriefcaseFile}
@@ -479,6 +478,32 @@ const Navbar = () => {
           name={item.name + item.type}
           image={item.program === 'notepad' ? notepadFile : paintIcon}
           handleDoubleClick={handleDoubleClick}
+          handlerFunction={
+            item.program === 'notepad' ? notepadHandler : paintHandler
+          }
+          setIsDirectory={setIsDirectory}
+          setTitle={
+            item.program === 'notepad' ? setNotepadTitle : setPaintTitle
+          }
+          setData={item.program === 'notepad' ? setNotepadText : ''}
+          setSelectedBriefcaseFile={setSelectedBriefcaseFile}
+          directory={item.directory}
+          setSelectedFile={setSelectedFile}
+          program={item.program}
+        />
+      );
+    }
+  });
+
+  const documentsFiles = items.map((item) => {
+    if (item.directory === 'briefcase') {
+      return (
+        <StartDocumentFile
+          type={item.type}
+          data={item.data}
+          key={item.name}
+          name={item.name + item.type}
+          image={item.program === 'notepad' ? notepadFile : paintIcon}
           handlerFunction={
             item.program === 'notepad' ? notepadHandler : paintHandler
           }
@@ -748,15 +773,6 @@ const Navbar = () => {
       />
       <DesktopItem
         shortcut={shortcut}
-        name={'CV.txt'}
-        image={notepadFile}
-        handleDoubleClick={handleDoubleClick}
-        handlerFunction={notepadHandler}
-        setTitle={setNotepadTitle}
-        setData={notepadText}
-      />
-      <DesktopItem
-        shortcut={shortcut}
         name={'Works.txt'}
         image={notepadFile}
         handleDoubleClick={handleDoubleClick}
@@ -851,6 +867,8 @@ const Navbar = () => {
           outlookHandler={outlookHandler}
           minesweeperHandler={minesweeperHandler}
           helpHandler={helpHandler}
+          documentsFiles={documentsFiles}
+          documentPermanentItems={documentPermanentItems}
         />
       )}
       {isShutdown && (

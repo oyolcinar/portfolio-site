@@ -29,6 +29,8 @@ const Start = ({
   outlookHandler,
   minesweeperHandler,
   helpHandler,
+  documentsFiles,
+  documentPermanentItems,
 }) => {
   const startRef = useRef(null);
 
@@ -144,7 +146,8 @@ const Start = ({
         <StartDocuments
           setIsStartOpen={setIsStartOpen}
           setIsDocumentsOpen={setIsDocumentsOpen}
-          orderArrayHandler={orderArrayHandler}
+          documentsFiles={documentsFiles}
+          documentPermanentItems={documentPermanentItems}
         />
       )}
       {isProgramsOpen && (

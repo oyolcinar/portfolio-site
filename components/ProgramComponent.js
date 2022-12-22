@@ -228,6 +228,8 @@ const ProgramComponent = ({
               setSaveMenu={setSaveMenu}
               selectedFile={selectedFile}
               saveHandler={saveHandler}
+              notepad={name === 'notepad' ? true : false}
+              paint={name === 'paint' ? true : false}
             />
           )}
           <div className={styles.headerLeft}>

@@ -14,6 +14,8 @@ const SaveQuestionMenu = ({
   setSaveMenu,
   selectedFile,
   saveHandler,
+  notepad,
+  paint,
 }) => {
   const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
 
@@ -84,6 +86,7 @@ const SaveQuestionMenu = ({
                     selectedFile.type,
                     selectedFile.data,
                     selectedFile.directory,
+                    notepad ? 'notepad' : 'paint',
                   )
                 : setSaveMenu(true);
               setSaveQuestion(false);

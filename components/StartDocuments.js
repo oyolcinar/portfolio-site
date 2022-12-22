@@ -1,13 +1,12 @@
-import notepadImage from '../public/icons/notepadFile.png';
-import styles from '../styles/Start.module.css';
-import Image from 'next/image';
 import { useRef } from 'react';
 import { useClickOutsideHandler } from '../utils/utils';
+import styles from '../styles/Start.module.css';
 
 const StartDocuments = ({
   setIsStartOpen,
   setIsDocumentsOpen,
-  orderArrayHandler,
+  documentsFiles,
+  documentPermanentItems,
 }) => {
   const documentsRef = useRef(null);
 
@@ -26,18 +25,8 @@ const StartDocuments = ({
       ref={documentsRef}
     >
       <ul className={styles.list}>
-        <li className={styles.item}>
-          <div className={styles.cluster}>
-            <Image src={notepadImage} alt='' height={30} />
-            <div>Works.txt</div>
-          </div>
-        </li>
-        <li className={styles.item}>
-          <div className={styles.cluster}>
-            <Image src={notepadImage} alt='' height={30} />
-            <div>CV.txt</div>
-          </div>
-        </li>
+        {documentPermanentItems}
+        {documentsFiles}
       </ul>
     </div>
   );
