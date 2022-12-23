@@ -29,6 +29,8 @@ const MenuComponent = ({
   desktopFilesForMenu,
   desktopPermanentItems,
   checkFiles,
+  fileId,
+  overwriteHandler,
 }) => {
   const [doubleClickSave, setDoubleClickSave] = useState(false);
   const [directory, setDirectory] = useState(false);

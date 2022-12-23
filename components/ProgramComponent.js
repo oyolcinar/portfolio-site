@@ -41,7 +41,6 @@ const ProgramComponent = ({
   help,
   isDirectory,
   setIsDirectory,
-  selectedBriefcaseFile,
   notepadText,
   saveHandler,
   setProgramFileTitle,
@@ -50,9 +49,10 @@ const ProgramComponent = ({
   desktopPermanentItems,
   checkFiles,
   deleteHandler,
-  selectedFile,
-  setSelectedFile,
+  fileId,
+  setFileId,
   setBrowserData,
+  overwriteHandler,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -226,10 +226,11 @@ const ProgramComponent = ({
               titleData={titleData}
               title={title}
               setSaveMenu={setSaveMenu}
-              selectedFile={selectedFile}
+              fileId={fileId}
               saveHandler={saveHandler}
               notepad={name === 'notepad' ? true : false}
               paint={name === 'paint' ? true : false}
+              overwriteHandler={overwriteHandler}
             />
           )}
           <div className={styles.headerLeft}>
@@ -320,7 +321,7 @@ const ProgramComponent = ({
                     className={styles.menuItem}
                     onClick={() => {
                       toggleMenuClickOutside();
-                      !titleData ? setSaveMenu(true) : '';
+                      !titleData ? setSaveMenu(true) : overwriteHandler(fileId);
                     }}
                   >
                     <div className={styles.menuItemCluster}>
@@ -333,7 +334,7 @@ const ProgramComponent = ({
                   onClick={() => {
                     toggleMenuClickOutside();
                     name === 'briefcase' || openMenu || saveMenu
-                      ? deleteHandler()
+                      ? deleteHandler(fileId)
                       : '';
                   }}
                 >

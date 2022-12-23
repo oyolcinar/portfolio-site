@@ -10,25 +10,17 @@ const StartDocumentFile = ({
   setTitle,
   setData,
   directory,
-  setSelectedFile,
-  program,
+  setFileId,
+  id,
 }) => {
   return (
     <li
       className={styles.item}
       onClick={() => {
-        directory && name && type
-          ? setSelectedFile({
-              filename: name,
-              filetype: type,
-              directory: directory,
-              data: data,
-              program: program,
-            })
-          : '';
+        directory && name && type ? setFileId(id) : '';
         setTitle ? setTitle(name) : '';
         setData ? setData(data) : '';
-        handlerFunction();
+        handlerFunction(id);
       }}
     >
       <div className={styles.cluster}>

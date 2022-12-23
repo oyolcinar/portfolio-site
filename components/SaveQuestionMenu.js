@@ -12,10 +12,11 @@ const SaveQuestionMenu = ({
   titleData,
   title,
   setSaveMenu,
-  selectedFile,
+  fileId,
   saveHandler,
   notepad,
   paint,
+  overwriteHandler,
 }) => {
   const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
 
@@ -80,15 +81,7 @@ const SaveQuestionMenu = ({
           <button
             className={`${styles.button} ${styles.sdButton} `}
             onClick={() => {
-              titleData
-                ? saveHandler(
-                    selectedFile.name,
-                    selectedFile.type,
-                    selectedFile.data,
-                    selectedFile.directory,
-                    notepad ? 'notepad' : 'paint',
-                  )
-                : setSaveMenu(true);
+              titleData ? overwriteHandler(fileId) : setSaveMenu(true);
               setSaveQuestion(false);
             }}
           >

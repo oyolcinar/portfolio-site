@@ -15,7 +15,8 @@ const DirectoryFile = ({
   setData,
   setTitle,
   directory,
-  setSelectedFile,
+  setFileId,
+  id,
 }) => {
   const [selected, setSelected] = useState(false);
   const directoryFileRef = useRef(null);
@@ -39,20 +40,12 @@ const DirectoryFile = ({
       className={styles.container}
       ref={directoryFileRef}
       onClick={(e) => {
-        directory && name && type
-          ? setSelectedFile({
-              filename: name,
-              filetype: type,
-              directory: directory,
-              data: data,
-            })
-          : '';
+        directory && name && type ? setFileId(id) : '';
         setIsDirectory(true);
-        setSelectedBriefcaseFile(name);
         setSelected(true);
         setTitle(name);
         setData(data);
-        handleDoubleClick(e, handlerFunction);
+        handleDoubleClick(e, handlerFunction, id);
       }}
     >
       <Image
