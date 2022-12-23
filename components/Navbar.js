@@ -401,6 +401,20 @@ const Navbar = () => {
 
   const desktopPermanentItems = [
     <DirectoryFile
+      name={'About.txt'}
+      image={notepadFileIcon}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={notepadHandler}
+      setIsDirectory={setIsDirectory}
+      key={'aboutDesktop'}
+      setTitle={setNotepadTitle}
+      setData={setNotepadText}
+      type={'.txt'}
+      program={'notepad'}
+      data={''}
+      id={'aboutDesktop'}
+    />,
+    <DirectoryFile
       name={'Works.txt'}
       image={notepadFileIcon}
       handleDoubleClick={handleDoubleClick}
@@ -417,6 +431,20 @@ const Navbar = () => {
   ];
 
   const documentPermanentItems = [
+    <StartDocumentFile
+      name={'About.txt'}
+      image={notepadFile}
+      handlerFunction={notepadHandler}
+      setIsDirectory={setIsDirectory}
+      setFileId={setFileId}
+      key={'aboutDesktop'}
+      setTitle={setNotepadTitle}
+      setData={setNotepadText}
+      type={'.txt'}
+      program={'notepad'}
+      data={''}
+      id={'aboutDesktop'}
+    />,
     <StartDocumentFile
       name={'Works.txt'}
       image={notepadFile}
@@ -765,6 +793,17 @@ const Navbar = () => {
         image={outlook}
         handleDoubleClick={handleDoubleClick}
         handlerFunction={outlookHandler}
+      />
+      <DesktopItem
+        shortcut={shortcut}
+        name={'About.txt'}
+        image={notepadFile}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={notepadHandler}
+        setTitle={setNotepadTitle}
+        setData={notepadText}
+        key={'aboutDesktop'}
+        id={'aboutDesktop'}
       />
       <DesktopItem
         shortcut={shortcut}
