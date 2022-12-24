@@ -9,7 +9,6 @@ const DirectoryFile = ({
   handlerFunction,
   handleDoubleClick,
   setIsDirectory,
-  setSelectedBriefcaseFile,
   type,
   data,
   setData,
@@ -40,12 +39,10 @@ const DirectoryFile = ({
       className={styles.container}
       ref={directoryFileRef}
       onClick={(e) => {
-        directory && name && type ? setFileId(id) : '';
         setIsDirectory(true);
+        directory && name && type ? setFileId(id) : '';
         setSelected(true);
-        setTitle(name);
-        setData(data);
-        handleDoubleClick(e, handlerFunction, id);
+        handleDoubleClick(e, handlerFunction, id, data, name);
       }}
     >
       <Image

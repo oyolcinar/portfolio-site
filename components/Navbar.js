@@ -41,6 +41,7 @@ import outlook from '../public/icons/outlook.png';
 import notepadFile from '../public/icons/notepadFile.png';
 import helpIcon from '../public/icons/helpIcon.png';
 import notepadFileIcon from '../public/icons/notepadFileIcon.png';
+import paintFileIcon from '../public/icons/paintIcon.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -71,7 +72,7 @@ const Navbar = () => {
   const [isResizing, setIsResizing] = useState(false);
 
   const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
-  const [paintSize, setPaintSize] = useState({ w: 600, h: 800 });
+  const [paintSize, setPaintSize] = useState({ w: 800, h: 600 });
   const [explorerSize, setExplorerSize] = useState({ w: 800, h: 600 });
   const [briefcaseSize, setBriefcaseSize] = useState({ w: 800, h: 600 });
   const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
@@ -273,6 +274,22 @@ const Navbar = () => {
     setItems([...newItems]);
   }
 
+  function openHandler() {
+    const openFile = items.find((item) => {
+      if (item.id === fileId) {
+        return item;
+      }
+    });
+
+    const file = openFile[0];
+
+    if (file.program === 'notepad') {
+      notepadHandler(file.id, file.data, file.title);
+    } else {
+      paintHandler(file.id);
+    }
+  }
+
   function briefcaseHandler() {
     !isBriefcase ? orderArrayHandler('briefcase') : '';
     setActive('briefcase');
@@ -300,8 +317,10 @@ const Navbar = () => {
     setMinimizeOutlook(false);
   }
 
-  function notepadHandler(id) {
+  function notepadHandler(id, data, title) {
     !isNotepad ? orderArrayHandler('notepad') : '';
+    data ? setNotepadText(data) : '';
+    title ? setNotepadTitle(title) : '';
     setFileId(id);
     setActive('notepad');
     setIsProgramsOpen(false);
@@ -338,9 +357,9 @@ const Navbar = () => {
     setMinimizeHelp(false);
   }
 
-  function handleDoubleClick(e, func, id) {
+  function handleDoubleClick(e, func, id, data, title) {
     if (e.detail === 2) {
-      func(id);
+      func(id, data, title);
     }
   }
 
@@ -471,7 +490,7 @@ const Navbar = () => {
             key={item.id}
             id={item.id}
             name={item.name + item.type}
-            image={item.program === 'notepad' ? notepadFile : paintIcon}
+            image={item.program === 'notepad' ? notepadFileIcon : paintFileIcon}
             handleDoubleClick={handleDoubleClick}
             handlerFunction={
               item.program === 'notepad' ? notepadHandler : paintHandler
@@ -499,7 +518,7 @@ const Navbar = () => {
           key={item.id}
           id={item.id}
           name={item.name + item.type}
-          image={item.program === 'notepad' ? notepadFile : paintIcon}
+          image={item.program === 'notepad' ? notepadFileIcon : paintIcon}
           handleDoubleClick={handleDoubleClick}
           handlerFunction={
             item.program === 'notepad' ? notepadHandler : paintHandler
@@ -958,6 +977,7 @@ const Navbar = () => {
           deleteHandler={deleteHandler}
           setFileId={setFileId}
           overwriteHandler={overwriteHandler}
+          openHandler={openHandler}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -984,7 +1004,7 @@ const Navbar = () => {
           title={'MS Paint'}
           titled={true}
           programIcon={paintIcon}
-          initialSize={{ w: 600, h: 800 }}
+          initialSize={{ w: 800, h: 600 }}
           saveable={true}
           setItems={setItems}
           opennable={true}
@@ -1000,6 +1020,7 @@ const Navbar = () => {
           deleteHandler={deleteHandler}
           setFileId={setFileId}
           overwriteHandler={overwriteHandler}
+          openHandler={openHandler}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -1067,6 +1088,7 @@ const Navbar = () => {
           desktopPermanentItems={desktopPermanentItems}
           deleteHandler={deleteHandler}
           setFileId={setFileId}
+          openHandler={openHandler}
         >
           <BriefcaseComponent
             briefCaseFiles={briefCaseFiles}

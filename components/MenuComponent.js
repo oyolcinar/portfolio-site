@@ -31,6 +31,7 @@ const MenuComponent = ({
   checkFiles,
   fileId,
   overwriteHandler,
+  openHandler,
 }) => {
   const [doubleClickSave, setDoubleClickSave] = useState(false);
   const [directory, setDirectory] = useState(false);
@@ -57,7 +58,6 @@ const MenuComponent = ({
 
   function toggleOpen() {
     openHandler();
-    setTitleData();
     setOpenMenu(false);
   }
 

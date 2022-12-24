@@ -53,6 +53,7 @@ const ProgramComponent = ({
   setFileId,
   setBrowserData,
   overwriteHandler,
+  openHandler,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -198,6 +199,7 @@ const ProgramComponent = ({
               desktopFilesForMenu={desktopFilesForMenu}
               desktopPermanentItems={desktopPermanentItems}
               checkFiles={checkFiles}
+              openHandler={openHandler}
             />
           )}
           {saveMenu && (
@@ -321,7 +323,7 @@ const ProgramComponent = ({
                     className={styles.menuItem}
                     onClick={() => {
                       toggleMenuClickOutside();
-                      !titleData ? setSaveMenu(true) : overwriteHandler(fileId);
+                      !titleData ? setSaveMenu(true) : overwriteHandler();
                     }}
                   >
                     <div className={styles.menuItemCluster}>
