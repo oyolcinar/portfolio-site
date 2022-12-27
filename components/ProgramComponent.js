@@ -343,11 +343,15 @@ const ProgramComponent = ({
                     className={styles.menuItem}
                     onClick={() => {
                       toggleMenuClickOutside();
-                      name !== 'explorer' ? setIsNewFile(true) : '';
-                      !isSaved && name !== 'explorer'
+                      name === 'notepad' || name === 'paint'
+                        ? setIsNewFile(true)
+                        : '';
+                      !isSaved && (name === 'notepad' || name === 'paint')
                         ? setSaveQuestion(true)
                         : newFileHandler();
-                      name === 'explorer' ? newFileHandler() : '';
+                      name === 'explorer' || name === 'outlook'
+                        ? newFileHandler()
+                        : '';
                     }}
                   >
                     <div className={styles.menuItemCluster}>

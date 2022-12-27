@@ -302,6 +302,9 @@ const Navbar = () => {
     if (active === 'explorer') {
       setBrowserData('https://www.wikipedia.org/');
     }
+    if (active === 'outlook') {
+      setSubject('');
+    }
   }
 
   function briefcaseHandler() {
@@ -1143,6 +1146,7 @@ const Navbar = () => {
           saveable={false}
           opennable={false}
           help={false}
+          newFileHandler={newFileHandler}
         >
           <OutlookComponent subject={subject} setSubject={setSubject} />
         </ProgramComponent>
