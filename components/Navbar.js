@@ -220,6 +220,7 @@ const Navbar = () => {
           item.type === filetype &&
           item.directory === directory
         ) {
+          setFileId(item.id);
           return item;
         }
       });
@@ -236,6 +237,8 @@ const Navbar = () => {
         program === 'notepad'
           ? setSaveNameSameNotepad(false)
           : setSaveNameSamePaint(false);
+        setFileId(newFile.id);
+
         setItems([...items, newFile]);
       } else {
         if (program === 'notepad') {
@@ -267,8 +270,6 @@ const Navbar = () => {
           ...item,
           data: notepadText,
         };
-      } else {
-        item;
       }
     });
     setItems([...newItems]);
@@ -281,12 +282,25 @@ const Navbar = () => {
       }
     });
 
-    const file = openFile[0];
-
-    if (file.program === 'notepad') {
-      notepadHandler(file.id, file.data, file.title);
+    if (openFile.program === 'notepad') {
+      setNotepadTitle(openFile.name);
+      notepadHandler(openFile.id, openFile.data, openFile.title);
     } else {
-      paintHandler(file.id);
+      setPaintTitle(openFile.name);
+      paintHandler(openFile.id);
+    }
+  }
+
+  function newFileHandler() {
+    if (active === 'notepad') {
+      setNotepadTitle('');
+      setNotepadText('');
+    }
+    if (active === 'paint') {
+      setPaintTitle('');
+    }
+    if (active === 'explorer') {
+      setBrowserData('https://www.wikipedia.org/');
     }
   }
 
@@ -502,6 +516,7 @@ const Navbar = () => {
             setData={item.program === 'notepad' ? setNotepadText : ''}
             directory={item.directory}
             program={item.program}
+            setFileId={setFileId}
           />
         );
       }
@@ -978,6 +993,9 @@ const Navbar = () => {
           setFileId={setFileId}
           overwriteHandler={overwriteHandler}
           openHandler={openHandler}
+          saveNameSameNotepad={saveNameSameNotepad}
+          setSaveNameSameNotepad={setSaveNameSameNotepad}
+          newFileHandler={newFileHandler}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -1021,6 +1039,7 @@ const Navbar = () => {
           setFileId={setFileId}
           overwriteHandler={overwriteHandler}
           openHandler={openHandler}
+          newFileHandler={newFileHandler}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -1051,6 +1070,7 @@ const Navbar = () => {
           opennable={false}
           help={false}
           setBrowserData={setBrowserData}
+          newFileHandler={newFileHandler}
         >
           <ExplorerBrowser
             browserData={browserData}

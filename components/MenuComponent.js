@@ -32,6 +32,9 @@ const MenuComponent = ({
   fileId,
   overwriteHandler,
   openHandler,
+  isNewFile,
+  setIsNewFile,
+  newFileHandler,
 }) => {
   const [doubleClickSave, setDoubleClickSave] = useState(false);
   const [directory, setDirectory] = useState(false);
@@ -303,6 +306,8 @@ const MenuComponent = ({
                   className={`${styles.button} ${styles.sdButton} `}
                   onClick={() => {
                     isSave ? toggleSave() : toggleOpen();
+                    isSave && isNewFile ? newFileHandler() : '';
+                    setIsNewFile(false);
                   }}
                 >
                   <span className={styles.underline}>{isSave ? 'S' : 'O'}</span>
@@ -312,6 +317,8 @@ const MenuComponent = ({
                   className={`${styles.button} ${styles.sdButton} `}
                   onClick={() => {
                     isSave ? setSaveMenu(false) : setOpenMenu(false);
+                    isSave && isNewFile ? newFileHandler() : '';
+                    setIsNewFile(false);
                   }}
                 >
                   Cancel

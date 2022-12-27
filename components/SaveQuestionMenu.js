@@ -17,6 +17,11 @@ const SaveQuestionMenu = ({
   notepad,
   paint,
   overwriteHandler,
+  saveNameSameNotepad,
+  setSaveNameSameNotepad,
+  isNewFile,
+  setIsNewFile,
+  newFileHandler,
 }) => {
   const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
 
@@ -72,8 +77,11 @@ const SaveQuestionMenu = ({
           </div>
           <div className={styles.bodyRight}>
             <div>
-              Do you want to save changes to &quot;
-              {titleData ? titleData : 'Untitled'}&quot;?
+              {!saveNameSameNotepad
+                ? `Do you want to save changes to '${
+                    titleData ? titleData : 'Untitled'
+                  }'?`
+                : `'${titleData}' already exists. Do you want to overwrite '${titleData}'?`}
             </div>
           </div>
         </div>
@@ -83,6 +91,9 @@ const SaveQuestionMenu = ({
             onClick={() => {
               titleData ? overwriteHandler(fileId) : setSaveMenu(true);
               setSaveQuestion(false);
+              setSaveNameSameNotepad ? setSaveNameSameNotepad(false) : '';
+              isNewFile ? newFileHandler() : '';
+              setIsNewFile(false);
             }}
           >
             <span className={styles.underline}>Y</span>es
@@ -90,7 +101,9 @@ const SaveQuestionMenu = ({
           <button
             className={`${styles.button} ${styles.sdButton} `}
             onClick={() => {
-              setIsSaved(true);
+              isNewFile ? setSaveQuestion(false) : '';
+              isNewFile ? newFileHandler() : setIsSaved(true);
+              setIsNewFile(false);
             }}
           >
             N<span className={styles.underline}>o</span>

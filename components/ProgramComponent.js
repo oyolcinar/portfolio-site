@@ -54,6 +54,9 @@ const ProgramComponent = ({
   setBrowserData,
   overwriteHandler,
   openHandler,
+  saveNameSameNotepad,
+  setSaveNameSameNotepad,
+  newFileHandler,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -63,6 +66,7 @@ const ProgramComponent = ({
   const [isClicked, setIsClicked] = useState(false);
 
   const [isSaved, setIsSaved] = useState(false);
+  const [isNewFile, setIsNewFile] = useState(false);
   const [saveQuestion, setSaveQuestion] = useState(false);
   const [saveMenu, setSaveMenu] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -218,6 +222,9 @@ const ProgramComponent = ({
               desktopFilesForMenu={desktopFilesForMenu}
               desktopPermanentItems={desktopPermanentItems}
               checkFiles={checkFiles}
+              isNewFile={isNewFile}
+              setIsNewFile={setIsNewFile}
+              newFileHandler={newFileHandler}
             />
           )}
           {saveQuestion && (
@@ -233,6 +240,26 @@ const ProgramComponent = ({
               notepad={name === 'notepad' ? true : false}
               paint={name === 'paint' ? true : false}
               overwriteHandler={overwriteHandler}
+              isNewFile={isNewFile}
+              setIsNewFile={setIsNewFile}
+              newFileHandler={newFileHandler}
+            />
+          )}
+          {saveNameSameNotepad && (
+            <SaveQuestionMenu
+              setSaveQuestion={setSaveQuestion}
+              setIsSaved={setIsSaved}
+              toggleClose={toggleClose}
+              titleData={titleData}
+              title={title}
+              setSaveMenu={setSaveMenu}
+              fileId={fileId}
+              saveHandler={saveHandler}
+              notepad={name === 'notepad' ? true : false}
+              paint={name === 'paint' ? true : false}
+              overwriteHandler={overwriteHandler}
+              saveNameSameNotepad={saveNameSameNotepad}
+              setSaveNameSameNotepad={setSaveNameSameNotepad}
             />
           )}
           <div className={styles.headerLeft}>
@@ -302,7 +329,7 @@ const ProgramComponent = ({
                     className={styles.menuItem}
                     onClick={() => {
                       toggleMenuClickOutside();
-                      setOpenMenu(true);
+                      name !== 'briefcase' ? setOpenMenu(true) : openHandler();
                     }}
                   >
                     <div className={styles.menuItemCluster}>
@@ -312,7 +339,17 @@ const ProgramComponent = ({
                 )}
                 {opennable && <li className={styles.seperator}></li>}
                 {name !== 'briefcase' && (
-                  <li className={styles.menuItem}>
+                  <li
+                    className={styles.menuItem}
+                    onClick={() => {
+                      toggleMenuClickOutside();
+                      name !== 'explorer' ? setIsNewFile(true) : '';
+                      !isSaved && name !== 'explorer'
+                        ? setSaveQuestion(true)
+                        : newFileHandler();
+                      name === 'explorer' ? newFileHandler() : '';
+                    }}
+                  >
                     <div className={styles.menuItemCluster}>
                       <span className={styles.underline}>N</span>ew
                     </div>
