@@ -57,6 +57,8 @@ const ProgramComponent = ({
   saveNameSameNotepad,
   setSaveNameSameNotepad,
   newFileHandler,
+  emptyBinHandler,
+  restoreHandler,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -348,15 +350,24 @@ const ProgramComponent = ({
                         : '';
                       !isSaved && (name === 'notepad' || name === 'paint')
                         ? setSaveQuestion(true)
-                        : newFileHandler();
+                        : name !== 'recycle'
+                        ? newFileHandler()
+                        : restoreHandler();
                       name === 'explorer' || name === 'outlook'
                         ? newFileHandler()
                         : '';
                     }}
                   >
-                    <div className={styles.menuItemCluster}>
-                      <span className={styles.underline}>N</span>ew
-                    </div>
+                    {name !== 'recycle' && (
+                      <div className={styles.menuItemCluster}>
+                        <span className={styles.underline}>N</span>ew
+                      </div>
+                    )}
+                    {name === 'recycle' && (
+                      <div className={styles.menuItemCluster}>
+                        R<span className={styles.underline}>e</span>store
+                      </div>
+                    )}
                   </li>
                 )}
                 {saveable && (
@@ -379,11 +390,19 @@ const ProgramComponent = ({
                     name === 'briefcase' || openMenu || saveMenu
                       ? deleteHandler(fileId)
                       : '';
+                    name === 'recycle' ? emptyBinHandler() : '';
                   }}
                 >
-                  <div className={styles.menuItemCluster}>
-                    <span className={styles.underline}>D</span>elete
-                  </div>
+                  {name !== 'recycle' && (
+                    <div className={styles.menuItemCluster}>
+                      <span className={styles.underline}>D</span>elete
+                    </div>
+                  )}
+                  {name === 'recycle' && (
+                    <div className={styles.menuItemCluster}>
+                      Empty&nbsp;<span className={styles.underline}>B</span>in
+                    </div>
+                  )}
                 </li>
                 <li className={styles.seperator}></li>
                 <li

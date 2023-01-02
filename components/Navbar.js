@@ -18,6 +18,7 @@ import HelpComponent from './BodyComponents/HelpComponent';
 import DesktopItem from './DesktopItem';
 import DirectoryFile from './BodyComponents/DirectoryFile';
 import StartDocumentFile from './StartDocumentFile';
+import RecycleComponent from './BodyComponents/RecycleComponent';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -42,6 +43,10 @@ import notepadFile from '../public/icons/notepadFile.png';
 import helpIcon from '../public/icons/helpIcon.png';
 import notepadFileIcon from '../public/icons/notepadFileIcon.png';
 import paintFileIcon from '../public/icons/paintIcon.png';
+import recycleIconEmpty from '../public/icons/recycleIconEmpty.png';
+import recycleIconFull from '../public/icons/recycleIconFull.png';
+import recycleFull from '../public/icons/recycleFull.png';
+import recycleEmpty from '../public/icons/recycleEmpty.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -57,6 +62,7 @@ const Navbar = () => {
   const [isOutlook, setIsOutlook] = useState(false);
   const [isMinesweeper, setIsMinesweeper] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
+  const [isRecycleBin, setIsRecycleBin] = useState(false);
   const [isDirectory, setIsDirectory] = useState(false);
 
   const [doubleClickModem, setDoubleClickModem] = useState(false);
@@ -68,6 +74,7 @@ const Navbar = () => {
   const [doubleClickOutlook, setDoubleClickOutlook] = useState(false);
   const [doubleClickMinesweeper, setDoubleClickMinesweeper] = useState(false);
   const [doubleClickHelp, setDoubleClickHelp] = useState(false);
+  const [doubleClickRecycleBin, setDoubleClickRecycleBin] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
   const [isResizing, setIsResizing] = useState(false);
 
@@ -78,11 +85,13 @@ const Navbar = () => {
   const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
   const [minesweeperSize, setMinesweeperSize] = useState({ w: 400, h: 500 });
   const [helpSize, setHelpSize] = useState({ w: 400, h: 300 });
+  const [recycleSize, setRecycleSize] = useState({ w: 400, h: 300 });
   const [draggableDisabled, setDraggableDisabled] = useState(false);
 
   const [notepadText, setNotepadText] = useState('');
   const [subject, setSubject] = useState('');
   const [items, setItems] = useState([]);
+  const [recycleItems, setRecycleItems] = useState([]);
   const [notepadTitle, setNotepadTitle] = useState('');
   const [paintTitle, setPaintTitle] = useState('');
   const [saveNameSameNotepad, setSaveNameSameNotepad] = useState(false);
@@ -98,6 +107,7 @@ const Navbar = () => {
   const [minimizeOutlook, setMinimizeOutlook] = useState(false);
   const [minimizeHelp, setMinimizeHelp] = useState(false);
   const [minimizeMinesweeper, setMinimizeMinesweeper] = useState(false);
+  const [minimizeRecycleBin, setMinimizeRecycleBin] = useState(false);
 
   const [orderArray, setOrderArray] = useState([]);
   const [active, setActive] = useState('');
@@ -177,6 +187,9 @@ const Navbar = () => {
     if (active === 'help') {
       resizeFrame(e, helpSize, setHelpSize);
     }
+    if (active === 'recycle') {
+      resizeFrame(e, recycleSize, setRecycleSize);
+    }
   }
 
   const resizeFrame = (e, size, setSize) => {
@@ -254,6 +267,13 @@ const Navbar = () => {
     if (!fileId) {
       return;
     } else {
+      const recycledItems = items.filter((item) => {
+        if (item.id === fileId) {
+          return item;
+        }
+      });
+      setRecycleItems([...recycledItems]);
+
       const newItems = items.filter((item) => {
         if (item.id !== fileId) {
           return item;
@@ -261,6 +281,15 @@ const Navbar = () => {
       });
       setItems([...newItems]);
     }
+  }
+
+  function emptyBinHandler() {
+    setRecycleItems([]);
+  }
+
+  function restoreHandler() {
+    setItems((prevState) => [...prevState, ...recycleItems]);
+    setRecycleItems([]);
   }
 
   function overwriteHandler() {
@@ -374,6 +403,15 @@ const Navbar = () => {
     setMinimizeHelp(false);
   }
 
+  function recycleHandler() {
+    !isRecycleBin ? orderArrayHandler('recycle') : '';
+    setActive('recycle');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsRecycleBin(true);
+    setMinimizeRecycleBin(false);
+  }
+
   function handleDoubleClick(e, func, id, data, title) {
     if (e.detail === 2) {
       func(id, data, title);
@@ -410,6 +448,10 @@ const Navbar = () => {
 
   function toggleMinimizeHelp() {
     setMinimizeHelp(true);
+  }
+
+  function toggleMinimizeRecycle() {
+    setMinimizeRecycleBin(true);
   }
 
   function toggleMinimize() {
@@ -581,6 +623,29 @@ const Navbar = () => {
   });
 
   const desktopFilesForMenu = items.map((item) => {
+    return (
+      <DirectoryFile
+        key={item.id}
+        id={item.id}
+        name={item.name + item.type}
+        image={item.program === 'notepad' ? notepadFile : paintIcon}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={
+          item.program === 'notepad' ? notepadHandler : paintHandler
+        }
+        type={item.type}
+        data={item.data}
+        setTitle={item.program === 'notepad' ? setNotepadTitle : setPaintTitle}
+        setIsDirectory={setIsDirectory}
+        setData={item.program === 'notepad' ? setNotepadText : ''}
+        directory={item.directory}
+        setFileId={setFileId}
+        program={item.program}
+      />
+    );
+  });
+
+  const recycleBinItems = recycleItems.map((item) => {
     return (
       <DirectoryFile
         key={item.id}
@@ -798,6 +863,26 @@ const Navbar = () => {
         </div>
       );
     }
+    if (item === 'recycle') {
+      return (
+        <div key={item}>
+          {minimizeRecycleBin || isRecycleBin ? (
+            <TrayComponent
+              minimize={minimizeRecycleBin}
+              setMinimize={setMinimizeRecycleBin}
+              setDoubleClick={setDoubleClickRecycleBin}
+              setActive={setActive}
+              active={active}
+              name={'recycle'}
+              title={'Recycle Bin'}
+              icon={recycleItems[0] ? recycleIconFull : recycleIconEmpty}
+            />
+          ) : (
+            ''
+          )}
+        </div>
+      );
+    }
   });
 
   return (
@@ -810,6 +895,13 @@ const Navbar = () => {
         stopResize(e);
       }}
     >
+      <DesktopItem
+        shortcut={shortcut}
+        name={'Recycle Bin'}
+        image={recycleItems[0] ? recycleFull : recycleEmpty}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={recycleHandler}
+      />
       <DesktopItem
         shortcut={shortcut}
         name={'Briefcase'}
@@ -1205,6 +1297,37 @@ const Navbar = () => {
           help={true}
         >
           <HelpComponent />
+        </ProgramComponent>
+      )}
+      {isRecycleBin && !minimizeRecycleBin && (
+        <ProgramComponent
+          doubleClickProgram={doubleClickRecycleBin}
+          setDoubleClickProgram={setDoubleClickRecycleBin}
+          isProgram={isRecycleBin}
+          setIsProgram={setIsRecycleBin}
+          toggleMinimizeProgram={toggleMinimizeRecycle}
+          minimizeProgram={minimizeRecycleBin}
+          size={recycleSize}
+          setSize={setRecycleSize}
+          startResize={startResize}
+          draggableDisabled={draggableDisabled}
+          setIsResizing={setIsResizing}
+          orderArray={orderArray}
+          orderArrayHandler={orderArrayHandler}
+          indexOfOrderArrayElement={indexOfOrderArrayElement}
+          active={active}
+          setActive={setActive}
+          name={'recycle'}
+          title={'Recycle Bin'}
+          programIcon={recycleItems[0] ? recycleIconFull : recycleIconEmpty}
+          initialSize={{ w: 400, h: 300 }}
+          saveable={false}
+          opennable={false}
+          help={false}
+          emptyBinHandler={emptyBinHandler}
+          restoreHandler={restoreHandler}
+        >
+          <RecycleComponent recycleBinItems={recycleBinItems} />
         </ProgramComponent>
       )}
     </div>
