@@ -31,3 +31,12 @@
   height: 100%;
   width: 100%;
 }
+
+.helpText {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin-top: 6px;
+  margin-left: 6px;
+  font-size: .55rem;
+}

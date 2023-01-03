@@ -84,7 +84,7 @@ const Navbar = () => {
   const [briefcaseSize, setBriefcaseSize] = useState({ w: 800, h: 600 });
   const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
   const [minesweeperSize, setMinesweeperSize] = useState({ w: 400, h: 500 });
-  const [helpSize, setHelpSize] = useState({ w: 400, h: 300 });
+  const [helpSize, setHelpSize] = useState({ w: 400, h: 350 });
   const [recycleSize, setRecycleSize] = useState({ w: 400, h: 300 });
   const [draggableDisabled, setDraggableDisabled] = useState(false);
 
@@ -1291,7 +1291,7 @@ const Navbar = () => {
           name={'help'}
           title={'Help'}
           programIcon={helpIcon}
-          initialSize={{ w: 400, h: 300 }}
+          initialSize={{ w: 400, h: 350 }}
           saveable={false}
           opennable={false}
           help={true}
