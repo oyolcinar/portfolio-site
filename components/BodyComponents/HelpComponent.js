@@ -17,7 +17,7 @@ const HelpComponent = () => {
         Oh and feel free to open Outlook and send me a message.
         <br />
         <br />
-        Cheers! Olgun.
+        Cheers!
       </div>
     </div>
   );

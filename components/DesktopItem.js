@@ -18,9 +18,15 @@ const DesktopItem = ({
   directory,
   setFileId,
   id,
+  link,
 }) => {
   const [selected, setSelected] = useState(false);
   const desktopItemRef = useRef(null);
+
+  function submitHandler(e) {
+    e.preventDefault();
+    window.open(link, '_blank');
+  }
 
   function toggleSelected() {
     setSelected(false);
@@ -42,7 +48,9 @@ const DesktopItem = ({
           directory && name && type ? setFileId(id) : '';
           setTitle ? setTitle(name) : '';
           setData ? setData(data) : '';
-          handleDoubleClick(e, handlerFunction, id);
+          !link
+            ? handleDoubleClick(e, handlerFunction, id)
+            : handleDoubleClick(e, submitHandler);
         }}
       >
         <Image

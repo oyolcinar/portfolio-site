@@ -20,6 +20,8 @@ import DirectoryFile from './BodyComponents/DirectoryFile';
 import StartDocumentFile from './StartDocumentFile';
 import RecycleComponent from './BodyComponents/RecycleComponent';
 
+import aboutText from '../utils/aboutText';
+
 import styles from '../styles/Navbar.module.css';
 
 import speaker from '../public/icons/loudspeaker.png';
@@ -47,6 +49,7 @@ import recycleIconEmpty from '../public/icons/recycleIconEmpty.png';
 import recycleIconFull from '../public/icons/recycleIconFull.png';
 import recycleFull from '../public/icons/recycleFull.png';
 import recycleEmpty from '../public/icons/recycleEmpty.png';
+import explorerPage from '../public/icons/html.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -418,6 +421,12 @@ const Navbar = () => {
     }
   }
 
+  function handleDoubleClickLink(e, func) {
+    if (e.detail === 2) {
+      func(e);
+    }
+  }
+
   function textHandler(e) {
     setNotepadText(e.target.value);
   }
@@ -489,7 +498,7 @@ const Navbar = () => {
       setData={setNotepadText}
       type={'.txt'}
       program={'notepad'}
-      data={''}
+      data={aboutText}
       id={'aboutDesktop'}
     />,
     <DirectoryFile
@@ -520,7 +529,7 @@ const Navbar = () => {
       setData={setNotepadText}
       type={'.txt'}
       program={'notepad'}
-      data={''}
+      data={aboutText}
       id={'aboutDesktop'}
     />,
     <StartDocumentFile
@@ -930,7 +939,8 @@ const Navbar = () => {
         handleDoubleClick={handleDoubleClick}
         handlerFunction={notepadHandler}
         setTitle={setNotepadTitle}
-        setData={notepadText}
+        setData={setNotepadText}
+        data={aboutText}
         key={'aboutDesktop'}
         id={'aboutDesktop'}
       />
@@ -941,9 +951,28 @@ const Navbar = () => {
         handleDoubleClick={handleDoubleClick}
         handlerFunction={notepadHandler}
         setTitle={setNotepadTitle}
-        setData={notepadText}
+        setData={setNotepadText}
+        data={''}
         key={'worksDesktop'}
         id={'worksDesktop'}
+      />
+      <DesktopItem
+        shortcut={shortcut}
+        name={'LinkedIn'}
+        image={explorerPage}
+        key={'linkedIn'}
+        id={'LinkedIn'}
+        handleDoubleClick={handleDoubleClickLink}
+        link={'http://www.linkedin.com/in/olgun-yolçınar-a4b216142'}
+      />
+      <DesktopItem
+        shortcut={shortcut}
+        name={'Github'}
+        image={explorerPage}
+        key={'github'}
+        id={'Github'}
+        handleDoubleClick={handleDoubleClickLink}
+        link={'https://github.com/oyolcinar'}
       />
       {desktopFiles}
       <nav className={styles.navbar}>
