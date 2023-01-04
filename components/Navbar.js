@@ -963,7 +963,7 @@ const Navbar = () => {
         key={'linkedIn'}
         id={'LinkedIn'}
         handleDoubleClick={handleDoubleClickLink}
-        link={'http://www.linkedin.com/in/olgun-yolçınar-a4b216142'}
+        link={'http://www.linkedin.com/in/olgun-yolcinar'}
       />
       <DesktopItem
         shortcut={shortcut}
