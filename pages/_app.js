@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
         <meta name='description' content='Web Developer based in Istanbul.' />
         <meta
           name='Keywords'
-          content='Web Development, Next.js, React, Front-End, Back-End '
+          content='Web Development, Next.js, React, Front-End, Back-End, Olgun Yolçınar '
         />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
