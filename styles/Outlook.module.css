@@ -39,9 +39,11 @@
   border-top: 2px solid #BDBDBD;
   border-left: 2px solid #BDBDBD;
   border-right: 2px solid #BDBDBD;
-  height: calc(100% - 148px);
+  height: calc(100% - 124px);
   width: 100%;
 }
+
+/* 148px */
 
 .label{
   display: inline-block;

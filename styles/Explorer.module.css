@@ -86,9 +86,11 @@
   border-top: 2px solid #BDBDBD;
   border-left: 2px solid #BDBDBD;
   border-right: 2px solid #BDBDBD;
-  height: calc(100% - 128px);
+  height: calc(100% - 120px);
   width: 100%;
 }
+
+/* 128px */
 
 .iconCluster {
   display: flex;
