@@ -31,9 +31,9 @@ const SaveQuestionMenu = ({
 }) => {
   const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     toggleClose();
-  }, [setIsSaved, toggleClose]);
+  }, [setIsSaved, toggleClose]); */
 
   const saveRef = useRef();
 
@@ -93,9 +93,7 @@ const SaveQuestionMenu = ({
                   }'?`
                 : `'${titleData}' already exists. Do you want to overwrite '${titleData}'?`}
               {deleteQuestion
-                ? `Are you sure you want to delete '${
-                    titleData ? titleData : 'Untitled'
-                  }'?`
+                ? `Are you sure you want to delete '${fileId}'?`
                 : ''}
             </div>
           </div>
@@ -109,7 +107,7 @@ const SaveQuestionMenu = ({
               setSaveQuestion(false);
               setSaveNameSameNotepad ? setSaveNameSameNotepad(false) : '';
               isNewFile ? newFileHandler() : '';
-              setIsNewFile(false);
+              setIsNewFile ? setIsNewFile(false) : '';
               deleteQuestion ? setDeleteQuestion(false) : '';
             }}
           >
@@ -120,7 +118,7 @@ const SaveQuestionMenu = ({
             onClick={() => {
               isNewFile ? setSaveQuestion(false) : '';
               isNewFile ? newFileHandler() : setIsSaved(true);
-              setIsNewFile(false);
+              setIsNewFile ? setIsNewFile(false) : '';
               deleteQuestion ? setDeleteQuestion(false) : '';
             }}
           >
