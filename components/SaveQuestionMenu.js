@@ -1,7 +1,10 @@
 import styles from '../styles/Card.module.css';
 import Image from 'next/image';
+
 import close from '../public/icons/close.png';
 import questionIcon from '../public/icons/question.png';
+import deleteFile from '../public/icons/eraseFile.png';
+
 import { useRef, useEffect, useState } from 'react';
 import { useClickOutsideHandler } from '../utils/utils';
 
@@ -22,6 +25,9 @@ const SaveQuestionMenu = ({
   isNewFile,
   setIsNewFile,
   newFileHandler,
+  deleteHandler,
+  setDeleteQuestion,
+  deleteQuestion,
 }) => {
   const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
 
@@ -73,15 +79,24 @@ const SaveQuestionMenu = ({
         </div>
         <div className={styles.body}>
           <div className={`${styles.bodyLeft} ${styles.sdBodyLeft}`}>
-            <Image src={questionIcon} alt='' height={45} />
+            <Image
+              src={deleteQuestion ? deleteFile : questionIcon}
+              alt=''
+              height={45}
+            />
           </div>
           <div className={styles.bodyRight}>
             <div>
-              {!saveNameSameNotepad
+              {!saveNameSameNotepad && !deleteQuestion
                 ? `Do you want to save changes to '${
                     titleData ? titleData : 'Untitled'
                   }'?`
                 : `'${titleData}' already exists. Do you want to overwrite '${titleData}'?`}
+              {deleteQuestion
+                ? `Are you sure you want to delete '${
+                    titleData ? titleData : 'Untitled'
+                  }'?`
+                : ''}
             </div>
           </div>
         </div>
@@ -89,11 +104,13 @@ const SaveQuestionMenu = ({
           <button
             className={`${styles.button} ${styles.sdButton} `}
             onClick={() => {
+              deleteQuestion ? deleteHandler(fileId) : '';
               titleData ? overwriteHandler(fileId) : setSaveMenu(true);
               setSaveQuestion(false);
               setSaveNameSameNotepad ? setSaveNameSameNotepad(false) : '';
               isNewFile ? newFileHandler() : '';
               setIsNewFile(false);
+              deleteQuestion ? setDeleteQuestion(false) : '';
             }}
           >
             <span className={styles.underline}>Y</span>es
@@ -104,6 +121,7 @@ const SaveQuestionMenu = ({
               isNewFile ? setSaveQuestion(false) : '';
               isNewFile ? newFileHandler() : setIsSaved(true);
               setIsNewFile(false);
+              deleteQuestion ? setDeleteQuestion(false) : '';
             }}
           >
             N<span className={styles.underline}>o</span>

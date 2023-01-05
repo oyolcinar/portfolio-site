@@ -72,6 +72,7 @@ const ProgramComponent = ({
   const [saveQuestion, setSaveQuestion] = useState(false);
   const [saveMenu, setSaveMenu] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [deleteQuestion, setDeleteQuestion] = useState(false);
 
   const programRef = useRef(null);
   const fileRef = useRef(null);
@@ -247,6 +248,20 @@ const ProgramComponent = ({
               newFileHandler={newFileHandler}
             />
           )}
+          {deleteQuestion && (
+            <SaveQuestionMenu
+              setSaveQuestion={setSaveQuestion}
+              setIsSaved={setIsSaved}
+              toggleClose={toggleClose}
+              titleData={titleData}
+              title={title}
+              setSaveMenu={setSaveMenu}
+              fileId={fileId}
+              deleteHandler={deleteHandler}
+              setDeleteQuestion={setDeleteQuestion}
+              deleteQuestion={deleteQuestion}
+            />
+          )}
           {saveNameSameNotepad && (
             <SaveQuestionMenu
               setSaveQuestion={setSaveQuestion}
@@ -388,7 +403,7 @@ const ProgramComponent = ({
                   onClick={() => {
                     toggleMenuClickOutside();
                     name === 'briefcase' || openMenu || saveMenu
-                      ? deleteHandler(fileId)
+                      ? setDeleteQuestion(true)
                       : '';
                     name === 'recycle' ? emptyBinHandler() : '';
                   }}

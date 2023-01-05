@@ -318,6 +318,17 @@ const Navbar = () => {
   }
 
   function openHandler() {
+    if (fileId === 'aboutDesktop') {
+      setNotepadTitle('About.txt');
+      notepadHandler('aboutDesktop', aboutText, 'About.txt');
+      return;
+    }
+
+    if (fileId === 'worksDesktop') {
+      worksHandler();
+      return;
+    }
+
     const openFile = items.find((item) => {
       if (item.id === fileId) {
         return item;
@@ -359,7 +370,7 @@ const Navbar = () => {
   }
 
   function worksHandler() {
-    !isBriefcase ? orderArrayHandler('works') : '';
+    !isWorks ? orderArrayHandler('works') : '';
     setActive('works');
     setIsProgramsOpen(false);
     setIsStartOpen(false);
@@ -523,6 +534,8 @@ const Navbar = () => {
       program={'notepad'}
       data={aboutText}
       id={'aboutDesktop'}
+      directory={'desktop'}
+      setFileId={setFileId}
     />,
     <DirectoryFile
       name={'Works'}
@@ -532,6 +545,9 @@ const Navbar = () => {
       setIsDirectory={setIsDirectory}
       key={'worksDesktop'}
       id={'worksDesktop'}
+      type={true}
+      directory={'desktop'}
+      setFileId={setFileId}
     />,
   ];
 
