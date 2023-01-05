@@ -59,6 +59,7 @@ const ProgramComponent = ({
   newFileHandler,
   emptyBinHandler,
   restoreHandler,
+  helpHandler,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
   const [isFile, setIsFile] = useState(false);
@@ -522,7 +523,12 @@ const ProgramComponent = ({
                 className={`${styles.menuDropdown} ${styles.helpMenu}`}
                 ref={helpRef}
               >
-                <li className={styles.menuItem}>
+                <li
+                  className={styles.menuItem}
+                  onClick={() => {
+                    helpHandler();
+                  }}
+                >
                   <div className={styles.menuItemCluster}>
                     A<span className={styles.underline}>b</span>out
                   </div>

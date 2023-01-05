@@ -1164,6 +1164,7 @@ const Navbar = () => {
           saveNameSameNotepad={saveNameSameNotepad}
           setSaveNameSameNotepad={setSaveNameSameNotepad}
           newFileHandler={newFileHandler}
+          helpHandler={helpHandler}
         >
           <NotepadText notepadText={notepadText} textHandler={textHandler} />
         </ProgramComponent>
@@ -1208,6 +1209,7 @@ const Navbar = () => {
           overwriteHandler={overwriteHandler}
           openHandler={openHandler}
           newFileHandler={newFileHandler}
+          helpHandler={helpHandler}
         >
           <PaintComponent size={paintSize} />
         </ProgramComponent>
@@ -1239,6 +1241,7 @@ const Navbar = () => {
           help={false}
           setBrowserData={setBrowserData}
           newFileHandler={newFileHandler}
+          helpHandler={helpHandler}
         >
           <ExplorerBrowser
             browserData={browserData}
@@ -1277,6 +1280,7 @@ const Navbar = () => {
           deleteHandler={deleteHandler}
           setFileId={setFileId}
           openHandler={openHandler}
+          helpHandler={helpHandler}
         >
           <BriefcaseComponent
             briefCaseFiles={briefCaseFiles}
@@ -1312,6 +1316,7 @@ const Navbar = () => {
           opennable={false}
           help={false}
           newFileHandler={newFileHandler}
+          helpHandler={helpHandler}
         >
           <OutlookComponent subject={subject} setSubject={setSubject} />
         </ProgramComponent>
@@ -1341,6 +1346,7 @@ const Navbar = () => {
           saveable={false}
           opennable={false}
           help={false}
+          helpHandler={helpHandler}
         />
       )}
       {isHelp && !minimizeHelp && (
@@ -1399,6 +1405,7 @@ const Navbar = () => {
           help={false}
           emptyBinHandler={emptyBinHandler}
           restoreHandler={restoreHandler}
+          helpHandler={helpHandler}
         >
           <RecycleComponent recycleBinItems={recycleBinItems} />
         </ProgramComponent>
@@ -1428,6 +1435,7 @@ const Navbar = () => {
           saveable={false}
           opennable={true}
           help={false}
+          helpHandler={helpHandler}
         >
           <WorksComponent />
         </ProgramComponent>
