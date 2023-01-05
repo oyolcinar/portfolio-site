@@ -340,7 +340,7 @@ const ProgramComponent = ({
                   </li>
                 )}
                 {opennable && <li className={styles.seperator}></li>}
-                {name !== 'briefcase' && (
+                {name !== 'briefcase' && name !== 'works' && (
                   <li
                     className={styles.menuItem}
                     onClick={() => {

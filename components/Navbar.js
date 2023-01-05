@@ -19,6 +19,7 @@ import DesktopItem from './DesktopItem';
 import DirectoryFile from './BodyComponents/DirectoryFile';
 import StartDocumentFile from './StartDocumentFile';
 import RecycleComponent from './BodyComponents/RecycleComponent';
+import WorksComponent from './BodyComponents/WorksComponent';
 
 import aboutText from '../utils/aboutText';
 
@@ -50,6 +51,8 @@ import recycleIconFull from '../public/icons/recycleIconFull.png';
 import recycleFull from '../public/icons/recycleFull.png';
 import recycleEmpty from '../public/icons/recycleEmpty.png';
 import explorerPage from '../public/icons/html.png';
+import directory from '../public/icons/directory.png';
+import directoryIcon from '../public/icons/directoryIcon.png';
 
 const Navbar = () => {
   const [isShutdown, setIsShutdown] = useState(false);
@@ -67,6 +70,7 @@ const Navbar = () => {
   const [isHelp, setIsHelp] = useState(false);
   const [isRecycleBin, setIsRecycleBin] = useState(false);
   const [isDirectory, setIsDirectory] = useState(false);
+  const [isWorks, setIsWorks] = useState(false);
 
   const [doubleClickModem, setDoubleClickModem] = useState(false);
   const [doubleClickNotepad, setDoubleClickNotepad] = useState(false);
@@ -78,6 +82,7 @@ const Navbar = () => {
   const [doubleClickMinesweeper, setDoubleClickMinesweeper] = useState(false);
   const [doubleClickHelp, setDoubleClickHelp] = useState(false);
   const [doubleClickRecycleBin, setDoubleClickRecycleBin] = useState(false);
+  const [doubleClickWorks, setDoubleClickWorks] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
   const [isResizing, setIsResizing] = useState(false);
 
@@ -85,6 +90,7 @@ const Navbar = () => {
   const [paintSize, setPaintSize] = useState({ w: 800, h: 600 });
   const [explorerSize, setExplorerSize] = useState({ w: 800, h: 600 });
   const [briefcaseSize, setBriefcaseSize] = useState({ w: 800, h: 600 });
+  const [worksSize, setWorksSize] = useState({ w: 800, h: 600 });
   const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
   const [minesweeperSize, setMinesweeperSize] = useState({ w: 400, h: 500 });
   const [helpSize, setHelpSize] = useState({ w: 400, h: 350 });
@@ -111,6 +117,7 @@ const Navbar = () => {
   const [minimizeHelp, setMinimizeHelp] = useState(false);
   const [minimizeMinesweeper, setMinimizeMinesweeper] = useState(false);
   const [minimizeRecycleBin, setMinimizeRecycleBin] = useState(false);
+  const [minimizeWorks, setMinimizeWorks] = useState(false);
 
   const [orderArray, setOrderArray] = useState([]);
   const [active, setActive] = useState('');
@@ -192,6 +199,9 @@ const Navbar = () => {
     }
     if (active === 'recycle') {
       resizeFrame(e, recycleSize, setRecycleSize);
+    }
+    if (active === 'works') {
+      resizeFrame(e, worksSize, setWorksSize);
     }
   }
 
@@ -348,6 +358,15 @@ const Navbar = () => {
     setMinimizeBriefcase(false);
   }
 
+  function worksHandler() {
+    !isBriefcase ? orderArrayHandler('works') : '';
+    setActive('works');
+    setIsProgramsOpen(false);
+    setIsStartOpen(false);
+    setIsWorks(true);
+    setMinimizeWorks(false);
+  }
+
   function explorerHandler() {
     !isExplorer ? orderArrayHandler('explorer') : '';
     setActive('explorer');
@@ -463,6 +482,10 @@ const Navbar = () => {
     setMinimizeRecycleBin(true);
   }
 
+  function toggleMinimizeWorks() {
+    setMinimizeWorks(true);
+  }
+
   function toggleMinimize() {
     setMinimizeModem(true);
   }
@@ -502,17 +525,12 @@ const Navbar = () => {
       id={'aboutDesktop'}
     />,
     <DirectoryFile
-      name={'Works.txt'}
-      image={notepadFileIcon}
+      name={'Works'}
+      image={directoryIcon}
       handleDoubleClick={handleDoubleClick}
-      handlerFunction={notepadHandler}
+      handlerFunction={worksHandler}
       setIsDirectory={setIsDirectory}
       key={'worksDesktop'}
-      setTitle={setNotepadTitle}
-      setData={setNotepadText}
-      type={'.txt'}
-      program={'notepad'}
-      data={''}
       id={'worksDesktop'}
     />,
   ];
@@ -533,17 +551,12 @@ const Navbar = () => {
       id={'aboutDesktop'}
     />,
     <StartDocumentFile
-      name={'Works.txt'}
-      image={notepadFile}
-      handlerFunction={notepadHandler}
+      name={'Works'}
+      image={directory}
+      handlerFunction={worksHandler}
       setIsDirectory={setIsDirectory}
       setFileId={setFileId}
       key={'worksDesktop'}
-      setTitle={setNotepadTitle}
-      setData={setNotepadText}
-      type={'.txt'}
-      program={'notepad'}
-      data={''}
       id={'worksDesktop'}
     />,
   ];
@@ -892,6 +905,26 @@ const Navbar = () => {
         </div>
       );
     }
+    if (item === 'works') {
+      return (
+        <div key={item}>
+          {minimizeWorks || isWorks ? (
+            <TrayComponent
+              minimize={minimizeWorks}
+              setMinimize={setMinimizeWorks}
+              setDoubleClick={setDoubleClickWorks}
+              setActive={setActive}
+              active={active}
+              name={'works'}
+              title={'Works'}
+              icon={directoryIcon}
+            />
+          ) : (
+            ''
+          )}
+        </div>
+      );
+    }
   });
 
   return (
@@ -946,15 +979,10 @@ const Navbar = () => {
       />
       <DesktopItem
         shortcut={shortcut}
-        name={'Works.txt'}
-        image={notepadFile}
+        name={'Works'}
+        image={directory}
         handleDoubleClick={handleDoubleClick}
-        handlerFunction={notepadHandler}
-        setTitle={setNotepadTitle}
-        setData={setNotepadText}
-        data={''}
-        key={'worksDesktop'}
-        id={'worksDesktop'}
+        handlerFunction={worksHandler}
       />
       <DesktopItem
         shortcut={shortcut}
@@ -1357,6 +1385,35 @@ const Navbar = () => {
           restoreHandler={restoreHandler}
         >
           <RecycleComponent recycleBinItems={recycleBinItems} />
+        </ProgramComponent>
+      )}
+      {isWorks && !minimizeWorks && (
+        <ProgramComponent
+          doubleClickProgram={doubleClickWorks}
+          setDoubleClickProgram={setDoubleClickWorks}
+          isProgram={isWorks}
+          setIsProgram={setIsWorks}
+          toggleMinimizeProgram={toggleMinimizeWorks}
+          minimizeProgram={minimizeWorks}
+          size={worksSize}
+          setSize={setWorksSize}
+          startResize={startResize}
+          draggableDisabled={draggableDisabled}
+          setIsResizing={setIsResizing}
+          orderArray={orderArray}
+          orderArrayHandler={orderArrayHandler}
+          indexOfOrderArrayElement={indexOfOrderArrayElement}
+          active={active}
+          setActive={setActive}
+          name={'works'}
+          title={'Works'}
+          programIcon={directory}
+          initialSize={{ w: 800, h: 600 }}
+          saveable={false}
+          opennable={true}
+          help={false}
+        >
+          <WorksComponent />
         </ProgramComponent>
       )}
     </div>
