@@ -31,9 +31,9 @@ const SaveQuestionMenu = ({
 }) => {
   const [doubleClickSavemenu, setDoubleClickSavemenu] = useState(false);
 
-  /*   useEffect(() => {
+  useEffect(() => {
     toggleClose();
-  }, [setIsSaved, toggleClose]); */
+  }, [setIsSaved, toggleClose]);
 
   const saveRef = useRef();
 
