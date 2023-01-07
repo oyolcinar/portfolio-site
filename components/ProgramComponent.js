@@ -404,7 +404,7 @@ const ProgramComponent = ({
                   onClick={() => {
                     toggleMenuClickOutside();
                     name === 'briefcase' || openMenu || saveMenu
-                      ? setDeleteQuestion(true)
+                      ? deleteHandler(fileId)
                       : '';
                     name === 'recycle' ? emptyBinHandler() : '';
                   }}
