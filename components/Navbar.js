@@ -103,6 +103,7 @@ const Navbar = () => {
   const [recycleItems, setRecycleItems] = useState([]);
   const [notepadTitle, setNotepadTitle] = useState('');
   const [paintTitle, setPaintTitle] = useState('');
+  const [explorerTitle, setExplorerTitle] = useState('');
   const [saveNameSameNotepad, setSaveNameSameNotepad] = useState(false);
   const [saveNameSamePaint, setSaveNameSamePaint] = useState(false);
   const [browserData, setBrowserData] = useState('https://www.wikipedia.org/');
@@ -378,8 +379,9 @@ const Navbar = () => {
     setMinimizeWorks(false);
   }
 
-  function explorerHandler() {
+  function explorerHandler(title) {
     !isExplorer ? orderArrayHandler('explorer') : '';
+    title ? setExplorerTitle(title) : setExplorerTitle('Internet Explorer');
     setActive('explorer');
     setIsProgramsOpen(false);
     setIsStartOpen(false);
@@ -830,8 +832,12 @@ const Navbar = () => {
               setActive={setActive}
               active={active}
               name={'explorer'}
-              title={'Internet Explorer'}
-              icon={explorerIcon}
+              title={explorerTitle}
+              icon={
+                explorerTitle === 'Internet Explorer'
+                  ? explorerIcon
+                  : explorerPage
+              }
             />
           ) : (
             ''
@@ -1017,6 +1023,15 @@ const Navbar = () => {
         id={'Github'}
         handleDoubleClick={handleDoubleClickLink}
         link={'https://github.com/oyolcinar'}
+      />
+      <DesktopItem
+        shortcut={shortcut}
+        name={'Resume LAST(1).pdf'}
+        image={explorerPage}
+        setTitle={setExplorerTitle}
+        id={'Resume LAST(1).pdf'}
+        handleDoubleClick={handleDoubleClick}
+        handlerFunction={explorerHandler}
       />
       {desktopFiles}
       <nav className={styles.navbar}>
@@ -1233,8 +1248,10 @@ const Navbar = () => {
           active={active}
           setActive={setActive}
           name={'explorer'}
-          title={'Internet Explorer'}
-          programIcon={explorerIcon}
+          title={explorerTitle}
+          programIcon={
+            explorerTitle === 'Internet Explorer' ? explorerIcon : explorerPage
+          }
           initialSize={{ w: 800, h: 600 }}
           saveable={false}
           opennable={false}
