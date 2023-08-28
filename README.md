@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Link: http://olgunyolcinar.com
 
-## Getting Started
+My personal website made with Next.js.
 
-First, run the development server:
+It is kind of a passion project to re-create the Win98 OS feel within the browser. The project kind of "grew in the telling" or in this case, coding because of that. Since every little detail like program minimization, order of execution, window size and position required its own state. 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Therefore the project employs some complex states and state management to recreate the authentic OS feel. Since it's a personal project I refrained from using TypeScript. Also time constraints (other works and the desire to make it up and running in short notice) kept from refactoring extensively and I allowed myself to "flow" in order to deliver the functionality in time. However I still believe the code is fairly understandable and modular.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+So far some of the features are missing. Like the minesweeper game, MS Paint and the Winamp player. But since it's quite modular, they can be implemented as I go along. Plus it's REALLY a pain in the glutes to find high-quality images for UI. I had to screenshot and crop all the buttons from archaic Win98 tutorials in order to use them on Internet Explorer component for instance. So there's that. I believe MS Paint will be the same.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+The project uses React Draggable custom component which made it easier for me to implement the dragging feature. However, since it's an outside library it caused some hickups regarding that smooth OS experience. I wanted to make some of the "programs" or the components draggable AND resiable, which caused some issues. Resizable components have to be double-clicked in order to be dragged.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Other than that new files can be created, saved, deleted and overwritten. Oh, and you can email me using that Sendgrid API.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
