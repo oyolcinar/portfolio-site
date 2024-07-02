@@ -13,7 +13,6 @@ import helpIcon from '../../public/icons/helpIcon.png';
 const OutlookComponent = ({ subject, setSubject }) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-
   const [errors, setErrors] = useState({});
   const [buttonMessage, setButtonMessage] = useState('Send');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -47,7 +46,7 @@ const OutlookComponent = ({ subject, setSubject }) => {
     let isValidForm = handleValidation();
 
     if (isValidForm) {
-      const res = await fetch('/api/sendgrid', {
+      const res = await fetch('/api/sendMail', {
         body: JSON.stringify({
           email: email,
           subject: subject,
@@ -117,6 +116,7 @@ const OutlookComponent = ({ subject, setSubject }) => {
           name='to'
           value='oyolcinar@gmail.com'
           className={styles.input}
+          readOnly
         />
         <br />
         <label htmlFor='email' className={styles.label}>
