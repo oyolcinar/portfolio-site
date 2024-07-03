@@ -1039,7 +1039,7 @@ const Navbar = () => {
         handlerFunction={() =>
           explorerHandler(
             'Resume LAST(1).pdf',
-            'http://olgunyolcinar.com/Desktop/Resume LAST(1).pdf',
+            'https://olgunyolcinar.com/Desktop/Resume LAST(1).pdf',
           )
         }
       />
