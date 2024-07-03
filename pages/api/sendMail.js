@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     from: process.env.GMAIL_USER,
     to: 'oyolcinar@gmail.com',
     subject: subject,
-    text: message,
+    text: email + message,
     replyTo: email,
   };
 
