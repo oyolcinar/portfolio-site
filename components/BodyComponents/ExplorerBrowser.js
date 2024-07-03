@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from '../../styles/Explorer.module.css';
 import outStyles from '../../styles/Outlook.module.css';
@@ -15,7 +15,7 @@ import search from '../../public/icons/search.png';
 import stop from '../../public/icons/stopEXP.png';
 import goArrow from '../../public/icons/goArrow.png';
 
-const ExplorerBrowser = ({ browserData, setBrowserData }) => {
+const ExplorerBrowser = ({ browserData, setBrowserData, triggerGo }) => {
   const [history, setHistory] = useState(['https://www.wikipedia.org/']);
   const [currentHistoryIndex, setCurrentHistoryIndex] = useState(1);
 
@@ -45,6 +45,12 @@ const ExplorerBrowser = ({ browserData, setBrowserData }) => {
     setCurrentHistoryIndex(history.length);
     setBrowserData(history[0]);
   }
+
+  useEffect(() => {
+    if (triggerGo) {
+      toggleGo();
+    }
+  }, [triggerGo]);
 
   return (
     <div>
@@ -129,7 +135,7 @@ const ExplorerBrowser = ({ browserData, setBrowserData }) => {
           <div className={styles.verticalSeperator}></div>
         </div>
         <div className={styles.links}>&gt;&gt;</div>
-        <div className={npStyles.textarea}>
+        <div className={styles.textarea}>
           <iframe
             className={npStyles.input}
             src={history[history.length - currentHistoryIndex]}

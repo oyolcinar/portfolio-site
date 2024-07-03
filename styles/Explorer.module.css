@@ -8,13 +8,14 @@
   background-color: white;
   border: inset 2px #a0a0a0;
   border-right-color: white;
-  height: 100%;
+  width: calc(100% - 1px);
+  height: calc(100% + 12px);
 }
 
 .input::-webkit-scrollbar {
   width: 24px !important;
   margin-bottom: 24px;
-  background-color: #BDBDBD;
+  background-color: #bdbdbd;
   height: 24px;
 }
 
@@ -36,27 +37,23 @@
 }
 
 .input::-webkit-scrollbar-button:single-button:vertical:increment {
-
   background-position: center 4px;
-  background-image: url('../public/icons/downArrow.png')
+  background-image: url('../public/icons/downArrow.png');
 }
 
 .input::-webkit-scrollbar-button:single-button:vertical:decrement {
-
   background-position: center 4px;
-  background-image: url('../public/icons/upArrow.png')
+  background-image: url('../public/icons/upArrow.png');
 }
 
 .input::-webkit-scrollbar-button:single-button:horizontal:decrement {
-
   background-position: center 4px;
-  background-image: url('../public/icons/leftArrow.png')
+  background-image: url('../public/icons/leftArrow.png');
 }
 
 .input::-webkit-scrollbar-button:single-button:horizontal:increment {
-
   background-position: center 4px;
-  background-image: url('../public/icons/rightArrow.png')
+  background-image: url('../public/icons/rightArrow.png');
 }
 
 .input {
@@ -83,9 +80,9 @@
 .body {
   position: absolute;
   padding: 0 1px;
-  border-top: 2px solid #BDBDBD;
-  border-left: 2px solid #BDBDBD;
-  border-right: 2px solid #BDBDBD;
+  border-top: 2px solid #bdbdbd;
+  border-left: 2px solid #bdbdbd;
+  border-right: 2px solid #bdbdbd;
   height: calc(100% - 128px);
   width: 100%;
 }
@@ -99,7 +96,7 @@
   margin-left: 10px;
   margin-bottom: 5px;
   gap: 20px;
-  font-size: .55rem;
+  font-size: 0.55rem;
 }
 
 .icon {
@@ -119,7 +116,7 @@
   position: absolute;
   display: flex;
   align-items: center;
-  font-size: .55rem;
+  font-size: 0.55rem;
   top: 0;
   right: 28px;
   width: 60px;

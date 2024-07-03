@@ -144,7 +144,7 @@ const OutlookComponent = ({ subject, setSubject }) => {
           }}
           className={`${styles.input} ${styles.lastInput}`}
         />
-        <div className={npStyles.textarea}>
+        <div className={styles.textarea}>
           <textarea
             name='message'
             value={message}

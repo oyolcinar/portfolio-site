@@ -36,16 +36,16 @@
 .body {
   position: absolute;
   padding: 0 1px;
-  border-top: 2px solid #BDBDBD;
-  border-left: 2px solid #BDBDBD;
-  border-right: 2px solid #BDBDBD;
+  border-top: 2px solid #bdbdbd;
+  border-left: 2px solid #bdbdbd;
+  border-right: 2px solid #bdbdbd;
   height: calc(100% - 148px);
   width: 100%;
 }
 
 /* 148px */
 
-.label{
+.label {
   display: inline-block;
   font-size: 0.55rem;
   width: 68px;
@@ -105,5 +105,14 @@
 .submit:active {
   border: inset 2px #393939;
   border-right-color: white;
-  border-bottom-color: white ;
+  border-bottom-color: white;
+}
+
+.textarea {
+  flex-grow: 1;
+  background-color: white;
+  border: inset 2px #a0a0a0;
+  border-right-color: white;
+  width: calc(100% - 1px);
+  height: calc(100% + 26px);
 }

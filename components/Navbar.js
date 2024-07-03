@@ -108,6 +108,7 @@ const Navbar = () => {
   const [saveNameSamePaint, setSaveNameSamePaint] = useState(false);
   const [browserData, setBrowserData] = useState('https://www.wikipedia.org/');
   const [fileId, setFileId] = useState('');
+  const [triggerGo, setTriggerGo] = useState(false);
 
   const [minimizeModem, setMinimizeModem] = useState(false);
   const [minimizeNotepad, setMinimizeNotepad] = useState(false);
@@ -379,9 +380,13 @@ const Navbar = () => {
     setMinimizeWorks(false);
   }
 
-  function explorerHandler(title) {
+  function explorerHandler(title, url) {
     !isExplorer ? orderArrayHandler('explorer') : '';
     title ? setExplorerTitle(title) : setExplorerTitle('Internet Explorer');
+    if (url) {
+      setBrowserData(url);
+      setTriggerGo(true);
+    }
     setActive('explorer');
     setIsProgramsOpen(false);
     setIsStartOpen(false);
@@ -1031,7 +1036,12 @@ const Navbar = () => {
         setTitle={setExplorerTitle}
         id={'Resume LAST(1).pdf'}
         handleDoubleClick={handleDoubleClick}
-        handlerFunction={explorerHandler}
+        handlerFunction={() =>
+          explorerHandler(
+            'Resume LAST(1).pdf',
+            'http://olgunyolcinar.com/Desktop/Resume LAST(1).pdf',
+          )
+        }
       />
       {desktopFiles}
       <nav className={styles.navbar}>
@@ -1263,6 +1273,7 @@ const Navbar = () => {
           <ExplorerBrowser
             browserData={browserData}
             setBrowserData={setBrowserData}
+            triggerGo={triggerGo}
           />
         </ProgramComponent>
       )}
