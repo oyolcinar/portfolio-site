@@ -1,5 +1,12 @@
 .container {
   height: calc(100vh - 45px);
+  width: 100vw;
+}
+
+@media (max-width: 600px) {
+  .desktopItems {
+    width: 50%;
+  }
 }
 
 .navbar {
@@ -11,7 +18,7 @@
   height: 45px;
   padding-left: 4px;
   padding-right: 4px;
-  border-top: 2px solid #FCFCFC;
+  border-top: 2px solid #fcfcfc;
   border-bottom: 2px solid #c0c0c0;
   padding-top: 1px;
   padding-bottom: 3px;
@@ -31,12 +38,12 @@
 }
 
 .item {
-  font-family: "Windows 95 Bold";
+  font-family: 'Windows 95 Bold';
   position: relative;
   font-size: 0.85rem;
   color: black;
   text-transform: normal;
-  background: #C0C0C0;
+  background: #c0c0c0;
   letter-spacing: 0;
   font-weight: 400;
   padding: 0 5px;
@@ -61,8 +68,8 @@
 }
 
 .item:active {
-  border: 2px solid #0A0A0A !important;
-/*   border-top-color: #a0a0a0;
+  border: 2px solid #0a0a0a !important;
+  /*   border-top-color: #a0a0a0;
   border-left-color: #a0a0a0; */
 }
 
@@ -70,11 +77,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: .65rem;
-  border-top: 1px solid #08080E;
-  border-left: 1px solid #08080E;
-  border-right: 1px solid #FCFCFC;
-  border-bottom: 1px solid #FCFCFC;
+  font-size: 0.65rem;
+  border-top: 1px solid #08080e;
+  border-left: 1px solid #08080e;
+  border-right: 1px solid #fcfcfc;
+  border-bottom: 1px solid #fcfcfc;
   padding: 3px 12px;
   margin-right: 1px;
 }
@@ -119,5 +126,6 @@
 }
 
 .desktopItemImage {
-  filter: sepia(120%) saturate(1200%) contrast(100%) brightness(30%) hue-rotate(210deg); 
+  filter: sepia(120%) saturate(1200%) contrast(100%) brightness(30%)
+    hue-rotate(210deg);
 }

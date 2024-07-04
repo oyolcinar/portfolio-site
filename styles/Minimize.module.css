@@ -1,21 +1,40 @@
 .card {
+  top: 1px;
   border-top: 2px solid white;
   border-left: 2px solid white;
   border-right: 2px solid #393939;
   border-bottom: 2px solid #393939;
   border-radius: 0;
-  background: #C0C0C0;
-  min-width: 250px;
+  background: #c0c0c0;
+  width: 250px;
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 60px !important;
+    height: 35px !important;
+    overflow: hidden;
+  }
+
+  .activeCard {
+    width: 60px !important;
+    height: 35px !important;
+    overflow: hidden;
+  }
+  .headerRight {
+    max-width: 10% !important;
+  }
 }
 
 .activeCard {
+  top: 1px;
   font-weight: 700;
   border-bottom: 2px solid white;
   border-right: 2px solid white;
   border-left: 2px solid #393939;
   border-top: 2px solid #393939;
   border-radius: 0;
-  min-width: 250px;
+  width: 250px;
 }
 
 .header {
@@ -23,14 +42,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: #C0C0C0;
+  background: #c0c0c0;
   color: white;
   position: relative;
-  font-size: .55rem;
+  font-size: 0.55rem;
   padding: 4px;
   color: #000;
   border-radius: 0;
-  border: 2px solid #BDBDBD;
+  border: 2px solid #bdbdbd;
 }
 
 .headerLeft {
@@ -38,6 +57,15 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+
+.headerRight {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .headerModem {

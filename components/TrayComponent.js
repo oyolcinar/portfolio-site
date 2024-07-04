@@ -32,11 +32,13 @@ const TrayComponent = ({
             height={20}
             className={cardStyles.headerModem}
           />
-          {titled
-            ? titleData
-              ? `${titleData} - ${title}`
-              : `Untitled - ${title}`
-            : title}
+          <div className={cardStyles.headerRight}>
+            {titled
+              ? titleData
+                ? `${titleData} - ${title}`
+                : `Untitled - ${title}`
+              : title}
+          </div>
         </div>
       </div>
     </div>

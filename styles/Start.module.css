@@ -4,12 +4,21 @@
   position: absolute;
   bottom: 38px;
   left: 6px;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   border: 2px solid #393939;
   border-top-color: white;
   border-left-color: white;
   box-shadow: 3px 0 4px -2px #393939;
   display: flex;
+}
+
+@media (max-width: 600px) {
+  .programsContainer {
+    left: 50px;
+  }
+  .documentsContainer {
+    left: 50px;
+  }
 }
 
 .seperator {
