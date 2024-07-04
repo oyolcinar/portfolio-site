@@ -14,10 +14,10 @@
 
 @media (max-width: 600px) {
   .programsContainer {
-    left: 50px;
+    left: 110px !important;
   }
   .documentsContainer {
-    left: 50px;
+    left: 110px !important;
   }
 }
 
