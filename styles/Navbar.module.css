@@ -109,6 +109,18 @@
   color: white;
 }
 
+.desktopItemsWorks {
+  font-size: 0.55rem;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  text-align: center;
+  z-index: -1;
+  color: black;
+}
+
 .desktopItemName {
   margin-top: 3px;
   border: 1px solid transparent;

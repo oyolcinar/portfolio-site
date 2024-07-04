@@ -165,9 +165,9 @@ const ProgramComponent = ({
         className={!fullScreen ? 'card' : styles.fullScreen}
         onClick={() => {
           setDoubleClickProgram(false);
-          if (!isDirectory) {
-            setActive(name);
-          }
+          // if (!isDirectory) {
+          //   setActive(name);
+          // }
         }}
       >
         <style jsx>{`

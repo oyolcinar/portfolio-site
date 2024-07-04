@@ -19,9 +19,9 @@
 .body {
   position: absolute;
   padding: 0 1px;
-  border-top: 2px solid #BDBDBD;
-  border-left: 2px solid #BDBDBD;
-  border-right: 2px solid #BDBDBD;
+  border-top: 2px solid #bdbdbd;
+  border-left: 2px solid #bdbdbd;
+  border-right: 2px solid #bdbdbd;
   border-bottom: 2px solid white;
   height: calc(100% - 37px);
   width: 100%;
@@ -38,5 +38,5 @@
   overflow: hidden;
   margin-top: 6px;
   margin-left: 6px;
-  font-size: .55rem;
+  font-size: 0.55rem;
 }

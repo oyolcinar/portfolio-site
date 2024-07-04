@@ -19,6 +19,7 @@ const DesktopItem = ({
   setFileId,
   id,
   link,
+  worksFile,
 }) => {
   const [selected, setSelected] = useState(false);
   const desktopItemRef = useRef(null);
@@ -41,6 +42,8 @@ const DesktopItem = ({
         className={
           selected
             ? `${styles.selected} ${styles.desktopItems}`
+            : worksFile
+            ? `${styles.desktopItemsWorks}`
             : `${styles.desktopItems}`
         }
         onClick={(e) => {

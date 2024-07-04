@@ -1,9 +1,9 @@
 import styles from '../../styles/Briefcase.module.css';
 
-const WorksComponent = () => {
+const WorksComponent = ({ worksPermanentItems }) => {
   return (
     <div className={styles.card}>
-      <div className={styles.briefcaseBody}></div>
+      <div className={styles.briefcaseBody}>{worksPermanentItems}</div>
     </div>
   );
 };

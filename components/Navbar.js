@@ -388,9 +388,9 @@ const Navbar = () => {
       setTriggerGo(true);
     }
     setActive('explorer');
+    setIsExplorer(true);
     setIsProgramsOpen(false);
     setIsStartOpen(false);
-    setIsExplorer(true);
     setMinimizeExplorer(false);
   }
 
@@ -555,6 +555,38 @@ const Navbar = () => {
       type={true}
       directory={'desktop'}
       setFileId={setFileId}
+    />,
+  ];
+
+  const worksPermanentItems = [
+    <DesktopItem
+      name={'SNOB'}
+      worksFile={true}
+      image={explorerPage}
+      shortcut={shortcut}
+      setTitle={setExplorerTitle}
+      key={'snob'}
+      id={'SNOB'}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={() =>
+        explorerHandler('SNOB', 'https://curious-squirrel-791794.netlify.app')
+      }
+    />,
+    <DesktopItem
+      name={'Baziszt'}
+      worksFile={true}
+      image={explorerPage}
+      shortcut={shortcut}
+      setTitle={setExplorerTitle}
+      key={'snob'}
+      id={'SNOB'}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={() =>
+        explorerHandler(
+          'Baziszt',
+          'https://jovial-starburst-545a45.netlify.app',
+        )
+      }
     />,
   ];
 
@@ -1465,7 +1497,7 @@ const Navbar = () => {
           help={false}
           helpHandler={helpHandler}
         >
-          <WorksComponent />
+          <WorksComponent worksPermanentItems={worksPermanentItems} />
         </ProgramComponent>
       )}
     </div>
