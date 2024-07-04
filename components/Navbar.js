@@ -1272,7 +1272,7 @@ const Navbar = () => {
           title={'Notepad'}
           titled={true}
           programIcon={notepadIcon}
-          initialSize={{ w: 400, h: 500 }}
+          initialSize={notepadSize}
           setText={setNotepadText}
           saveable={true}
           setItems={setItems}
@@ -1321,7 +1321,7 @@ const Navbar = () => {
           title={'MS Paint'}
           titled={true}
           programIcon={paintIcon}
-          initialSize={{ w: 800, h: 600 }}
+          initialSize={paintSize}
           saveable={true}
           setItems={setItems}
           opennable={true}
@@ -1367,7 +1367,7 @@ const Navbar = () => {
           programIcon={
             explorerTitle === 'Internet Explorer' ? explorerIcon : explorerPage
           }
-          initialSize={{ w: 800, h: 600 }}
+          initialSize={explorerSize}
           saveable={false}
           opennable={false}
           help={false}
@@ -1403,7 +1403,7 @@ const Navbar = () => {
           name={'briefcase'}
           title={'Briefcase'}
           programIcon={briefcaseIcon}
-          initialSize={{ w: 800, h: 600 }}
+          initialSize={briefcaseSize}
           saveable={false}
           opennable={true}
           help={false}
@@ -1443,7 +1443,7 @@ const Navbar = () => {
           title={'Outlook'}
           titled={true}
           programIcon={outlookIcon}
-          initialSize={{ w: 600, h: 400 }}
+          initialSize={outlookSize}
           titleData={subject}
           saveable={false}
           opennable={false}
@@ -1475,7 +1475,7 @@ const Navbar = () => {
           name={'minesweeper'}
           title={'Minesweeper'}
           programIcon={minesweeperIcon}
-          initialSize={{ w: 400, h: 500 }}
+          initialSize={minesweeperSize}
           saveable={false}
           opennable={false}
           help={false}
@@ -1503,7 +1503,7 @@ const Navbar = () => {
           name={'help'}
           title={'Help'}
           programIcon={helpIcon}
-          initialSize={{ w: 400, h: 350 }}
+          initialSize={helpSize}
           saveable={false}
           opennable={false}
           help={true}
@@ -1532,7 +1532,7 @@ const Navbar = () => {
           name={'recycle'}
           title={'Recycle Bin'}
           programIcon={recycleItems[0] ? recycleIconFull : recycleIconEmpty}
-          initialSize={{ w: 400, h: 300 }}
+          initialSize={recycleSize}
           saveable={false}
           opennable={false}
           help={false}
@@ -1564,7 +1564,7 @@ const Navbar = () => {
           name={'works'}
           title={'Works'}
           programIcon={directory}
-          initialSize={{ w: 800, h: 600 }}
+          initialSize={worksSize}
           saveable={false}
           opennable={true}
           help={false}
