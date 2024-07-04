@@ -22,6 +22,12 @@ const StartDocumentFile = ({
         setData ? setData(data) : '';
         handlerFunction(id);
       }}
+      onTouchEnd={() => {
+        directory && name && type ? setFileId(id) : '';
+        setTitle ? setTitle(name) : '';
+        setData ? setData(data) : '';
+        handlerFunction(id);
+      }}
     >
       <div className={styles.cluster}>
         <Image src={image} alt='' height={30} />

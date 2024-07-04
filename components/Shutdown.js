@@ -74,6 +74,9 @@ const Shutdown = ({
                 onClick={() => {
                   setRedirect('http://www.google.com');
                 }}
+                onTouchEnd={() => {
+                  setRedirect('http://www.google.com');
+                }}
                 defaultChecked='checked'
               />
               <label for='choice1'>
@@ -87,6 +90,9 @@ const Shutdown = ({
                 value='Restart'
                 className={styles.radio}
                 onClick={() => {
+                  setRedirect('/');
+                }}
+                onTouchEnd={() => {
                   setRedirect('/');
                 }}
               />
@@ -103,6 +109,9 @@ const Shutdown = ({
                 onClick={() => {
                   setRedirect('https://github.com/oyolcinar/portfolio-site');
                 }}
+                onTouchEnd={() => {
+                  setRedirect('https://github.com/oyolcinar/portfolio-site');
+                }}
               />
               <label for='choice3'>
                 Restart in <span className={styles.underline}>M</span>S-DOS mode
@@ -116,10 +125,16 @@ const Shutdown = ({
                   onClick={(e) => {
                     submitHandler(e);
                   }}
+                  onTouchEnd={(e) => {
+                    submitHandler(e);
+                  }}
                 />
                 <button
                   className={`${styles.button} ${styles.sdButton} `}
                   onClick={() => {
+                    setIsShutdown(false);
+                  }}
+                  onTouchEnd={() => {
                     setIsShutdown(false);
                   }}
                 >

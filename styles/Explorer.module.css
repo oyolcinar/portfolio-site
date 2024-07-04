@@ -97,6 +97,7 @@
   margin-bottom: 5px;
   gap: 20px;
   font-size: 0.55rem;
+  overflow-x: hidden;
 }
 
 .icon {

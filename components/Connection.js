@@ -97,6 +97,9 @@ const Connection = ({
                 onClick={() => {
                   toggleMinimize();
                 }}
+                onTouchEnd={() => {
+                  toggleMinimize();
+                }}
               />
               <Image
                 alt=''
@@ -111,6 +114,11 @@ const Connection = ({
                 src={close}
                 height={23}
                 onClick={() => {
+                  setActive('');
+                  orderArrayHandler('modem');
+                  setModemState(false);
+                }}
+                onTouchEnd={() => {
                   setActive('');
                   orderArrayHandler('modem');
                   setModemState(false);

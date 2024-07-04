@@ -120,6 +120,9 @@ const Start = ({
             onClick={() => {
               helpHandler();
             }}
+            onTouchEnd={() => {
+              helpHandler();
+            }}
           >
             <Image src={help} alt='' height={30} className={styles.helpImage} />
             <div className={styles.help}>Help</div>
@@ -132,6 +135,11 @@ const Start = ({
           <li
             className={`${styles.item} ${styles.shutdown}`}
             onClick={() => {
+              setIsStartOpen(false);
+              setIsShutdown(true);
+              if (modem) toggleMinimize(false);
+            }}
+            onTouchEnd={() => {
               setIsStartOpen(false);
               setIsShutdown(true);
               if (modem) toggleMinimize(false);

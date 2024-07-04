@@ -22,6 +22,10 @@ const DesktopDirectory = ({ setSelectedDirectory, setDirectory }) => {
         setSelectedDirectory('desktop');
         setDirectory((prevState) => !prevState);
       }}
+      onTouchEnd={() => {
+        setSelectedDirectory('desktop');
+        setDirectory((prevState) => !prevState);
+      }}
     >
       <Image src={desktopIcon} alt='' height={18} />
       <div>Desktop</div>

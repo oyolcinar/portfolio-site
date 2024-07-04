@@ -301,6 +301,7 @@ const ProgramComponent = ({
                 onClick={() => {
                   toggleMinimizeProgram();
                 }}
+                onTouchEnd={() => toggleMinimizeProgram()}
               />
               <Image
                 alt=''
@@ -310,6 +311,7 @@ const ProgramComponent = ({
                 onClick={() => {
                   maximizeHandler();
                 }}
+                onTouchEnd={() => maximizeHandler()}
               />
             </div>
             <div className={styles.close}>
@@ -320,6 +322,9 @@ const ProgramComponent = ({
                 onClick={() => {
                   toggleClose();
                 }}
+                onTouchEnd={() => {
+                  toggleClose();
+                }}
               />
             </div>
           </div>
@@ -328,6 +333,10 @@ const ProgramComponent = ({
           <ul className={styles.menu} ref={menuRef}>
             <li
               onClick={() => {
+                setIsClicked((prevState) => !prevState);
+                toggleFile();
+              }}
+              onTouchEnd={() => {
                 setIsClicked((prevState) => !prevState);
                 toggleFile();
               }}
@@ -349,6 +358,10 @@ const ProgramComponent = ({
                       toggleMenuClickOutside();
                       name !== 'briefcase' ? setOpenMenu(true) : openHandler();
                     }}
+                    onTouchEnd={() => {
+                      toggleMenuClickOutside();
+                      name !== 'briefcase' ? setOpenMenu(true) : openHandler();
+                    }}
                   >
                     <div className={styles.menuItemCluster}>
                       <span className={styles.underline}>O</span>pen
@@ -360,6 +373,20 @@ const ProgramComponent = ({
                   <li
                     className={styles.menuItem}
                     onClick={() => {
+                      toggleMenuClickOutside();
+                      name === 'notepad' || name === 'paint'
+                        ? setIsNewFile(true)
+                        : '';
+                      !isSaved && (name === 'notepad' || name === 'paint')
+                        ? setSaveQuestion(true)
+                        : name !== 'recycle'
+                        ? newFileHandler()
+                        : restoreHandler();
+                      name === 'explorer' || name === 'outlook'
+                        ? newFileHandler()
+                        : '';
+                    }}
+                    onTouchEnd={() => {
                       toggleMenuClickOutside();
                       name === 'notepad' || name === 'paint'
                         ? setIsNewFile(true)
@@ -393,6 +420,10 @@ const ProgramComponent = ({
                       toggleMenuClickOutside();
                       !titleData ? setSaveMenu(true) : overwriteHandler();
                     }}
+                    onTouchEnd={() => {
+                      toggleMenuClickOutside();
+                      !titleData ? setSaveMenu(true) : overwriteHandler();
+                    }}
                   >
                     <div className={styles.menuItemCluster}>
                       <span className={styles.underline}>S</span>ave
@@ -402,6 +433,13 @@ const ProgramComponent = ({
                 <li
                   className={styles.menuItem}
                   onClick={() => {
+                    toggleMenuClickOutside();
+                    name === 'briefcase' || openMenu || saveMenu
+                      ? deleteHandler(fileId)
+                      : '';
+                    name === 'recycle' ? emptyBinHandler() : '';
+                  }}
+                  onTouchEnd={() => {
                     toggleMenuClickOutside();
                     name === 'briefcase' || openMenu || saveMenu
                       ? deleteHandler(fileId)
@@ -427,6 +465,10 @@ const ProgramComponent = ({
                     toggleMenuClickOutside();
                     toggleClose();
                   }}
+                  onTouchEnd={() => {
+                    toggleMenuClickOutside();
+                    toggleClose();
+                  }}
                 >
                   <div className={styles.menuItemCluster}>
                     <span className={styles.underline}>C</span>lose
@@ -436,6 +478,10 @@ const ProgramComponent = ({
             )}
             <li
               onClick={() => {
+                setIsClicked((prevState) => !prevState);
+                toggleEdit();
+              }}
+              onTouchEnd={() => {
                 setIsClicked((prevState) => !prevState);
                 toggleEdit();
               }}
@@ -489,6 +535,10 @@ const ProgramComponent = ({
                 setIsClicked((prevState) => !prevState);
                 toggleSearch();
               }}
+              onTouchEnd={() => {
+                setIsClicked((prevState) => !prevState);
+                toggleSearch();
+              }}
               onMouseEnter={() => {
                 isClicked ? toggleSearch() : '';
               }}
@@ -512,6 +562,10 @@ const ProgramComponent = ({
                 setIsClicked((prevState) => !prevState);
                 toggleHelp();
               }}
+              onTouchEnd={() => {
+                setIsClicked((prevState) => !prevState);
+                toggleHelp();
+              }}
               onMouseEnter={() => {
                 isClicked ? toggleHelp() : '';
               }}
@@ -526,6 +580,9 @@ const ProgramComponent = ({
                 <li
                   className={styles.menuItem}
                   onClick={() => {
+                    helpHandler();
+                  }}
+                  onTouchEnd={() => {
                     helpHandler();
                   }}
                 >

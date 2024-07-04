@@ -43,6 +43,9 @@ const Programs = ({
           onClick={() => {
             briefcaseHandler();
           }}
+          onTouchEnd={() => {
+            briefcaseHandler();
+          }}
         >
           <div className={styles.cluster}>
             <Image src={briefcase} alt='' height={30} />
@@ -52,6 +55,9 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
+            explorerHandler();
+          }}
+          onTouchEnd={() => {
             explorerHandler();
           }}
         >
@@ -65,6 +71,9 @@ const Programs = ({
           onClick={() => {
             minesweeperHandler();
           }}
+          onTouchEnd={() => {
+            minesweeperHandler();
+          }}
         >
           <div className={styles.cluster}>
             <Image src={minesweeper} alt='' height={30} />
@@ -74,6 +83,9 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
+            paintHandler();
+          }}
+          onTouchEnd={() => {
             paintHandler();
           }}
         >
@@ -87,6 +99,9 @@ const Programs = ({
           onClick={() => {
             notepadHandler();
           }}
+          onTouchEnd={() => {
+            notepadHandler();
+          }}
         >
           <div className={styles.cluster}>
             <Image src={notepad} alt='' height={30} />
@@ -96,6 +111,9 @@ const Programs = ({
         <li
           className={styles.item}
           onClick={() => {
+            outlookHandler();
+          }}
+          onTouchEnd={() => {
             outlookHandler();
           }}
         >

@@ -94,6 +94,9 @@ const MenuComponent = ({
         onClick={() => {
           setDoubleClickSave(false);
         }}
+        onTouchEnd={() => {
+          setDoubleClickSave(false);
+        }}
       >
         <div
           className={`${styles.card} ${styles.shutdown} ${styles.saveMenuContainer}`}
@@ -115,6 +118,9 @@ const MenuComponent = ({
                   src={close}
                   height={23}
                   onClick={() => {
+                    isSave ? setSaveMenu(false) : setOpenMenu(false);
+                  }}
+                  onTouchEnd={() => {
                     isSave ? setSaveMenu(false) : setOpenMenu(false);
                   }}
                 />
@@ -144,6 +150,9 @@ const MenuComponent = ({
                 <div
                   className={styles.saveDirectoryButton}
                   onClick={() => {
+                    setDirectory((prevState) => !prevState);
+                  }}
+                  onTouchEnd={() => {
                     setDirectory((prevState) => !prevState);
                   }}
                 >
@@ -205,6 +214,9 @@ const MenuComponent = ({
                       onClick={() => {
                         setSelectFileType((prevState) => !prevState);
                       }}
+                      onTouchEnd={() => {
+                        setSelectFileType((prevState) => !prevState);
+                      }}
                     >
                       <div className={styles.selectedFileType}>
                         {selectedFileType === 'all'
@@ -221,6 +233,9 @@ const MenuComponent = ({
                     <div
                       className={styles.saveDirectoryButton}
                       onClick={() => {
+                        setSelectFileType((prevState) => !prevState);
+                      }}
+                      onTouchEnd={() => {
                         setSelectFileType((prevState) => !prevState);
                       }}
                     >
@@ -245,6 +260,10 @@ const MenuComponent = ({
                               setSelectedFileType('.txt');
                               setSelectFileType(false);
                             }}
+                            onTouchEnd={() => {
+                              setSelectedFileType('.txt');
+                              setSelectFileType(false);
+                            }}
                           >
                             {text}
                           </div>
@@ -253,6 +272,10 @@ const MenuComponent = ({
                           <div
                             className={styles.selectedFileType}
                             onClick={() => {
+                              setSelectedFileType('.bmp');
+                              setSelectFileType(false);
+                            }}
+                            onTouchEnd={() => {
                               setSelectedFileType('.bmp');
                               setSelectFileType(false);
                             }}
@@ -267,6 +290,10 @@ const MenuComponent = ({
                               setSelectedFileType('.jpg');
                               setSelectFileType(false);
                             }}
+                            onTouchEnd={() => {
+                              setSelectedFileType('.jpg');
+                              setSelectFileType(false);
+                            }}
                           >
                             {jpg}
                           </div>
@@ -275,6 +302,10 @@ const MenuComponent = ({
                           <div
                             className={styles.selectedFileType}
                             onClick={() => {
+                              setSelectedFileType('.jpeg');
+                              setSelectFileType(false);
+                            }}
+                            onTouchEnd={() => {
                               setSelectedFileType('.jpeg');
                               setSelectFileType(false);
                             }}
@@ -289,6 +320,10 @@ const MenuComponent = ({
                             <div
                               className={styles.selectedFileType}
                               onClick={() => {
+                                setSelectedFileType('all');
+                                setSelectFileType(false);
+                              }}
+                              onTouchEnd={() => {
                                 setSelectedFileType('all');
                                 setSelectFileType(false);
                               }}
@@ -309,6 +344,11 @@ const MenuComponent = ({
                     isSave && isNewFile ? newFileHandler() : '';
                     setIsNewFile(false);
                   }}
+                  onTouchEnd={() => {
+                    isSave ? toggleSave() : toggleOpen();
+                    isSave && isNewFile ? newFileHandler() : '';
+                    setIsNewFile(false);
+                  }}
                 >
                   <span className={styles.underline}>{isSave ? 'S' : 'O'}</span>
                   {isSave ? 'ave' : 'pen'}
@@ -316,6 +356,11 @@ const MenuComponent = ({
                 <button
                   className={`${styles.button} ${styles.sdButton} `}
                   onClick={() => {
+                    isSave ? setSaveMenu(false) : setOpenMenu(false);
+                    isSave && isNewFile ? newFileHandler() : '';
+                    setIsNewFile(false);
+                  }}
+                  onTouchEnd={() => {
                     isSave ? setSaveMenu(false) : setOpenMenu(false);
                     isSave && isNewFile ? newFileHandler() : '';
                     setIsNewFile(false);

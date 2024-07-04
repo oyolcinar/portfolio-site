@@ -55,6 +55,15 @@ const DesktopItem = ({
             ? handleDoubleClick(e, handlerFunction, id)
             : handleDoubleClick(e, submitHandler);
         }}
+        onTouchEnd={(e) => {
+          setSelected(true);
+          directory && name && type ? setFileId(id) : '';
+          setTitle ? setTitle(name) : '';
+          setData ? setData(data) : '';
+          !link
+            ? handleDoubleClick(e, handlerFunction, id)
+            : handleDoubleClick(e, submitHandler);
+        }}
       >
         <Image
           src={image}

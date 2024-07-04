@@ -73,6 +73,9 @@ const SaveQuestionMenu = ({
                 onClick={() => {
                   setSaveQuestion(false);
                 }}
+                onTouchEnd={() => {
+                  setSaveQuestion(false);
+                }}
               />
             </div>
           </div>
@@ -110,6 +113,15 @@ const SaveQuestionMenu = ({
               setIsNewFile ? setIsNewFile(false) : '';
               deleteQuestion ? setDeleteQuestion(false) : '';
             }}
+            onTouchEnd={() => {
+              deleteQuestion ? deleteHandler(fileId) : '';
+              titleData ? overwriteHandler(fileId) : setSaveMenu(true);
+              setSaveQuestion(false);
+              setSaveNameSameNotepad ? setSaveNameSameNotepad(false) : '';
+              isNewFile ? newFileHandler() : '';
+              setIsNewFile ? setIsNewFile(false) : '';
+              deleteQuestion ? setDeleteQuestion(false) : '';
+            }}
           >
             <span className={styles.underline}>Y</span>es
           </button>
@@ -121,12 +133,21 @@ const SaveQuestionMenu = ({
               setIsNewFile ? setIsNewFile(false) : '';
               deleteQuestion ? setDeleteQuestion(false) : '';
             }}
+            onTouchEnd={() => {
+              isNewFile ? setSaveQuestion(false) : '';
+              isNewFile ? newFileHandler() : setIsSaved(true);
+              setIsNewFile ? setIsNewFile(false) : '';
+              deleteQuestion ? setDeleteQuestion(false) : '';
+            }}
           >
             N<span className={styles.underline}>o</span>
           </button>
           <button
             className={`${styles.button} ${styles.sdButton} `}
             onClick={() => {
+              setSaveQuestion(false);
+            }}
+            onTouchEnd={() => {
               setSaveQuestion(false);
             }}
           >

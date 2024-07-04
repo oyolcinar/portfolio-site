@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import { useElapsedTime } from 'use-elapsed-time';
 import { nanoid } from 'nanoid';
+import { isSmallScreen } from '../utils/screenSize';
 
 import SoundControl from './SoundControl';
 import Connection from './Connection';
@@ -55,6 +56,18 @@ import directory from '../public/icons/directory.png';
 import directoryIcon from '../public/icons/directoryIcon.png';
 
 const Navbar = () => {
+  const defaultSizes = {
+    notepad: { w: 400, h: 500 },
+    paint: { w: 800, h: 600 },
+    explorer: { w: 800, h: 600 },
+    briefcase: { w: 800, h: 600 },
+    works: { w: 800, h: 600 },
+    outlook: { w: 600, h: 400 },
+    minesweeper: { w: 400, h: 500 },
+    help: { w: 400, h: 350 },
+    recycle: { w: 400, h: 300 },
+  };
+
   const [isShutdown, setIsShutdown] = useState(false);
   const [isNotepad, setIsNotepad] = useState(false);
   const [sound, setSound] = useState(false);
@@ -86,15 +99,17 @@ const Navbar = () => {
   const [currentImage, setCurrentImage] = useState(offOff);
   const [isResizing, setIsResizing] = useState(false);
 
-  const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
-  const [paintSize, setPaintSize] = useState({ w: 800, h: 600 });
-  const [explorerSize, setExplorerSize] = useState({ w: 800, h: 600 });
-  const [briefcaseSize, setBriefcaseSize] = useState({ w: 800, h: 600 });
-  const [worksSize, setWorksSize] = useState({ w: 800, h: 600 });
-  const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
-  const [minesweeperSize, setMinesweeperSize] = useState({ w: 400, h: 500 });
-  const [helpSize, setHelpSize] = useState({ w: 400, h: 350 });
-  const [recycleSize, setRecycleSize] = useState({ w: 400, h: 300 });
+  const [notepadSize, setNotepadSize] = useState(defaultSizes.notepad);
+  const [paintSize, setPaintSize] = useState(defaultSizes.paint);
+  const [explorerSize, setExplorerSize] = useState(defaultSizes.explorer);
+  const [briefcaseSize, setBriefcaseSize] = useState(defaultSizes.briefcase);
+  const [worksSize, setWorksSize] = useState(defaultSizes.works);
+  const [outlookSize, setOutlookSize] = useState(defaultSizes.outlook);
+  const [minesweeperSize, setMinesweeperSize] = useState(
+    defaultSizes.minesweeper,
+  );
+  const [helpSize, setHelpSize] = useState(defaultSizes.help);
+  const [recycleSize, setRecycleSize] = useState(defaultSizes.recycle);
   const [draggableDisabled, setDraggableDisabled] = useState(false);
 
   const [notepadText, setNotepadText] = useState('');
@@ -123,6 +138,56 @@ const Navbar = () => {
 
   const [orderArray, setOrderArray] = useState([]);
   const [active, setActive] = useState('');
+
+  const updateSizes = () => {
+    const factor = isSmallScreen() ? 0.6 : 1;
+    const factorWidth = isSmallScreen() ? 0.4 : 1;
+    setNotepadSize({
+      w: defaultSizes.notepad.w * factor,
+      h: defaultSizes.notepad.h * factor,
+    });
+    setPaintSize({
+      w: defaultSizes.paint.w * factorWidth,
+      h: defaultSizes.paint.h * factor,
+    });
+    setExplorerSize({
+      w: defaultSizes.explorer.w * factorWidth,
+      h: defaultSizes.explorer.h * factor,
+    });
+    setBriefcaseSize({
+      w: defaultSizes.briefcase.w * factorWidth,
+      h: defaultSizes.briefcase.h * factor,
+    });
+    setWorksSize({
+      w: defaultSizes.works.w * factorWidth,
+      h: defaultSizes.works.h * factor,
+    });
+    setOutlookSize({
+      w: defaultSizes.outlook.w * factorWidth,
+      h: defaultSizes.outlook.h * factor,
+    });
+    setMinesweeperSize({
+      w: defaultSizes.minesweeper.w * factor,
+      h: defaultSizes.minesweeper.h * factor,
+    });
+    setHelpSize({
+      w: defaultSizes.help.w * factor,
+      h: defaultSizes.help.h * factor,
+    });
+    setRecycleSize({
+      w: defaultSizes.recycle.w * factorWidth,
+      h: defaultSizes.recycle.h * factor,
+    });
+  };
+
+  useEffect(() => {
+    updateSizes();
+    window.addEventListener('resize', updateSizes);
+
+    return () => {
+      window.removeEventListener('resize', updateSizes);
+    };
+  }, []);
 
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
 
@@ -452,8 +517,16 @@ const Navbar = () => {
     setMinimizeRecycleBin(false);
   }
 
+  // function handleDoubleClick(e, func, id, data, title) {
+  //   if (e.detail === 2) {
+  //     func(id, data, title);
+  //   }
+  // }
+
   function handleDoubleClick(e, func, id, data, title) {
-    if (e.detail === 2) {
+    if (e.type === 'click' && e.detail === 2) {
+      func(id, data, title);
+    } else if (e.type === 'touchend' && e.detail === 0) {
       func(id, data, title);
     }
   }

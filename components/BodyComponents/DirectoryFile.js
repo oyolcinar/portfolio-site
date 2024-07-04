@@ -44,6 +44,12 @@ const DirectoryFile = ({
         setSelected(true);
         handleDoubleClick(e, handlerFunction, id, data, name);
       }}
+      onTouchEnd={(e) => {
+        setIsDirectory(true);
+        directory && name && type ? setFileId(id) : '';
+        setSelected(true);
+        handleDoubleClick(e, handlerFunction, id, data, name);
+      }}
     >
       <Image
         src={image}

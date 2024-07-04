@@ -23,6 +23,11 @@ const TrayComponent = ({
         setMinimize(false);
         setDoubleClick((prevState) => !prevState);
       }}
+      onTouchEnd={() => {
+        setActive(name);
+        setMinimize(false);
+        setDoubleClick((prevState) => !prevState);
+      }}
     >
       <div className={cardStyles.header}>
         <div className={cardStyles.headerLeft}>
