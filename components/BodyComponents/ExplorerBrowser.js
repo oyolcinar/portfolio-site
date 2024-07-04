@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import styles from '../../styles/Explorer.module.css';
 import outStyles from '../../styles/Outlook.module.css';
@@ -18,6 +18,8 @@ import goArrow from '../../public/icons/goArrow.png';
 const ExplorerBrowser = ({ browserData, setBrowserData, triggerGo }) => {
   const [history, setHistory] = useState(['https://www.wikipedia.org/']);
   const [currentHistoryIndex, setCurrentHistoryIndex] = useState(1);
+
+  const addressRef = useRef(null);
 
   function toggleBack() {
     if (currentHistoryIndex < history.length) {
@@ -51,6 +53,12 @@ const ExplorerBrowser = ({ browserData, setBrowserData, triggerGo }) => {
       toggleGo();
     }
   }, [triggerGo]);
+
+  const handleFocus = (ref) => {
+    if (ref && ref.current) {
+      ref.current.focus();
+    }
+  };
 
   return (
     <div>
@@ -117,6 +125,8 @@ const ExplorerBrowser = ({ browserData, setBrowserData, triggerGo }) => {
           type='text'
           name='browser'
           value={browserData}
+          ref={addressRef}
+          onTouchEnd={() => handleFocus(addressRef)}
           onChange={(e) => {
             toggleBrowserData(e);
           }}

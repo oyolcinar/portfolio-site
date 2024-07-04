@@ -2,14 +2,14 @@
   font-family: 'Pixelated';
   src: url('../public/fonts/pixelated-times-new-roman.ttf');
   font-style: normal;
-  }
+}
 
 @font-face {
-    font-family: 'Windows 95';
-    src: url('../public/fonts/w-95-sans-serif.woff2') format('woff2'),
-        url('../public/fonts/w-95-sans-serif.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Windows 95';
+  src: url('../public/fonts/w-95-sans-serif.woff2') format('woff2'),
+    url('../public/fonts/w-95-sans-serif.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {

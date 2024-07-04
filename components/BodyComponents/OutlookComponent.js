@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from '../../styles/Outlook.module.css';
 import npStyles from '../../styles/Notepad.module.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import envelopeOpenBig from '../../public/icons/envelopeOpen.png';
 import envelopeOpenIcon from '../../public/icons/envelope_open_sheet-1.png';
@@ -17,6 +17,10 @@ const OutlookComponent = ({ subject, setSubject }) => {
   const [buttonMessage, setButtonMessage] = useState('Send');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailureMessage, setShowFailureMessage] = useState(false);
+
+  const emailRef = useRef(null);
+  const subjectRef = useRef(null);
+  const messageRef = useRef(null);
 
   const handleValidation = () => {
     let tempErrors = {};
@@ -67,6 +71,12 @@ const OutlookComponent = ({ subject, setSubject }) => {
       setShowSuccessMessage(true);
       setButtonMessage('Sent!');
       setShowFailureMessage(false);
+    }
+  };
+
+  const handleFocus = (ref) => {
+    if (ref && ref.current) {
+      ref.current.focus();
     }
   };
 
@@ -125,6 +135,8 @@ const OutlookComponent = ({ subject, setSubject }) => {
         <input
           type='email'
           value={email}
+          ref={emailRef}
+          onTouchEnd={() => handleFocus(emailRef)}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -139,6 +151,8 @@ const OutlookComponent = ({ subject, setSubject }) => {
           type='text'
           name='subject'
           value={subject}
+          ref={subjectRef}
+          onTouchEnd={() => handleFocus(subjectRef)}
           onChange={(e) => {
             setSubject(e.target.value);
           }}
@@ -148,6 +162,8 @@ const OutlookComponent = ({ subject, setSubject }) => {
           <textarea
             name='message'
             value={message}
+            ref={messageRef}
+            onTouchEnd={() => handleFocus(messageRef)}
             onChange={(e) => {
               setMessage(e.target.value);
             }}

@@ -55,7 +55,7 @@ const DesktopItem = ({
             ? handleDoubleClick(e, handlerFunction, id)
             : handleDoubleClick(e, submitHandler);
         }}
-        onTouchEnd={(e) => {
+        onTouchStart={(e) => {
           setSelected(true);
           directory && name && type ? setFileId(id) : '';
           setTitle ? setTitle(name) : '';

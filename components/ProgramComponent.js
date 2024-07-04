@@ -169,6 +169,12 @@ const ProgramComponent = ({
           //   setActive(name);
           // }
         }}
+        onTouchEnd={() => {
+          setDoubleClickProgram(false);
+          // if (!isDirectory) {
+          //   setActive(name);
+          // }
+        }}
       >
         <style jsx>{`
           .card {

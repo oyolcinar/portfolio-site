@@ -175,7 +175,7 @@ const Navbar = () => {
       h: defaultSizes.help.h * factor,
     });
     setRecycleSize({
-      w: defaultSizes.recycle.w * factorWidth,
+      w: defaultSizes.recycle.w * factor,
       h: defaultSizes.recycle.h * factor,
     });
   };
@@ -517,22 +517,18 @@ const Navbar = () => {
     setMinimizeRecycleBin(false);
   }
 
-  // function handleDoubleClick(e, func, id, data, title) {
-  //   if (e.detail === 2) {
-  //     func(id, data, title);
-  //   }
-  // }
-
   function handleDoubleClick(e, func, id, data, title) {
     if (e.type === 'click' && e.detail === 2) {
       func(id, data, title);
-    } else if (e.type === 'touchend' && e.detail === 0) {
+    } else if (e.type === 'touchstart' && e.detail === 0) {
       func(id, data, title);
     }
   }
 
   function handleDoubleClickLink(e, func) {
-    if (e.detail === 2) {
+    if (e.type === 'click' && e.detail === 2) {
+      func(e);
+    } else if (e.type === 'touchstart' && e.detail === 0) {
       func(e);
     }
   }
