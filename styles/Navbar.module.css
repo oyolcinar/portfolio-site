@@ -1,6 +1,7 @@
 .container {
   height: calc(100vh - 45px);
   width: 100vw;
+  overflow: hidden;
 }
 
 @media (max-width: 600px) {

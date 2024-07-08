@@ -151,8 +151,6 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  console.log(crowded1);
-
   const getInitialSize = (type) => {
     const sizes = {
       notepad: smallScreen ? { w: 300, h: 400 } : { w: 400, h: 500 },

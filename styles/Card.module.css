@@ -16,7 +16,7 @@
   border-right: 2px solid #393939;
   border-bottom: 2px solid #393939;
   border-radius: 0;
-  background: #C0C0C0;
+  background: #c0c0c0;
   box-shadow: 3px 0 4px -2px #393939;
 }
 
@@ -28,11 +28,11 @@
   background: #000181;
   color: white;
   position: relative;
-  font-size: .55rem;
+  font-size: 0.55rem;
   padding: 4px;
-  color: #C9C9C9;
+  color: #c9c9c9;
   border-radius: 0;
-  border: 2px solid #BDBDBD;
+  border: 2px solid #bdbdbd;
   height: 34px;
 }
 
@@ -67,18 +67,18 @@
   margin-bottom: 3px;
 }
 
-.body{
+.body {
   display: flex;
   flex-direction: row;
   padding: 10px 10px;
-  border-top: 2px solid #BDBDBD;
-  border-left: 3px solid #BDBDBD;
-  border-right: 3px solid #BDBDBD;
+  border-top: 2px solid #bdbdbd;
+  border-left: 3px solid #bdbdbd;
+  border-right: 3px solid #bdbdbd;
   border-bottom: 2px solid #bdbdbd;
 }
 
 .bodyLeft {
-  font-size: .55rem;
+  font-size: 0.55rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -107,11 +107,11 @@
   background-color: #c0c0c0;
   border-color: #a0a0a0;
   letter-spacing: 0.025em;
-  padding: .2rem 0.9rem;
+  padding: 0.2rem 0.9rem;
 }
 
 .button:focus {
-  outline: 1px dashed #08080E;
+  outline: 1px dashed #08080e;
   outline-offset: -5px;
 }
 
@@ -121,7 +121,7 @@
 
 .double {
   background: #808080;
-  color: #C9C9C9;
+  color: #c9c9c9;
 }
 
 .connection {
@@ -129,7 +129,7 @@
 }
 
 .bodyRight {
-  font-size: .55rem;
+  font-size: 0.55rem;
 }
 
 .form {
@@ -141,7 +141,7 @@
 }
 
 .headerShutdown {
-  font-family: "Windows 95 Bold";
+  font-family: 'Windows 95 Bold';
   font-size: 0.73rem;
   color: white;
   margin-bottom: 5px;
@@ -175,7 +175,7 @@
 }
 
 .form > label:hover {
-  outline: 1px dashed #08080E;
+  outline: 1px dashed #08080e;
   outline-offset: 2px;
 }
 
@@ -185,7 +185,7 @@
   color: #000;
   width: 12px;
   height: 12px;
-  border: 2px solid #08080E;
+  border: 2px solid #08080e;
   border-bottom-color: white;
   border-right-color: white;
   border-radius: 50%;
@@ -215,12 +215,12 @@
   justify-content: flex-start;
   align-items: center;
   list-style: none;
-  font-size: .55rem;
+  font-size: 0.55rem;
   padding-left: 7px;
   gap: 10px;
   margin-top: 3px;
   margin-bottom: 0;
-  background-color: #BDBDBD;
+  background-color: #bdbdbd;
 }
 
 .menu > li {
@@ -240,7 +240,7 @@
 .fullScreen {
   width: calc(100vw - 1px);
   height: calc(100vh - 45px);
-  background-color: #BDBDBD;
+  background-color: #bdbdbd;
   position: absolute;
   top: 0;
   left: 0;
@@ -248,7 +248,7 @@
 
 .menuDropdown {
   position: absolute;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   border: 2px solid #393939;
   border-top-color: white;
   border-left-color: white;
@@ -264,7 +264,6 @@
   padding-left: 0;
   padding-top: 5px;
   padding-bottom: 5px;
-
 }
 
 .fileMenu {
@@ -305,7 +304,7 @@
 .seperator {
   height: 1px;
   width: 100%;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   border-bottom: 1px solid white;
   border-top: 1px solid #393939;
 }
@@ -347,7 +346,7 @@
 }
 
 .saveDirectoryButton {
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   height: 22px;
   width: 20px;
   border: 2px #393939 solid;
@@ -363,7 +362,7 @@
 }
 
 .saveDirectoryButton:active {
-  border: 2px #C0C0C0 inset;
+  border: 2px #c0c0c0 inset;
   border-bottom-color: white;
   border-right-color: white;
 }
@@ -375,7 +374,7 @@
   background-color: white;
   width: 312px;
   height: 25px;
-  border: 2px #C0C0C0 solid;
+  border: 2px #c0c0c0 solid;
   border-top: none;
   border-left-color: #393939;
 }
@@ -424,7 +423,7 @@
   outline: none;
   width: 330px;
   font-family: 'Windows 95';
-  font-size: .55rem;
+  font-size: 0.55rem;
 }
 
 .saveMenuContainer {
@@ -451,7 +450,7 @@
   background-color: white;
   width: 312px;
   height: 25px;
-  border: 2px #C0C0C0 solid;
+  border: 2px #c0c0c0 solid;
   border-top: none;
   border-left-color: #393939;
   top: 350px;
