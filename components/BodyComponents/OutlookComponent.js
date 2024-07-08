@@ -76,9 +76,17 @@ const OutlookComponent = ({ subject, setSubject }) => {
 
   const handleFocus = (ref) => {
     if (ref && ref.current) {
-      ref.current.click();
+      ref.current.readOnly = false;
+      ref.current.setAttribute('readonly', 'readonly');
+      ref.current.removeAttribute('readonly');
     }
   };
+
+  // const handleFocus = (ref) => {
+  //   if (ref && ref.current) {
+  //     ref.current.focus();
+  //   }
+  // };
 
   return (
     <div>

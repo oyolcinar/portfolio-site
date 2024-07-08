@@ -56,9 +56,17 @@ const ExplorerBrowser = ({ browserData, setBrowserData, triggerGo }) => {
 
   const handleFocus = (ref) => {
     if (ref && ref.current) {
-      ref.current.click();
+      ref.current.readOnly = false;
+      ref.current.setAttribute('readonly', 'readonly');
+      ref.current.removeAttribute('readonly');
     }
   };
+
+  // const handleFocus = (ref) => {
+  //   if (ref && ref.current) {
+  //     ref.current.click();
+  //   }
+  // };
 
   return (
     <div>
