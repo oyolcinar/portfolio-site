@@ -56,7 +56,11 @@ const ExplorerBrowser = ({ browserData, setBrowserData, triggerGo }) => {
 
   const handleFocus = (ref) => {
     if (ref && ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      ref.current.focus();
+      ref.current.blur();
+      setTimeout(() => {
+        ref.current.focus();
+      }, 0);
     }
   };
 
