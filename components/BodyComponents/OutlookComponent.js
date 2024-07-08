@@ -76,7 +76,7 @@ const OutlookComponent = ({ subject, setSubject }) => {
 
   const handleFocus = (ref) => {
     if (ref && ref.current) {
-      ref.current.focus();
+      ref.current.click();
     }
   };
 

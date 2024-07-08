@@ -142,6 +142,8 @@ const Navbar = () => {
   const updateSizes = () => {
     const factor = isSmallScreen() ? 0.6 : 1;
     const factorWidth = isSmallScreen() ? 0.4 : 1;
+    const outlook = isSmallScreen() ? 0.5 : 1;
+    const outlookHeight = isSmallScreen() ? 0.7 : 1;
     setNotepadSize({
       w: defaultSizes.notepad.w * factor,
       h: defaultSizes.notepad.h * factor,
@@ -163,8 +165,8 @@ const Navbar = () => {
       h: defaultSizes.works.h * factor,
     });
     setOutlookSize({
-      w: defaultSizes.outlook.w * factorWidth,
-      h: defaultSizes.outlook.h * factor,
+      w: defaultSizes.outlook.w * outlook,
+      h: defaultSizes.outlook.h * outlookHeight,
     });
     setMinesweeperSize({
       w: defaultSizes.minesweeper.w * factor,

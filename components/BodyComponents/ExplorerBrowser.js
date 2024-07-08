@@ -54,28 +54,9 @@ const ExplorerBrowser = ({ browserData, setBrowserData, triggerGo }) => {
     }
   }, [triggerGo]);
 
-  useEffect(() => {
-    const handleFocusOut = () => {
-      if (addressRef.current) {
-        addressRef.current.blur();
-      }
-    };
-
-    if (addressRef.current) {
-      addressRef.current.addEventListener('focusout', handleFocusOut);
-    }
-
-    return () => {
-      if (addressRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        addressRef.current.removeEventListener('focusout', handleFocusOut);
-      }
-    };
-  }, [addressRef]);
-
   const handleFocus = (ref) => {
     if (ref && ref.current) {
-      ref.current.focus();
+      ref.current.click();
     }
   };
 
