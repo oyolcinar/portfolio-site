@@ -87,6 +87,8 @@ const Navbar = () => {
   const [currentImage, setCurrentImage] = useState(offOff);
   const [smallScreen, setSmallScreen] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
+  const [crowded1, setCrowded1] = useState('');
+  const [crowded2, setCrowded2] = useState('');
 
   const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
   const [paintSize, setPaintSize] = useState({ w: 800, h: 600 });
@@ -132,7 +134,15 @@ const Navbar = () => {
   const soundControlRef = useRef(null);
 
   const handleResize = () => {
-    setSmallScreen(isSmallScreen());
+    const screenSize = isSmallScreen();
+    setSmallScreen(screenSize);
+    if (screenSize) {
+      setCrowded1(1);
+      setCrowded2(2);
+    } else {
+      setCrowded1('');
+      setCrowded2('');
+    }
   };
 
   useEffect(() => {
@@ -141,15 +151,17 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  console.log(crowded1);
+
   const getInitialSize = (type) => {
     const sizes = {
-      notepad: smallScreen ? { w: 350, h: 400 } : { w: 400, h: 500 },
-      paint: smallScreen ? { w: 350, h: 400 } : { w: 800, h: 600 },
+      notepad: smallScreen ? { w: 300, h: 400 } : { w: 400, h: 500 },
+      paint: smallScreen ? { w: 300, h: 400 } : { w: 800, h: 600 },
       explorer: smallScreen ? { w: 300, h: 300 } : { w: 800, h: 600 },
       briefcase: smallScreen ? { w: 300, h: 300 } : { w: 800, h: 600 },
       works: smallScreen ? { w: 300, h: 300 } : { w: 800, h: 600 },
-      outlook: smallScreen ? { w: 350, h: 400 } : { w: 600, h: 400 },
-      minesweeper: smallScreen ? { w: 350, h: 400 } : { w: 400, h: 500 },
+      outlook: smallScreen ? { w: 300, h: 400 } : { w: 600, h: 400 },
+      minesweeper: smallScreen ? { w: 300, h: 400 } : { w: 400, h: 500 },
       help: smallScreen ? { w: 300, h: 300 } : { w: 400, h: 350 },
       recycle: smallScreen ? { w: 300, h: 300 } : { w: 400, h: 300 },
     };
@@ -605,6 +617,7 @@ const Navbar = () => {
     />,
     <DesktopItem
       name={'Baziszt'}
+      crowdingItem={3}
       worksFile={true}
       image={explorerPage}
       shortcut={shortcut}
@@ -1084,7 +1097,7 @@ const Navbar = () => {
         link={'http://www.linkedin.com/in/olgun-yolcinar'}
       />
       <DesktopItem
-        crowdingItem={smallScreen ? 1 : ''}
+        crowdingItem={crowded1}
         shortcut={shortcut}
         name={'Github'}
         image={explorerPage}
@@ -1094,7 +1107,7 @@ const Navbar = () => {
         link={'https://github.com/oyolcinar'}
       />
       <DesktopItem
-        crowdingItem={smallScreen ? 2 : ''}
+        crowdingItem={crowded2}
         shortcut={shortcut}
         name={'Resume LAST(1).pdf'}
         image={explorerPage}

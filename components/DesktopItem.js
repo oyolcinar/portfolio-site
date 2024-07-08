@@ -1,7 +1,8 @@
 import Draggable from 'react-draggable';
 import Image from 'next/image';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useClickOutsideHandler } from '../utils/utils';
+import { isSmallScreen } from '../utils/screenSize';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -24,6 +25,19 @@ const DesktopItem = ({
 }) => {
   const [selected, setSelected] = useState(false);
   const desktopItemRef = useRef(null);
+  const [defaultPosition, setDefaultPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    let position = { x: 0, y: 0 };
+    if (crowdingItem === 1) {
+      position = { x: 80, y: -426 };
+    } else if (crowdingItem === 2) {
+      position = { x: 80, y: -426 };
+    } else if (crowdingItem === 3) {
+      position = { x: 80, y: -60 };
+    }
+    setDefaultPosition(position);
+  }, [crowdingItem]);
 
   function submitHandler(e) {
     e.preventDefault();
@@ -36,16 +50,8 @@ const DesktopItem = ({
 
   useClickOutsideHandler(desktopItemRef, toggleSelected);
 
-  let defaultPosition = {};
-
-  if (crowdingItem === 1) {
-    defaultPosition = { x: 90, y: -426 };
-  } else if (crowdingItem === 2) {
-    defaultPosition = { x: 90, y: -426 };
-  }
-
   return (
-    <Draggable bounds='parent' defaultPosition={defaultPosition}>
+    <Draggable bounds='parent' position={defaultPosition}>
       <div
         ref={desktopItemRef}
         className={

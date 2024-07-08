@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 import { useClickOutsideHandler } from '../utils/utils';
+import { isSmallScreen } from '../utils/screenSize';
 import Image from 'next/image';
 
 import SaveQuestionMenu from './SaveQuestionMenu';
@@ -181,8 +182,8 @@ const ProgramComponent = ({
             position: absolute;
             left: calc(50% - ${initialSize.w / 2}px);
             top: calc(50% - ${initialSize.h / 2}px);
-            width: ${size.w}px;
-            height: ${size.h}px;
+            width: ${isSmallScreen() ? initialSize.w : size.w}px;
+            height: ${isSmallScreen() ? initialSize.h : size.h}px;
             z-index: ${active === name
               ? orderArray.length + 1
               : indexOfOrderArrayElement(name)};
