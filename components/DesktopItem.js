@@ -51,7 +51,7 @@ const DesktopItem = ({
   useClickOutsideHandler(desktopItemRef, toggleSelected);
 
   return (
-    <Draggable bounds='parent' position={defaultPosition}>
+    <Draggable bounds='parent' positionOffset={defaultPosition}>
       <div
         ref={desktopItemRef}
         className={
