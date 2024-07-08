@@ -20,6 +20,7 @@ const DesktopItem = ({
   id,
   link,
   worksFile,
+  crowdingItem,
 }) => {
   const [selected, setSelected] = useState(false);
   const desktopItemRef = useRef(null);
@@ -35,8 +36,16 @@ const DesktopItem = ({
 
   useClickOutsideHandler(desktopItemRef, toggleSelected);
 
+  let defaultPosition = {};
+
+  if (crowdingItem === 1) {
+    defaultPosition = { x: 90, y: -426 };
+  } else if (crowdingItem === 2) {
+    defaultPosition = { x: 90, y: -426 };
+  }
+
   return (
-    <Draggable bounds='parent'>
+    <Draggable bounds='parent' defaultPosition={defaultPosition}>
       <div
         ref={desktopItemRef}
         className={

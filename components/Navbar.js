@@ -56,18 +56,6 @@ import directory from '../public/icons/directory.png';
 import directoryIcon from '../public/icons/directoryIcon.png';
 
 const Navbar = () => {
-  const defaultSizes = {
-    notepad: { w: 400, h: 500 },
-    paint: { w: 800, h: 600 },
-    explorer: { w: 800, h: 600 },
-    briefcase: { w: 800, h: 600 },
-    works: { w: 800, h: 600 },
-    outlook: { w: 600, h: 400 },
-    minesweeper: { w: 400, h: 500 },
-    help: { w: 400, h: 350 },
-    recycle: { w: 400, h: 300 },
-  };
-
   const [isShutdown, setIsShutdown] = useState(false);
   const [isNotepad, setIsNotepad] = useState(false);
   const [sound, setSound] = useState(false);
@@ -99,17 +87,15 @@ const Navbar = () => {
   const [currentImage, setCurrentImage] = useState(offOff);
   const [isResizing, setIsResizing] = useState(false);
 
-  const [notepadSize, setNotepadSize] = useState(defaultSizes.notepad);
-  const [paintSize, setPaintSize] = useState(defaultSizes.paint);
-  const [explorerSize, setExplorerSize] = useState(defaultSizes.explorer);
-  const [briefcaseSize, setBriefcaseSize] = useState(defaultSizes.briefcase);
-  const [worksSize, setWorksSize] = useState(defaultSizes.works);
-  const [outlookSize, setOutlookSize] = useState(defaultSizes.outlook);
-  const [minesweeperSize, setMinesweeperSize] = useState(
-    defaultSizes.minesweeper,
-  );
-  const [helpSize, setHelpSize] = useState(defaultSizes.help);
-  const [recycleSize, setRecycleSize] = useState(defaultSizes.recycle);
+  const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
+  const [paintSize, setPaintSize] = useState({ w: 800, h: 600 });
+  const [explorerSize, setExplorerSize] = useState({ w: 800, h: 600 });
+  const [briefcaseSize, setBriefcaseSize] = useState({ w: 800, h: 600 });
+  const [worksSize, setWorksSize] = useState({ w: 800, h: 600 });
+  const [outlookSize, setOutlookSize] = useState({ w: 600, h: 400 });
+  const [minesweeperSize, setMinesweeperSize] = useState({ w: 400, h: 500 });
+  const [helpSize, setHelpSize] = useState({ w: 400, h: 350 });
+  const [recycleSize, setRecycleSize] = useState({ w: 400, h: 300 });
   const [draggableDisabled, setDraggableDisabled] = useState(false);
 
   const [notepadText, setNotepadText] = useState('');
@@ -138,58 +124,6 @@ const Navbar = () => {
 
   const [orderArray, setOrderArray] = useState([]);
   const [active, setActive] = useState('');
-
-  const updateSizes = () => {
-    const factor = isSmallScreen() ? 0.6 : 1;
-    const factorWidth = isSmallScreen() ? 0.4 : 1;
-    const outlook = isSmallScreen() ? 0.5 : 1;
-    const outlookHeight = isSmallScreen() ? 0.7 : 1;
-    setNotepadSize({
-      w: defaultSizes.notepad.w * factor,
-      h: defaultSizes.notepad.h * factor,
-    });
-    setPaintSize({
-      w: defaultSizes.paint.w * factorWidth,
-      h: defaultSizes.paint.h * factor,
-    });
-    setExplorerSize({
-      w: defaultSizes.explorer.w * factorWidth,
-      h: defaultSizes.explorer.h * factor,
-    });
-    setBriefcaseSize({
-      w: defaultSizes.briefcase.w * factorWidth,
-      h: defaultSizes.briefcase.h * factor,
-    });
-    setWorksSize({
-      w: defaultSizes.works.w * factorWidth,
-      h: defaultSizes.works.h * factor,
-    });
-    setOutlookSize({
-      w: defaultSizes.outlook.w * outlook,
-      h: defaultSizes.outlook.h * outlookHeight,
-    });
-    setMinesweeperSize({
-      w: defaultSizes.minesweeper.w * factor,
-      h: defaultSizes.minesweeper.h * factor,
-    });
-    setHelpSize({
-      w: defaultSizes.help.w * factor,
-      h: defaultSizes.help.h * factor,
-    });
-    setRecycleSize({
-      w: defaultSizes.recycle.w * factor,
-      h: defaultSizes.recycle.h * factor,
-    });
-  };
-
-  useEffect(() => {
-    updateSizes();
-    window.addEventListener('resize', updateSizes);
-
-    return () => {
-      window.removeEventListener('resize', updateSizes);
-    };
-  }, []);
 
   const { elapsedTime } = useElapsedTime({ isPlaying: true });
 
@@ -520,17 +454,13 @@ const Navbar = () => {
   }
 
   function handleDoubleClick(e, func, id, data, title) {
-    if (e.type === 'click' && e.detail === 2) {
-      func(id, data, title);
-    } else if (e.type === 'touchstart' && e.detail === 0) {
+    if (e.detail === 2) {
       func(id, data, title);
     }
   }
 
   function handleDoubleClickLink(e, func) {
-    if (e.type === 'click' && e.detail === 2) {
-      func(e);
-    } else if (e.type === 'touchstart' && e.detail === 0) {
+    if (e.detail === 2) {
       func(e);
     }
   }
@@ -1124,6 +1054,7 @@ const Navbar = () => {
         link={'http://www.linkedin.com/in/olgun-yolcinar'}
       />
       <DesktopItem
+        crowdingItem={!isSmallScreen ? 1 : ''}
         shortcut={shortcut}
         name={'Github'}
         image={explorerPage}
@@ -1133,6 +1064,7 @@ const Navbar = () => {
         link={'https://github.com/oyolcinar'}
       />
       <DesktopItem
+        crowdingItem={!isSmallScreen ? 2 : ''}
         shortcut={shortcut}
         name={'Resume LAST(1).pdf'}
         image={explorerPage}
@@ -1270,7 +1202,7 @@ const Navbar = () => {
           title={'Notepad'}
           titled={true}
           programIcon={notepadIcon}
-          initialSize={notepadSize}
+          initialSize={!isSmallScreen ? { w: 350, h: 400 } : { w: 400, h: 500 }}
           setText={setNotepadText}
           saveable={true}
           setItems={setItems}
@@ -1319,7 +1251,7 @@ const Navbar = () => {
           title={'MS Paint'}
           titled={true}
           programIcon={paintIcon}
-          initialSize={paintSize}
+          initialSize={!isSmallScreen ? { w: 350, h: 400 } : { w: 800, h: 600 }}
           saveable={true}
           setItems={setItems}
           opennable={true}
@@ -1365,7 +1297,7 @@ const Navbar = () => {
           programIcon={
             explorerTitle === 'Internet Explorer' ? explorerIcon : explorerPage
           }
-          initialSize={explorerSize}
+          initialSize={!isSmallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
           saveable={false}
           opennable={false}
           help={false}
@@ -1401,7 +1333,7 @@ const Navbar = () => {
           name={'briefcase'}
           title={'Briefcase'}
           programIcon={briefcaseIcon}
-          initialSize={briefcaseSize}
+          initialSize={!isSmallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
           saveable={false}
           opennable={true}
           help={false}
@@ -1441,7 +1373,7 @@ const Navbar = () => {
           title={'Outlook'}
           titled={true}
           programIcon={outlookIcon}
-          initialSize={outlookSize}
+          initialSize={!isSmallScreen ? { w: 350, h: 400 } : { w: 600, h: 400 }}
           titleData={subject}
           saveable={false}
           opennable={false}
@@ -1473,7 +1405,7 @@ const Navbar = () => {
           name={'minesweeper'}
           title={'Minesweeper'}
           programIcon={minesweeperIcon}
-          initialSize={minesweeperSize}
+          initialSize={!isSmallScreen ? { w: 350, h: 400 } : { w: 400, h: 500 }}
           saveable={false}
           opennable={false}
           help={false}
@@ -1501,7 +1433,7 @@ const Navbar = () => {
           name={'help'}
           title={'Help'}
           programIcon={helpIcon}
-          initialSize={helpSize}
+          initialSize={{ w: 400, h: 350 }}
           saveable={false}
           opennable={false}
           help={true}
@@ -1530,7 +1462,7 @@ const Navbar = () => {
           name={'recycle'}
           title={'Recycle Bin'}
           programIcon={recycleItems[0] ? recycleIconFull : recycleIconEmpty}
-          initialSize={recycleSize}
+          initialSize={{ w: 400, h: 300 }}
           saveable={false}
           opennable={false}
           help={false}
@@ -1562,7 +1494,7 @@ const Navbar = () => {
           name={'works'}
           title={'Works'}
           programIcon={directory}
-          initialSize={worksSize}
+          initialSize={!isSmallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
           saveable={false}
           opennable={true}
           help={false}
