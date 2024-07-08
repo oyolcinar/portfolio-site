@@ -85,6 +85,7 @@ const Navbar = () => {
   const [doubleClickRecycleBin, setDoubleClickRecycleBin] = useState(false);
   const [doubleClickWorks, setDoubleClickWorks] = useState(false);
   const [currentImage, setCurrentImage] = useState(offOff);
+  const [smallScreen, setSmallScreen] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
 
   const [notepadSize, setNotepadSize] = useState({ w: 400, h: 500 });
@@ -129,6 +130,17 @@ const Navbar = () => {
 
   const startButtonRef = useRef(null);
   const soundControlRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSmallScreen(isSmallScreen());
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
@@ -454,13 +466,17 @@ const Navbar = () => {
   }
 
   function handleDoubleClick(e, func, id, data, title) {
-    if (e.detail === 2) {
+    if (e.type === 'click' && e.detail === 2) {
+      func(id, data, title);
+    } else if (e.type === 'touchstart' && e.detail === 0) {
       func(id, data, title);
     }
   }
 
   function handleDoubleClickLink(e, func) {
-    if (e.detail === 2) {
+    if (e.type === 'click' && e.detail === 2) {
+      func(e);
+    } else if (e.type === 'touchstart' && e.detail === 0) {
       func(e);
     }
   }
@@ -1054,7 +1070,7 @@ const Navbar = () => {
         link={'http://www.linkedin.com/in/olgun-yolcinar'}
       />
       <DesktopItem
-        crowdingItem={!isSmallScreen ? 1 : ''}
+        crowdingItem={smallScreen ? 1 : ''}
         shortcut={shortcut}
         name={'Github'}
         image={explorerPage}
@@ -1064,7 +1080,7 @@ const Navbar = () => {
         link={'https://github.com/oyolcinar'}
       />
       <DesktopItem
-        crowdingItem={!isSmallScreen ? 2 : ''}
+        crowdingItem={smallScreen ? 2 : ''}
         shortcut={shortcut}
         name={'Resume LAST(1).pdf'}
         image={explorerPage}
@@ -1202,7 +1218,7 @@ const Navbar = () => {
           title={'Notepad'}
           titled={true}
           programIcon={notepadIcon}
-          initialSize={!isSmallScreen ? { w: 350, h: 400 } : { w: 400, h: 500 }}
+          initialSize={smallScreen ? { w: 350, h: 400 } : { w: 400, h: 500 }}
           setText={setNotepadText}
           saveable={true}
           setItems={setItems}
@@ -1251,7 +1267,7 @@ const Navbar = () => {
           title={'MS Paint'}
           titled={true}
           programIcon={paintIcon}
-          initialSize={!isSmallScreen ? { w: 350, h: 400 } : { w: 800, h: 600 }}
+          initialSize={smallScreen ? { w: 350, h: 400 } : { w: 800, h: 600 }}
           saveable={true}
           setItems={setItems}
           opennable={true}
@@ -1297,7 +1313,7 @@ const Navbar = () => {
           programIcon={
             explorerTitle === 'Internet Explorer' ? explorerIcon : explorerPage
           }
-          initialSize={!isSmallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
+          initialSize={smallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
           saveable={false}
           opennable={false}
           help={false}
@@ -1333,7 +1349,7 @@ const Navbar = () => {
           name={'briefcase'}
           title={'Briefcase'}
           programIcon={briefcaseIcon}
-          initialSize={!isSmallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
+          initialSize={smallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
           saveable={false}
           opennable={true}
           help={false}
@@ -1373,7 +1389,7 @@ const Navbar = () => {
           title={'Outlook'}
           titled={true}
           programIcon={outlookIcon}
-          initialSize={!isSmallScreen ? { w: 350, h: 400 } : { w: 600, h: 400 }}
+          initialSize={smallScreen ? { w: 350, h: 400 } : { w: 600, h: 400 }}
           titleData={subject}
           saveable={false}
           opennable={false}
@@ -1405,7 +1421,7 @@ const Navbar = () => {
           name={'minesweeper'}
           title={'Minesweeper'}
           programIcon={minesweeperIcon}
-          initialSize={!isSmallScreen ? { w: 350, h: 400 } : { w: 400, h: 500 }}
+          initialSize={smallScreen ? { w: 350, h: 400 } : { w: 400, h: 500 }}
           saveable={false}
           opennable={false}
           help={false}
@@ -1494,7 +1510,7 @@ const Navbar = () => {
           name={'works'}
           title={'Works'}
           programIcon={directory}
-          initialSize={!isSmallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
+          initialSize={smallScreen ? { w: 400, h: 300 } : { w: 800, h: 600 }}
           saveable={false}
           opennable={true}
           help={false}
