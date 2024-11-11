@@ -118,3 +118,9 @@
   width: calc(100% - 1px);
   height: calc(100% + 26px);
 }
+
+@media (max-width: 600px) {
+  .textarea {
+    height: calc(100% + 2px);
+  }
+}

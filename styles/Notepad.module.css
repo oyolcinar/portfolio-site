@@ -204,3 +204,9 @@
   border-bottom-color: white;
   border-right-color: white;
 }
+
+@media (max-width: 600px) {
+  .textarea {
+    height: calc(100% - 2px);
+  }
+}
