@@ -620,8 +620,8 @@ const Navbar = () => {
       image={explorerPage}
       shortcut={shortcut}
       setTitle={setExplorerTitle}
-      key={'snob'}
-      id={'SNOB'}
+      key={'baziszt'}
+      id={'Baziszt'}
       handleDoubleClick={handleDoubleClick}
       handlerFunction={() =>
         explorerHandler(
@@ -629,6 +629,18 @@ const Navbar = () => {
           'https://jovial-starburst-545a45.netlify.app',
         )
       }
+    />,
+    <DesktopItem
+      name={'&LANA'}
+      crowdingItem={3}
+      worksFile={true}
+      image={explorerPage}
+      shortcut={shortcut}
+      setTitle={setExplorerTitle}
+      key={'&lana'}
+      id={'&LANA'}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={() => explorerHandler('&LANA', 'https://andlana.co')}
     />,
   ];
 
