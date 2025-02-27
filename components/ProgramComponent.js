@@ -164,6 +164,16 @@ const ProgramComponent = ({
       <div
         ref={programRef}
         className={!fullScreen ? 'card' : styles.fullScreen}
+        style={
+          fullScreen
+            ? {
+                zIndex:
+                  active === name
+                    ? orderArray.length + 1
+                    : indexOfOrderArrayElement(name),
+              }
+            : {}
+        }
         onClick={() => {
           setDoubleClickProgram(false);
           // if (!isDirectory) {
