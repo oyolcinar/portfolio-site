@@ -32,9 +32,13 @@ const DesktopItem = ({
     if (crowdingItem === 1) {
       position = { x: 80, y: -426 };
     } else if (crowdingItem === 2) {
-      position = { x: 80, y: -426 };
-    } else if (crowdingItem === 3) {
       position = { x: 80, y: -60 };
+    } else if (crowdingItem === 3) {
+      position = { x: 160, y: -120 };
+    } else if (crowdingItem === 4) {
+      position = { x: 240, y: -180 };
+    } else if (crowdingItem === 5) {
+      position = { x: 80, y: 672 + 366 };
     }
     setDefaultPosition(position);
   }, [crowdingItem]);

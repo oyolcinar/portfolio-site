@@ -615,7 +615,7 @@ const Navbar = () => {
     />,
     <DesktopItem
       name={'Baziszt'}
-      crowdingItem={3}
+      crowdingItem={2}
       worksFile={true}
       image={explorerPage}
       shortcut={shortcut}
@@ -641,6 +641,20 @@ const Navbar = () => {
       id={'&LANA'}
       handleDoubleClick={handleDoubleClick}
       handlerFunction={() => explorerHandler('&LANA', 'https://andlana.co')}
+    />,
+    <DesktopItem
+      name={'Tekgoz Studio'}
+      crowdingItem={4}
+      worksFile={true}
+      image={explorerPage}
+      shortcut={shortcut}
+      setTitle={setExplorerTitle}
+      key={'tekgoz'}
+      id={'tekgoz-studio'}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={() =>
+        explorerHandler('Tekgoz Studio', 'https://tekgoz.studio')
+      }
     />,
   ];
 
