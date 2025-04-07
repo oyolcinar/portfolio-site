@@ -601,21 +601,7 @@ const Navbar = () => {
 
   const worksPermanentItems = [
     <DesktopItem
-      name={'SNOB'}
-      worksFile={true}
-      image={explorerPage}
-      shortcut={shortcut}
-      setTitle={setExplorerTitle}
-      key={'snob'}
-      id={'SNOB'}
-      handleDoubleClick={handleDoubleClick}
-      handlerFunction={() =>
-        explorerHandler('SNOB', 'https://curious-squirrel-791794.netlify.app')
-      }
-    />,
-    <DesktopItem
       name={'Baziszt'}
-      crowdingItem={2}
       worksFile={true}
       image={explorerPage}
       shortcut={shortcut}
@@ -627,6 +613,23 @@ const Navbar = () => {
         explorerHandler(
           'Baziszt',
           'https://jovial-starburst-545a45.netlify.app',
+        )
+      }
+    />,
+    <DesktopItem
+      name={'Dislevent International'}
+      crowdingItem={2}
+      worksFile={true}
+      image={explorerPage}
+      shortcut={shortcut}
+      setTitle={setExplorerTitle}
+      key={'dislevent'}
+      id={'Dislevent'}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={() =>
+        explorerHandler(
+          'Dislevent International',
+          'https://disleventinternational.com',
         )
       }
     />,
@@ -643,8 +646,22 @@ const Navbar = () => {
       handlerFunction={() => explorerHandler('&LANA', 'https://andlana.co')}
     />,
     <DesktopItem
-      name={'Tekgoz Studio'}
+      name={'SNOB'}
       crowdingItem={4}
+      worksFile={true}
+      image={explorerPage}
+      shortcut={shortcut}
+      setTitle={setExplorerTitle}
+      key={'snob'}
+      id={'SNOB'}
+      handleDoubleClick={handleDoubleClick}
+      handlerFunction={() =>
+        explorerHandler('SNOB', 'https://curious-squirrel-791794.netlify.app')
+      }
+    />,
+    <DesktopItem
+      name={'Tekgoz Studio'}
+      crowdingItem={5}
       worksFile={true}
       image={explorerPage}
       shortcut={shortcut}
