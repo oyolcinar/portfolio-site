@@ -1128,7 +1128,7 @@ const Navbar = () => {
         handleDoubleClick={handleDoubleClick}
         handlerFunction={worksHandler}
       />
-      <DesktopItem
+      {/* <DesktopItem
         shortcut={shortcut}
         name={'LinkedIn'}
         image={explorerPage}
@@ -1146,8 +1146,8 @@ const Navbar = () => {
         id={'Github'}
         handleDoubleClick={handleDoubleClickLink}
         link={'https://github.com/oyolcinar'}
-      />
-      <DesktopItem
+      /> */}
+      {/* <DesktopItem
         crowdingItem={crowded2}
         shortcut={shortcut}
         name={'Resume LAST(1).pdf'}
@@ -1161,7 +1161,7 @@ const Navbar = () => {
             'https://olgunyolcinar.com/Desktop/Resume LAST(1).pdf',
           )
         }
-      />
+      /> */}
       {desktopFiles}
       <nav className={styles.navbar}>
         <ul className={styles.list}>
@@ -1191,8 +1191,8 @@ const Navbar = () => {
               minimizeModem
                 ? setMinimizeModem(false)
                 : modem
-                ? setDoubleClickModem((prevState) => !prevState)
-                : setModem((prevState) => !prevState);
+                  ? setDoubleClickModem((prevState) => !prevState)
+                  : setModem((prevState) => !prevState);
             }}
           />
           <Image
